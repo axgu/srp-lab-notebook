@@ -476,10 +476,10 @@ J_{\theta} = -\frac{1}{m}\sum_{i=1} ^{m} y^{(i)}\log(h_{\theta}(x^{(i)})) + (1 -
 <li><p>To do this, we repeatedly update each parameter:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[
-\theta_{j} := \theta_{j} - \alpha\frac{\partial}{\partial \theta_{j}}J(\theta)\theta_{j} 
+\[ \begin{align}\begin{aligned}
+\theta_{j} := \theta_{j} - \alpha\frac{\partial}{\partial \theta_{j}}J(\theta)\theta_{j} \\
 \theta_{j} := \theta_{j} - \alpha\sum_{i=1} ^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j} ^{(i)}
-\]</div>
+\end{aligned}\end{align} \]</div>
 </div>
 <div class="section" id="advanced-optimization">
 <h2>Advanced Optimization<a class="headerlink" href="#advanced-optimization" title="Permalink to this headline">¶</a></h2>
