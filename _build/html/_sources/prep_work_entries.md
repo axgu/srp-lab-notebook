@@ -77,6 +77,6 @@ Resources:
 * [Towards Data Science Logistic Regression Overview](https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc)
 * [Interpretable ML Book by Christoph Molnar](https://christophm.github.io/interpretable-ml-book/logistic.html)
 
-<i> pm, minutes</i> 
+<i>5:20 pm, 215 minutes</i> 
 
 ---

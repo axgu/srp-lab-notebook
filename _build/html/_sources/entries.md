@@ -1,6 +1,6 @@
 # Entries
 
-This section includes all entries for my daily journal. Entries are separated based on type of work and/or stage of the research. Formatting for entries is described below:
+This section includes all entries for my daily journal. Entries are separated based on type of work and/or stage of the research. Formatting for each entry is described below:
 
 
 <b>Title</b><br>
