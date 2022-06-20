@@ -1,0 +1,20 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: SRP Lab Notebook
+  chapters:
+  - file: table_of_contents
+  - file: entries
+    sections:
+    - file: prep_work_entries
+- caption: Prep Work
+  chapters:
+  - file: prep/deep_learning
+    sections:
+    - file: prep/dl_intro_notes
+    - file: prep/dl_tutorial1
+    - file: prep/dl_tutorial1_code
+  - file: prep/logistic_regression
