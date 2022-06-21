@@ -283,6 +283,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 </pre></div>
 </div>
@@ -302,8 +303,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gradient Descent</span>
-<span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
     <span class="n">h</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">)))</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="n">h</span> <span class="o">-</span> <span class="n">Y</span>
     <span class="n">grad</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
@@ -314,13 +314,71 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createData</span><span class="p">(</span><span class="n">fName</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dataset from: https://www.kaggle.com/datasets/kandij/diabetes-dataset</span>
+
+<span class="k">def</span> <span class="nf">createData</span><span class="p">(</span><span class="n">fName</span><span class="p">):</span>
     <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fName</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># normalize data</span>
     <span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">8</span><span class="p">]</span> <span class="c1"># outcome column is label</span>
     <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">splitData</span><span class="p">(</span><span class="n">split</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">createData</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1"># Split into train and test</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)),</span> <span class="n">cols</span><span class="p">]</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):,</span> <span class="n">cols</span><span class="p">]</span>
+    <span class="n">Y_train</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">))]</span>
+    <span class="n">Y_test</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)):]</span>
+
+    <span class="c1"># Normalize input data</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_test</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Add bias as first column</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">X_train</span><span class="p">]</span> 
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">X_test</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">):</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">:</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">gradient</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">-</span> <span class="n">lr</span><span class="o">*</span><span class="n">grad</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    # Plot graph of cost vs iteration as weights are changed</span>
+<span class="sd">    fig = plt.figure()</span>
+<span class="sd">    ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])</span>
+<span class="sd">    ax.plot(np.arange(len(loss)), loss, &quot;b-&quot;, label=&quot;cost&quot;)</span>
+
+<span class="sd">    ax.set_title(&quot;Cost at weights are changed&quot;)</span>
+<span class="sd">    ax.set_xlabel(&quot;iteration&quot;)</span>
+<span class="sd">    ax.set_ylabel(&quot;Costs&quot;)</span>
+<span class="sd">    ax.legend()</span>
+<span class="sd">    plt.show()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final weights: &quot;</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final cost: &quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training Accuracy: &quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+    
+    
+    <span class="k">return</span> <span class="n">weights</span>
 </pre></div>
 </div>
 </div>
@@ -339,58 +397,170 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scatterplot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">feature1</span><span class="p">,</span> <span class="n">feature2</span><span class="p">):</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">W</span><span class="p">))))</span>
+
+    <span class="c1"># make scatterplots</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">y1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X_test</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axline</span><span class="p">((</span><span class="n">X_test</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">y2</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">))</span>
+    
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">Y_test</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Observed Diabetes&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Normalized &quot;</span> <span class="o">+</span> <span class="n">feature2</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Normalized &quot;</span> <span class="o">+</span> <span class="n">feature1</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Predicted Diabetes&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Normalized &quot;</span> <span class="o">+</span> <span class="n">feature2</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Normalized &quot;</span> <span class="o">+</span> <span class="n">feature1</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;diabetes2.csv&quot;</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">createData</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">X</span><span class="p">]</span> <span class="c1"># Add bias as first column</span>
+<span class="n">sr</span> <span class="o">=</span> <span class="mf">0.75</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">splitData</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing Accuracy: &quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final weights:  [-0.66405417  0.30734772  0.71401776 -0.11287652 -0.00607035  0.03314956
+  0.52259872  0.2591092   0.16235891]
+Final cost:  -0.0017505502766420476
+Training Accuracy:  0.7673611111111112
+Testing Accuracy:  0.78125
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>
-<span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">loss</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
-<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">:</span>
-    <span class="n">grad</span> <span class="o">=</span> <span class="n">gradient</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-    <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">-</span> <span class="n">lr</span><span class="o">*</span><span class="n">grad</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
-    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">splitData</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing Accuracy: &quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final weights: &quot;</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final cost: &quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Preganancy&quot;</span><span class="p">,</span> <span class="s2">&quot;Glucose&quot;</span><span class="p">,</span> <span class="s2">&quot;BloodPressure&quot;</span><span class="p">,</span> <span class="s2">&quot;BMI&quot;</span><span class="p">,</span><span class="s2">&quot;DPF&quot;</span><span class="p">,</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">outcome</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">Y_test</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">)</span>
+<span class="n">maskY</span> <span class="o">=</span> <span class="p">(</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+<span class="n">outcome</span><span class="p">[(</span><span class="n">maskY</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;diabetic&quot;</span>
+<span class="n">maskN</span> <span class="o">=</span> <span class="p">(</span><span class="n">outcome</span> <span class="o">==</span> <span class="s2">&quot;0.0&quot;</span><span class="p">)</span>
+<span class="n">outcome</span><span class="p">[(</span><span class="n">maskN</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;non-diabetic&quot;</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Outcome&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outcome</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;Outcome&#39;</span><span class="p">,</span><span class="n">colormap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;Set3&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final weights:  [-0.64392898  0.29515392  0.78730122 -0.11343963  0.00261644  0.01429073
-  0.47770982  0.24176111  0.22467336]
-Final cost:  0.002858577643417755
-Accuracy 0.76953125
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final weights:  [-0.66434199  0.30362071  0.73030187 -0.10865401  0.53167357  0.26736186
+  0.15678175]
+Final cost:  -0.0014675424264386629
+Training Accuracy:  0.7708333333333334
+Testing Accuracy:  0.7864583333333334
 </pre></div>
 </div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../../_images/diabetes-logreg_10_2.png" src="../../_images/diabetes-logreg_10_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot graph of cost vs iteration as weights are changed</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">)),</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;b-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cost&quot;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cost at weights are changed&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;iteration&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Costs&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Glucose, BMI</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">splitData</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Accuracy: &quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
+<span class="n">scatterplot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s2">&quot;Glucose&quot;</span><span class="p">,</span> <span class="s2">&quot;BMI&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/diabetes-logreg_8_0.png" src="../../_images/diabetes-logreg_8_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final weights:  [-0.65005931  0.79928399  0.52493328]
+Final cost:  -0.013031372492764523
+Training Accuracy:  0.7569444444444444
+Test Accuracy:  0.7604166666666666
+</pre></div>
+</div>
+<img alt="../../_images/diabetes-logreg_11_1.png" src="../../_images/diabetes-logreg_11_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Glucose, Pregnancies</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">splitData</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Accuracy: &quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
+<span class="n">scatterplot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s2">&quot;Glucose&quot;</span><span class="p">,</span> <span class="s2">&quot;Pregnancies&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final weights:  [-0.63617686  0.8349525   0.34142828]
+Final cost:  -0.022706312975639024
+Training Accuracy:  0.7361111111111112
+Test Accuracy:  0.7708333333333334
+</pre></div>
+</div>
+<img alt="../../_images/diabetes-logreg_12_1.png" src="../../_images/diabetes-logreg_12_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Glucose, DPF</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">splitData</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Accuracy: &quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
+<span class="n">scatterplot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s2">&quot;Glucose&quot;</span><span class="p">,</span> <span class="s2">&quot;Diabetes Pedigree Function&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final weights:  [-0.63104608  0.84221055  0.27509572]
+Final cost:  -0.02408674110918849
+Training Accuracy:  0.7465277777777778
+Test Accuracy:  0.7760416666666666
+</pre></div>
+</div>
+<img alt="../../_images/diabetes-logreg_13_1.png" src="../../_images/diabetes-logreg_13_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># BMI, Pregnancies</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">splitData</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Accuracy: &quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">))</span>
+<span class="n">scatterplot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s2">&quot;BMI&quot;</span><span class="p">,</span> <span class="s2">&quot;Pregnancies&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final weights:  [-0.62254392  0.61786381  0.4043365 ]
+Final cost:  -0.028591104587616968
+Training Accuracy:  0.6996527777777778
+Test Accuracy:  0.671875
+</pre></div>
+</div>
+<img alt="../../_images/diabetes-logreg_14_1.png" src="../../_images/diabetes-logreg_14_1.png" />
 </div>
 </div>
 </div>

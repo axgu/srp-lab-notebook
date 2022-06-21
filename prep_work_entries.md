@@ -96,3 +96,19 @@ Resources:
 <i>9:10 pm, 70 minutes</i> 
 
 ---
+
+<b>Logistic Regression Code Analysis</b><br>
+<i>06/21/2022, 9:20 am</i>
+
+
+Synopsis: I will analyze the results of my logistic regression diabetes prediction program.
+
+Data: 
+
+Resources:
+* [Diabetes Prediction Code](./prep/log_reg/diabetes-logreg.ipynb)
+* [Kaggle Dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset)
+
+<i></i> 
+
+---
