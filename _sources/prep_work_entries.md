@@ -109,6 +109,6 @@ Files:
 * [Kaggle Dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset)
 * [Diabetes Prediction Analysis](./prep/log_reg/diabetes-summary.md)
 
-<i>3:50 pm, 390 mins</i> 
+<i>4:00 pm, 400 mins</i> 
 
 ---
