@@ -72,11 +72,27 @@ Synopsis: I will learn about logistic regression.
 Data: I looked into logistic regression materials, including a video lecture series by Andrew Ng on YouTube and an article published by Towards Data Science. Notable aspects of study included description of a classification problem, sigmoid activation function, cost function, and gradient descent. I initially learned about logistic regression for a standard binary classification problem before extending it to multi-class classification problems. I also published my Jupyter notebook.
 
 Resources:
-* [Logistic Regression](./prep/logistic_regression.md)
+* [Logistic Regression](./prep/log_reg/logistic_regression.md)
 * [Logistic Regression Lecture by Andrew Ng](https://www.youtube.com/watch?v=-EIfb6vFJzc)
 * [Towards Data Science Logistic Regression Overview](https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc)
 * [Interpretable ML Book by Christoph Molnar](https://christophm.github.io/interpretable-ml-book/logistic.html)
 
 <i>5:20 pm, 215 minutes</i> 
+
+---
+
+<b>Logistic Regression Code</b><br>
+<i>06/20/2022, 8:00 pm</i>
+
+
+Synopsis: I will apply logistic regression on a dataset with Python.
+
+Data: I imported a diabetes prediction dataset from Kaggle for logistic regression. In Python, I created functions for calculating cost, gradients, and final accuracy, as well as initializing the datasets. My code also loops through and performs gradient descent a set number of times (10000) and graphs the change in cost from iteration to iteration.
+
+Resources:
+* [Diabetes Prediction Code](./prep/log_reg/diabetes-logreg.ipynb)
+* [Kaggle Dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset)
+
+<i>9:10 pm, 70 minutes</i> 
 
 ---
