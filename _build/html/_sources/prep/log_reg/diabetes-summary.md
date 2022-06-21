@@ -8,8 +8,9 @@ Functions were created in Python to initialize the data, split the dataset into 
 Final weights:  [-0.66405417  0.30734772  0.71401776 -0.11287652 -0.00607035  0.03314956  0.52259872  0.2591092   0.16235891]<br>
 Final cost:  -0.0017505502766420476><br>
 Training Accuracy:  0.7673611111111112<br>
-Testing Accuracy:  0.78125
+Testing Accuracy:  0.78125<br>
 </i>
+
 
 Since all input values were normalized, the final weights in the output reflect the features that have the largest impact on the significance. Conversely, the classes corresponding to the weights very close to 0 are less significant. Thus, skin thickness and insulin levels, with weights -0.0060735 and 0.03314956 were considered least impactful.
 
@@ -22,11 +23,13 @@ Training Accuracy:  0.7743055555555556<br>
 Testing Accuracy:  0.7760416666666666<br>
 </i>
 
+
 As indicated by the output results of this model as well as the previous model, glucose is most impactful on diabetes prediction, as its corresponding weight is furthest from 0. This observation is also correlated by the parallel coordinate plot of the test data:
 
 ```{image} ./parallel-plot.png
 :name: label
 ```
+
 
 ## Glucose Comparison
 
@@ -61,11 +64,13 @@ Finally, logistic regression was performed on the dataset, removing glucose from
 Final weights:  [-0.62254392  0.61786381  0.4043365 ]<br>
 Final cost:  -0.028591104587616968<br>
 Training Accuracy:  0.6996527777777778<br>
-Test Accuracy:  0.671875
+Test Accuracy:  0.671875<br>
 </i>
+
 ```{image} ./bmi-pregnancies.png
 :name: label
 ```
+
 
 ## Resources
 * [Diabetes Prediction Code](./diabetes-logreg.ipynb)
