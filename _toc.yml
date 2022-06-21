@@ -17,4 +17,6 @@ parts:
     - file: prep/dl_intro_notes
     - file: prep/dl_tutorial1
     - file: prep/dl_tutorial1_code
-  - file: prep/logistic_regression
+  - file: prep/log_reg/logistic_regression
+    sections:
+    - file: prep/log_reg/diabetes-logreg

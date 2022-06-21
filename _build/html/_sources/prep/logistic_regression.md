@@ -85,6 +85,8 @@ $$
 
 $$
 \theta_{j} := \theta_{j} - \alpha\frac{\partial}{\partial \theta_{j}}J(\theta)\theta_{j} 
+
+
 \theta_{j} := \theta_{j} - \alpha\sum_{i=1} ^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j} ^{(i)}
 $$
 
