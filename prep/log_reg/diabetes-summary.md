@@ -15,11 +15,13 @@ Outcomes were denoted by a 1 for diabetic and a 0 for non-diabetic.
 Functions were created in Python to initialize the data, split the dataset into training and testing sets, normalize input values, add a bias, calculate cost, gradients, and model accuracy, iterate through gradient descent, and visualize the data. Initially, the model was trained on all provided features, resulting in the following output:
 
 (8-dimensional model)
+
+
 <i>
-Final weights:  [-0.66405417 &ensp; 0.30734772 &ensp; 0.71401776 &ensp;-0.11287652 &ensp; -0.00607035 &ensp; 0.03314956 &ensp; 0.52259872 &ensp; 0.2591092 &ensp; 0.16235891]<br>
-Final cost:  -0.0017505502766420476<br>
-Training Accuracy:  0.7673611111111112<br>
-Testing Accuracy:  0.78125<br>
+<b>Final weights:</b>  [-0.66405417 &ensp; 0.30734772 &ensp; 0.71401776 &ensp;-0.11287652 &ensp; -0.00607035 &ensp; 0.03314956 &ensp; 0.52259872 &ensp; 0.2591092 &ensp; 0.16235891]<br>
+<b>Final cost:</b>  -0.0017505502766420476<br>
+<b>Training Accuracy:</b>  0.7673611111111112<br>
+<b>Testing Accuracy:</b>  0.78125<br>
 </i>
 <br>
 
@@ -29,11 +31,13 @@ Since all input values were normalized, the final weights in the output reflect 
 Another logistic regression model was trained and tested on the other classes. The resulting accuracy for training and testing sets were similar to the initial model: 
 
 (6-dimensional model)
+
+
 <i>
-Final weights:  [-0.89146127 &ensp; 0.42844742 &ensp; 0.9595772 &ensp; -0.22267593 &ensp; 0.75103708 &ensp; 0.31908514 &ensp; 0.10940684]<br>
-Final cost:  -0.050473260107638356<br>
-Training Accuracy:  0.7743055555555556<br>
-Testing Accuracy:  0.7760416666666666<br>
+<b>Final weights:</b>  [-0.89146127 &ensp; 0.42844742 &ensp; 0.9595772 &ensp; -0.22267593 &ensp; 0.75103708 &ensp; 0.31908514 &ensp; 0.10940684]<br>
+<b>Final cost:</b>  -0.050473260107638356<br>
+<b>Training Accuracy:</b>  0.7743055555555556<br>
+<b>Testing Accuracy:</b>  0.7760416666666666<br>
 </i>
 <br>
 
@@ -77,11 +81,13 @@ This is a linear relationship between the x-axis variable, $x_{1}$, and the y-ax
 Finally, logistic regression was performed on the dataset to determine the effect of removing glucose from the selected features. Instead, a model was created, trained, and tested on BMI and pregnancy values. The result is a lower classification rate, as observed from the output:
 
 (2-dimensional model)
+
+
 <i>
-Final weights:  [-0.62254392 &ensp; 0.61786381 &ensp; 0.4043365]<br>
-Final cost:  -0.028591104587616968<br>
-Training Accuracy:  0.6996527777777778<br>
-Test Accuracy:  0.671875<br>
+<b>Final weights:</b>  [-0.62254392 &ensp; 0.61786381 &ensp; 0.4043365]<br>
+<b>Final cost:</b>  -0.028591104587616968<br>
+<b>Training Accuracy:</b>  0.6996527777777778<br>
+<b>Test Accuracy:</b>  0.671875<br>
 </i>
 <br>
 
