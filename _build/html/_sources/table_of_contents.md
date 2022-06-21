@@ -21,5 +21,8 @@
 * - 06/20/2022
   - Logistic Regression
   - Prep Work
+* - 06/20/2022
+  - Logistic Regression Code
+  - Prep Work
 
 ```

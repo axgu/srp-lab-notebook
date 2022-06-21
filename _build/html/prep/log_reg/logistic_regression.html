@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logistic Regression &#8212; My Project</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Diabetes Prediction with Logistic Regression" href="diabetes-logreg.html" />
+    <link rel="prev" title="Tutorial 1 Code" href="../dl_tutorial1_code.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SRP Lab Notebook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../table_of_contents.html">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../entries.html">
+   Entries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prep_work_entries.html">
+     Prep Work
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Prep Work
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deep_learning.html">
+   Deep Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../dl_intro_notes.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../dl_tutorial1.html">
+     Tutorial 1: Decoding Neural Responses
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../dl_tutorial1_code.html">
+     Tutorial 1 Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   Logistic Regression
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="diabetes-logreg.html">
+     Diabetes Prediction with Logistic Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/prep/log_reg/logistic_regression.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#machine-learning-process">
+   Machine Learning Process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-representation">
+   Hypothesis Representation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decision-boundary">
+   Decision Boundary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-function">
+   Cost Function
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simplified-cost-function">
+     Simplified Cost Function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent">
+   Gradient Descent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advanced-optimization">
+   Advanced Optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiclass-classification-one-vs-all">
+   Multiclass Classification: One-vs-all
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Logistic Regression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#machine-learning-process">
+   Machine Learning Process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-representation">
+   Hypothesis Representation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decision-boundary">
+   Decision Boundary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-function">
+   Cost Function
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simplified-cost-function">
+     Simplified Cost Function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent">
+   Gradient Descent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advanced-optimization">
+   Advanced Optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiclass-classification-one-vs-all">
+   Multiclass Classification: One-vs-all
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="logistic-regression">
+<h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Models probabilities for classification</p>
+<ul>
+<li><p>Values strictly between 0 (negatife class) and 1 (positive class)</p></li>
+<li><p>Linear regression not ideal because:</p>
+<ul>
+<li><p>Values can be &gt; 1 or &lt; 0</p></li>
+<li><p>Extreme values influence linear regression model</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Used when dependent variable is categorical</p>
+<ol class="simple">
+<li><p>Binary logistic regression - categorical response has only two possible outcomes</p></li>
+<li><p>Multinomial logistic regression - three or more categories without ordering</p></li>
+<li><p>Ordinal logistic regression - three or more categories with ordering</p></li>
+</ol>
+</li>
+</ul>
+<div class="section" id="machine-learning-process">
+<h2>Machine Learning Process<a class="headerlink" href="#machine-learning-process" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Identify features and labels (data)</p></li>
+<li><p>Set initial weights for model</p></li>
+<li><p>Loop until model is close</p>
+<ol class="simple">
+<li><p>Calculate cost</p></li>
+<li><p>Calculate gradient</p></li>
+<li><p>If length of gradient vector is close to 0, stop; otherwise, adjust weights based on the gradient</p></li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="hypothesis-representation">
+<h2>Hypothesis Representation<a class="headerlink" href="#hypothesis-representation" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Classifier should output between 0 and 1 only</p></li>
+<li><p>Sigmoid function:</p>
+<div class="math notranslate nohighlight">
+\[
+  g(z) = \frac{1}{1 + \exp(-z)}
+  \]</div>
+</li>
+<li><p>Hypothesis representation:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_{\theta}(x) = \frac{1}{1 + \exp(-\theta^{T}x)}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(h_{\theta}(x)\)</span> = estimated probability that y = 1 on input x</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_{\theta}(x) = P(y=1|x; \theta)\)</span></p></li>
+<li><p>Since y must equal 0 or 1, <span class="math notranslate nohighlight">\(P(y=0|x; \theta) = 1 - P(y=1|x; \theta)\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="decision-boundary">
+<h2>Decision Boundary<a class="headerlink" href="#decision-boundary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Separates region where the hypothesis predicts y = 1 from the region where the hypothesis predicts y = 0</p></li>
+<li><p>Property of the hypothesis, not the training set</p></li>
+<li><p>Higher order polynomials result in more complex decision boundaries</p></li>
+</ul>
+</div>
+<div class="section" id="cost-function">
+<h2>Cost Function<a class="headerlink" href="#cost-function" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Gradient descent will converge into global minimum only if the function is convex</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+J_{\theta} = \frac{1}{m}\sum_{i=1} ^{m} \text{Cost}(h_{\theta}(x^{(i)}), y^{(i)})\\\begin{split}\text{Cost}(h_{\theta}(x), y) = \begin{cases}
+-\log(h_{\theta}(x)),  &amp; \text{if $y = 1$} \\[2ex] 
+-\log(1 - h_{\theta}(x)),  &amp; \text{if $y = 0$}
+\end{cases}
+\end{split}\end{aligned}\end{align} \]</div>
+<p>For the y = 1 case:</p>
+<ul class="simple">
+<li><p>Cost = 0 if <span class="math notranslate nohighlight">\(y = 1\)</span>, <span class="math notranslate nohighlight">\(h_{\theta}(x) = 1\)</span></p></li>
+<li><p>As <span class="math notranslate nohighlight">\(h_{\theta}(x)\to0\)</span>, <span class="math notranslate nohighlight">\(Cost\to\infty\)</span></p></li>
+</ul>
+<p>For the y = 0 case:</p>
+<ul class="simple">
+<li><p>Cost = 0 if <span class="math notranslate nohighlight">\(y = 0\)</span>, <span class="math notranslate nohighlight">\(h_{\theta}(x) = 0\)</span></p></li>
+<li><p>As <span class="math notranslate nohighlight">\(h_{\theta}(x)\to1\)</span>, <span class="math notranslate nohighlight">\(Cost\to\infty\)</span></p></li>
+</ul>
+<p>If there is a large difference between <span class="math notranslate nohighlight">\(h_{\theta}(x)\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, the learning algorithm is penalized by a very large cost.</p>
+<div class="section" id="simplified-cost-function">
+<h3>Simplified Cost Function<a class="headerlink" href="#simplified-cost-function" title="Permalink to this headline">¶</a></h3>
+<p>We can rewrite the cost function as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Cost}(h_{\theta}(x), y) = -y\log(h_{\theta}(x)) - (1-y)\log(1-h_{\theta}(x))
+\]</div>
+<p>Checking our cases will result in our first definition:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(y = 1\)</span>: <span class="math notranslate nohighlight">\(\text{Cost}(h_{\theta}(x), y) = -1(\log(h_{\theta}(x))) - 0(\log(1-h_{\theta}(x))) = -\log(h_{\theta}(x))\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y = 0\)</span>: <span class="math notranslate nohighlight">\(\text{Cost}(h_{\theta}(x), y) = -0(\log(h_{\theta}(x))) - 1(\log(1-h_{\theta}(x))) = -\log(1 - h_{\theta}(x))\)</span></p></li>
+</ul>
+<p>So our final logistic regression cost function is:</p>
+<div class="math notranslate nohighlight">
+\[
+J_{\theta} = -\frac{1}{m}\sum_{i=1} ^{m} y^{(i)}\log(h_{\theta}(x^{(i)})) + (1 - y^{(i)}\log(1 - h_{\theta}(x^{(i)})))
+\]</div>
+</div>
+</div>
+<div class="section" id="gradient-descent">
+<h2>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We use gradient descent to minimize our cost function</p></li>
+<li><p>To do this, we repeatedly update each parameter:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\theta_{j} := \theta_{j} - \alpha\frac{\partial}{\partial \theta_{j}}J(\theta)\theta_{j} \\
+\theta_{j} := \theta_{j} - \alpha\sum_{i=1} ^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j} ^{(i)}
+\end{aligned}\end{align} \]</div>
+</div>
+<div class="section" id="advanced-optimization">
+<h2>Advanced Optimization<a class="headerlink" href="#advanced-optimization" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Optimization algorithms:</p>
+<ul>
+<li><p>Conjugate gradient</p></li>
+<li><p>BFGS</p></li>
+<li><p>L-BFGS</p></li>
+</ul>
+</li>
+<li><p>Advantages:</p>
+<ul>
+<li><p>No need to manually pick <span class="math notranslate nohighlight">\(\alpha\)</span></p></li>
+<li><p>Often faster than gradient descent</p></li>
+</ul>
+</li>
+<li><p>Disadvantages:</p>
+<ul>
+<li><p>More complex</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="multiclass-classification-one-vs-all">
+<h2>Multiclass Classification: One-vs-all<a class="headerlink" href="#multiclass-classification-one-vs-all" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Turn the problem into several binary classification problems</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_{\theta} ^{(i)}(x) = P(y=i|x; \theta) \quad (i = 1,2,3)
+\]</div>
+<ul class="simple">
+<li><p>Train a logistic regression classifier <span class="math notranslate nohighlight">\(h_{\theta} ^{(i)}(x)\)</span> for each class/category <span class="math notranslate nohighlight">\(i\)</span> to predict the probability that <span class="math notranslate nohighlight">\(y = i\)</span></p></li>
+<li><p>To make a prediction on a new input <span class="math notranslate nohighlight">\(x\)</span>, calculate and pick the class <span class="math notranslate nohighlight">\(i\)</span> that maximizes <span class="math notranslate nohighlight">\(h_{\theta} ^{(i)}(x)\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=-EIfb6vFJzc">Logistic Regression Lecture by Andrew Ng</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">Towards Data Science Logistic Regression Overview</a></p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/logistic.html">Interpretable ML Book by Christoph Molnar</a></p></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./prep\log_reg"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../dl_tutorial1_code.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Tutorial 1 Code</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="diabetes-logreg.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Diabetes Prediction with Logistic Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Anna Gu<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
