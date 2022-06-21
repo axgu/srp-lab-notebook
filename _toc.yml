@@ -20,4 +20,4 @@ parts:
   - file: prep/log_reg/logistic_regression
     sections:
     - file: prep/log_reg/diabetes-logreg
-    - file: prep/log_reg/diabetes2
+    - file: prep/log_reg/diabetes-summary

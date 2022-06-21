@@ -56,6 +56,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Diabetes Prediction with Logistic Regression" href="diabetes-logreg.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -133,7 +134,7 @@
   Prep Work
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../deep_learning.html">
    Deep Learning
@@ -161,19 +162,24 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="logistic_regression.html">
    Logistic Regression
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="diabetes-logreg.html">
      Diabetes Prediction with Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Diabetes Prediction Summary
     </a>
    </li>
   </ul>
@@ -316,42 +322,66 @@
 <h1>Diabetes Prediction Summary<a class="headerlink" href="#diabetes-prediction-summary" title="Permalink to this headline">¶</a></h1>
 <p>Logistic regression was performed for a binary classification problem to predict whether a subject is diabetic or non-diabetic. Input variables provided in the dataset included pregnancies, glucose level, blood pressure, skin thickness, insulin, BMI, diabetes pedigree function, and age. Outcomes were denoted by a 1 for diabetic and a 0 for non-diabetic.</p>
 <p>Functions were created in Python to initialize the data, split the dataset into training and testing sets, normalize input values, add a bias, calculate cost, gradients, and model accuracy, iterate through gradient descent, and visualize the data. Initially, the model was trained on all 8 provided features, resulting in the following output:</p>
-<p>Final weights:  [-0.66405417  0.30734772  0.71401776 -0.11287652 -0.00607035  0.03314956  0.52259872  0.2591092   0.16235891]</p>
-<p>Final cost:  -0.0017505502766420476</p>
-<p>Training Accuracy:  0.7673611111111112</p>
-<p>Testing Accuracy:  0.78125</p>
+<blockquote>
+<div><p>Final weights:  [-0.66405417  0.30734772  0.71401776 -0.11287652 -0.00607035  0.03314956  0.52259872  0.2591092   0.16235891]</p>
+</div></blockquote>
+<blockquote>
+<div><p>Final cost:  -0.0017505502766420476</p>
+</div></blockquote>
+<blockquote>
+<div><p>Training Accuracy:  0.7673611111111112</p>
+</div></blockquote>
+<blockquote>
+<div><p>Testing Accuracy:  0.78125</p>
+</div></blockquote>
 <p>Since all input values were normalized, the final weights in the output reflect the features that have the largest impact on the significance. Conversely, the classes corresponding to the weights very close to 0 are less significant. Thus, skin thickness and insulin levels, with weights -0.0060735 and 0.03314956 were considered least impactful.</p>
 <p>Another logistic regression model was trained and tested on the other classes. The resulting accuracy for training and testing sets were quite similar to the initial model:</p>
-<p>Final weights:  [-0.89146127  0.42844742  0.9595772  -0.22267593  0.75103708  0.31908514 0.10940684]</p>
-<p>Final cost:  -0.050473260107638356</p>
-<p>Training Accuracy:  0.7743055555555556</p>
-<p>Testing Accuracy:  0.7760416666666666</p>
+<blockquote>
+<div><p>Final weights:  [-0.89146127  0.42844742  0.9595772  -0.22267593  0.75103708  0.31908514 0.10940684]</p>
+</div></blockquote>
+<blockquote>
+<div><p>Final cost:  -0.050473260107638356</p>
+</div></blockquote>
+<blockquote>
+<div><p>Training Accuracy:  0.7743055555555556</p>
+</div></blockquote>
+<blockquote>
+<div><p>Testing Accuracy:  0.7760416666666666</p>
+</div></blockquote>
 <p>As indicated by the output results of this model as well as the previous model, glucose is most impactful on diabetes prediction, as its corresponding weight is furthest from 0. This observation is also correlated by the parallel coordinate plot of the test data:</p>
 <img alt="../../_images/parallel-plot.png" id="label" src="../../_images/parallel-plot.png" />
 <div class="section" id="glucose-comparison">
 <h2>Glucose Comparison<a class="headerlink" href="#glucose-comparison" title="Permalink to this headline">¶</a></h2>
 <p>Since both previous applications of logistic regression on the diabetes dataset indicated that glucose was the most significant variable, models were created to perform logistic regression on glucose and another variable that also had a greater impact. Disregarding the bias as this is the same for all cases, the features with the most extreme weights after glucose, from most significant to least signficiant, were BMI, pregnancies, and diabetes pedigree function. Performing logistic regression on these variables and glucose yielded very similar test accuracies, specifically of 76.0417%, 77.0834%, and 77.6042%, respectively. This can also be seen in the side-by-side scatterplots below comparing predicted diabetics to observed diabetics for each of the three models.</p>
-<p>&lt;img ./glucose-bmi.png /&gt;&lt;img ./glucose-pregnancies.png /&gt;&lt;img ./glucose-dpf.png /&gt;</p>
+<p><img src="glucose-bmi.png" /><img src="glucose-pregnancies.png" /><img src= "glucose-dpf.png" /></p>
 <div class="section" id="decision-boundary">
 <h3>Decision Boundary<a class="headerlink" href="#decision-boundary" title="Permalink to this headline">¶</a></h3>
-<p>The black line in each of the “Predicted Diabetes” scatterplots shows the decision boundary. This was calculated by setting the sigmoid function <span class="math notranslate nohighlight">\(h_{\theta}(x) = 0.5\)</span>. Thus, the boundary is determined by when <span class="math notranslate nohighlight">\(\theta_{0} + \theta_{1}\dot\x_{1} + \theta_{2}\dot\x_{2} = 0\)</span>.</p>
+<p>The black line in each of the “Predicted Diabetes” scatterplots shows the decision boundary. This was calculated by setting the sigmoid function <span class="math notranslate nohighlight">\(h_{\theta}(x) = 0.5\)</span>. Thus, the boundary is determined by when <span class="math notranslate nohighlight">\(\theta_{0} + \theta_{1}\cdot x_{1} + \theta_{2}\cdot x_{2} = 0\)</span>.</p>
 <p>Solving for <span class="math notranslate nohighlight">\(x_{2}\)</span>, the y-axis variable of the scatterplot, gives:</p>
 <div class="math notranslate nohighlight">
 \[
-x_{2} = \frac{-\theta_{0} - \theta_{1}\dot\x_{1}}{\theta_{2}}
+x_{2} = \frac{-\theta_{0} - \theta_{1}\cdot x_{1}}{\theta_{2}}
 \]</div>
 <p>This is a linear relationship between the x-axis variable, <span class="math notranslate nohighlight">\(x_{1}\)</span>, and the y-axis variable, <span class="math notranslate nohighlight">\(x_{2}\)</span>.</p>
 <p>Finally, logistic regression was performed on the dataset, removing glucose from the selected features. Instead, a model was created, trained, and tested on BMI and pregnancy values. The results is a noticeably less accurate classification rate, as observed in the output:</p>
-<p>Final weights:  [-0.62254392  0.61786381  0.4043365 ]</p>
-<p>Final cost:  -0.028591104587616968</p>
-<p>Training Accuracy:  0.6996527777777778</p>
-<p>Test Accuracy:  0.671875</p>
+<blockquote>
+<div><p>Final weights:  [-0.62254392  0.61786381  0.4043365 ]</p>
+</div></blockquote>
+<blockquote>
+<div><p>Final cost:  -0.028591104587616968</p>
+</div></blockquote>
+<blockquote>
+<div><p>Training Accuracy:  0.6996527777777778</p>
+</div></blockquote>
+<blockquote>
+<div><p>Test Accuracy:  0.671875</p>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><span class="xref myst">Diabetes Prediction Code</span></p></li>
+<li><p><a class="reference internal" href="diabetes-logreg.html"><span class="doc std std-doc">Diabetes Prediction Code</span></a></p></li>
 <li><p><a class="reference external" href="https://www.kaggle.com/datasets/kandij/diabetes-dataset">Kaggle Dataset</a></p></li>
 <li><p><a class="reference external" href="https://www.python-graph-gallery.com/150-parallel-plot-with-pandas">Parallel Plot Graph by Yan Holtz</a></p></li>
 <li><p><a class="reference external" href="https://matplotlib.org/stable/api/axes_api.html">Matplotlib Docs</a></p></li>
@@ -383,7 +413,14 @@ x_{2} = \frac{-\theta_{0} - \theta_{1}\dot\x_{1}}{\theta_{2}}
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="diabetes-logreg.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Diabetes Prediction with Logistic Regression</p>
+        </div>
+    </a>
 </div>
             
         </div>
