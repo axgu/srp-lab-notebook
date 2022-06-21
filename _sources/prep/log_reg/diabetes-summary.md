@@ -10,7 +10,7 @@ Final cost:  -0.0017505502766420476><br>
 Training Accuracy:  0.7673611111111112<br>
 Testing Accuracy:  0.78125<br>
 </i>
-
+<br>
 
 Since all input values were normalized, the final weights in the output reflect the features that have the largest impact on the significance. Conversely, the classes corresponding to the weights very close to 0 are less significant. Thus, skin thickness and insulin levels, with weights -0.0060735 and 0.03314956, were considered least impactful.
 
@@ -22,7 +22,7 @@ Final cost:  -0.050473260107638356<br>
 Training Accuracy:  0.7743055555555556<br>
 Testing Accuracy:  0.7760416666666666<br>
 </i>
-
+<br>
 
 As indicated by the output results of this model as well as the previous model, glucose is most impactful on diabetes prediction, as its corresponding weight is furthest from 0. This observation is also corroborated by the parallel coordinate plot of the test data:
 
@@ -66,6 +66,7 @@ Final cost:  -0.028591104587616968<br>
 Training Accuracy:  0.6996527777777778<br>
 Test Accuracy:  0.671875<br>
 </i>
+<br>
 
 ```{image} ./bmi-pregnancies.png
 :name: label
