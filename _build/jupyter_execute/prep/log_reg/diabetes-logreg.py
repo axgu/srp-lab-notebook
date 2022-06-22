@@ -127,6 +127,8 @@ def scatterplot(X_test, Y_test, W, feature1, feature2):
     plt.axline((X_test[-1, 1], y1), (X_test[0, 1], y2), color = "black")
     plt.ylim(np.amin(X_test[:, 2], axis = 0), np.amax(X_test[:, 2], axis = 0))
     
+    plt.suptitle(feature1 + " and " + feature2 + " Model")
+
     axs[0].scatter(X_test[:, 1], X_test[:, 2], c=Y_test)
     axs[0].set_title("Observed Diabetes")
     axs[0].set_ylabel("Normalized " + feature2)
@@ -169,6 +171,9 @@ maskN = (outcome == "0.0")
 outcome[(maskN)] = "non-diabetic"
 df["Outcome"] = outcome
 pd.plotting.parallel_coordinates(df, 'Outcome',colormap=plt.get_cmap("Set3"))
+plt.title("Observed Diabetes")
+plt.ylabel("Z-score")
+plt.xlabel("Input Features")
 
 
 # In[11]:
