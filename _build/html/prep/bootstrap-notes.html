@@ -1,0 +1,672 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap Methods and Permutation Testing Notes &#8212; My Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Daily Log
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../table_of_contents.html">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../entries.html">
+   Entries
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep_work_entries.html">
+     Prep Work
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Prep Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="deep_learning.html">
+   Deep Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dl_intro_notes.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dl_tutorial1.html">
+     Tutorial 1: Decoding Neural Responses
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dl_tutorial1_code.html">
+     Tutorial 1 Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="log_reg/logistic_regression.html">
+   Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="log_reg/diabetes-logreg.html">
+     Diabetes Prediction with Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="log_reg/diabetes-summary.html">
+     Diabetes Prediction Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/prep/bootstrap-notes.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bootstrap-idea">
+   The Bootstrap Idea
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-steps-in-using-the-bootstrap">
+   First Steps in Using the Bootstrap
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-t-confidence-intervals">
+     Bootstrap t confidence intervals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-to-compare-two-groups">
+     Bootstrap to compare two groups
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bootstrap-distribution-accuracy">
+   Bootstrap Distribution Accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bootstrap-confidence-intervals">
+   Bootstrap Confidence Intervals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-percentile-confidence-intervals">
+     Bootstrap percentile confidence intervals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bca-and-tilting">
+     BCa and tilting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#significance-testing-using-permutation-tests">
+   Significance Testing Using Permutation Tests
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-procedure">
+     General procedure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-problems">
+     Types of problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bootstrap Methods and Permutation Testing Notes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bootstrap-idea">
+   The Bootstrap Idea
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-steps-in-using-the-bootstrap">
+   First Steps in Using the Bootstrap
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-t-confidence-intervals">
+     Bootstrap t confidence intervals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-to-compare-two-groups">
+     Bootstrap to compare two groups
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bootstrap-distribution-accuracy">
+   Bootstrap Distribution Accuracy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bootstrap-confidence-intervals">
+   Bootstrap Confidence Intervals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bootstrap-percentile-confidence-intervals">
+     Bootstrap percentile confidence intervals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bca-and-tilting">
+     BCa and tilting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#significance-testing-using-permutation-tests">
+   Significance Testing Using Permutation Tests
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-procedure">
+     General procedure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-problems">
+     Types of problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="bootstrap-methods-and-permutation-testing-notes">
+<h1>Bootstrap Methods and Permutation Testing Notes<a class="headerlink" href="#bootstrap-methods-and-permutation-testing-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-bootstrap-idea">
+<h2>The Bootstrap Idea<a class="headerlink" href="#the-bootstrap-idea" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Computational method to conduct statistical inference</p></li>
+<li><p>Can be applied when theory fails (i.e. conditions for traditional inference not all met): randomization/lack of bias necessary, but large enough sample size and normal population distribution not needed</p></li>
+<li><p>Approximate sampling distribution from one sample:</p>
+<ol class="simple">
+<li><p><strong>Resampling</strong> - repeatedly sample <strong>with</strong> replacement from initial random sample</p></li>
+<li><p><strong>Bootstrap distribution</strong> - based on many resamples; represents the sampling distribution of the statistic, based on many samples</p>
+<ul>
+<li><p><strong>Shape</strong> - Approximately the same as the sampling distribution</p></li>
+<li><p><strong>Center</strong> - Centered at original statistic value instead of parameter value</p></li>
+<li><p><strong>Spread</strong> - Approximately the same as the sampling distribution</p></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Bootstrap distribution of resample means only used to estimate how the sample mean of <em>one</em> sample of size n would vary due to random sampling</p></li>
+<li><p>Apply plug-in principle: substitute sample for population</p></li>
+</ul>
+<p>Suppose <span class="math notranslate nohighlight">\(B\)</span> resamples are taken. Let the means of these resamples be <span class="math notranslate nohighlight">\(\overline{x}^{*}\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\text{mean}_{\text{boot}} = \frac{1}{B} \sum \overline{x}^{*}\\
+\text{SE}_{\text{boot}} = \sqrt{\frac{1}{B - 1} \sum (\overline{x}^{*} - \text{mean}_{\text{boot}})^{2}}
+\end{aligned}\end{align} \]</div>
+<ul class="simple">
+<li><p><strong>Bootstrap standard error</strong> <span class="math notranslate nohighlight">\(\text{SE}_{\text{boot}}\)</span> - standard deviation of the bootstrap distribution of the statistic</p></li>
+</ul>
+</div>
+<div class="section" id="first-steps-in-using-the-bootstrap">
+<h2>First Steps in Using the Bootstrap<a class="headerlink" href="#first-steps-in-using-the-bootstrap" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Shape</strong> - Approximates the shape of the sampling distribution, so the bootstrap distribution can be used to check normality of the sampling distribution</p></li>
+<li><p><strong>Center</strong> - Compare whether bootstrap distribution of the statistic is centered at original statistic value</p>
+<ul>
+<li><p><strong>Bias</strong> - Difference between mean of a statistic’s sampling distribution and the true value</p></li>
+<li><p><strong>Bootstrap estimate of bias</strong> - Difference between mean of bootstrap distribution and original sample statistic value</p></li>
+</ul>
+</li>
+<li><p><strong>Spread</strong> - Bootstrap standard error of a statistic is the standard deviation of its bootstrap distribution, which is an estimate of the standard deviation of the sampling distribution</p></li>
+</ul>
+<div class="section" id="bootstrap-t-confidence-intervals">
+<h3>Bootstrap t confidence intervals<a class="headerlink" href="#bootstrap-t-confidence-intervals" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Get a confidence interval for the parameter by using the bootstrap standard error and <em>t</em> distribution if:</p>
+<ul>
+<li><p>Bootstrap distribution shows a normal shape
+*Bootstrap distribution has a small bias</p></li>
+</ul>
+</li>
+<li><p><strong>Trimmed mean</strong> - mean of only the center observations in a data set. <em>Ex: 25% trimmed mean ignores smallest 25% and largest 25% of observations.</em></p></li>
+<li><p>An approximate level <em>C</em> confidence interval for the parameter that corresponds to the statistic is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{statistic} \pm t^{*}\text{SE}_{\text{boot}}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t^{*}\)</span> is the critical value corresponding to <em>C</em> of the <span class="math notranslate nohighlight">\(t(n-1)\)</span> distribution</p></li>
+</ul>
+</div>
+<div class="section" id="bootstrap-to-compare-two-groups">
+<h3>Bootstrap to compare two groups<a class="headerlink" href="#bootstrap-to-compare-two-groups" title="Permalink to this headline">¶</a></h3>
+<p>Given independent SRSs of sizes <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> from _two_separate populations:</p>
+<ol class="simple">
+<li><p>Draw resamples of sizes <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> from their respective initial samples. Compute a statistic to compare the two groups.</p></li>
+<li><p>Repeat</p></li>
+<li><p>Construct bootstrap distribution</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="bootstrap-distribution-accuracy">
+<h2>Bootstrap Distribution Accuracy<a class="headerlink" href="#bootstrap-distribution-accuracy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Sources of variation among bootstrap distributions:</p>
+<ol class="simple">
+<li><p>Choosing a random original sample from the population</p></li>
+<li><p>Resampling from the original sample</p></li>
+</ol>
+</li>
+<li><p>Bootstrap distributions inform about shape, bias, and spread of sampling distribution</p>
+<ul>
+<li><p>Do not have the same center as sampling distribution</p></li>
+</ul>
+</li>
+<li><p>Larger samples preferred because bootstrap distributions from small samples do not as closely mimic shape and spread of sampling distribution</p></li>
+<li><p>Resampling with 1000+ resamples introduced very little additional variation</p></li>
+<li><p>Bootstrap inference based on smaller initial samples is unreliable for medians and quartiles since those are calculated from just a few of the sample observations</p>
+<ul>
+<li><p>The initial sample excludes influential values in the population</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="bootstrap-confidence-intervals">
+<h2>Bootstrap Confidence Intervals<a class="headerlink" href="#bootstrap-confidence-intervals" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bootstrap-percentile-confidence-intervals">
+<h3>Bootstrap percentile confidence intervals<a class="headerlink" href="#bootstrap-percentile-confidence-intervals" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Interval between 2.5% and 97.5% percentiles of bootstrap distribution of a statistic is a 95% bootstrap percentile confidence interval</p></li>
+<li><p>Estimate of bias must be small</p></li>
+<li><p>Percentiles do not ignore skewness; not symmetric</p></li>
+<li><p>Compare with t interval - if they do not agree, do not use either</p></li>
+<li><p><strong>Accuracy</strong> - Produces intervals that capture parameter <em>C</em>% of the time; other <span class="math notranslate nohighlight">\(1-C\)</span>% misses equally between high and low</p></li>
+<li><p>Generally, the t and percentile intervals may NOT be sufficiently accurate when:</p>
+<ul>
+<li><p>statistic is strongly biased</p></li>
+<li><p>sampling distribution is skewed</p></li>
+<li><p>high accuracy is necessary because of high stakes</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="bca-and-tilting">
+<h3>BCa and tilting<a class="headerlink" href="#bca-and-tilting" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>WARNING: use cautiously when sample sizes are small</p></li>
+<li><p><strong>Bootstrap bias-corrected accelerated (BCa) interval</strong> - modification of percentile method that adjusts percentiles to correct for bias and skewness</p>
+<ul>
+<li><p>Requires more than 1000 resamples for high accuracy; 5000 or more for very high accuracy</p></li>
+</ul>
+</li>
+<li><p><strong>Bootstrap tilting interval</strong> - adjusts process of random resampling</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="significance-testing-using-permutation-tests">
+<h2>Significance Testing Using Permutation Tests<a class="headerlink" href="#significance-testing-using-permutation-tests" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Significance tests - explain whether an observed results could reasonably occur “by chance” from random sampling</p>
+<ol class="simple">
+<li><p>Choose statistic that measures effect</p></li>
+<li><p>Construct sampling distribution the statistic would have without the effect</p></li>
+<li><p>Locate observed statistic and decide based on location (main part, tail, etc.) whether the effect exists</p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Null hypothesis</strong> - Statement that effect is not present</p></li>
+<li><p><strong>P-value</strong> - probability of observed result or something more extreme occurring “by chance” (i.e. without effect)</p></li>
+</ul>
+</li>
+<li><p>Resampling for significance tests must be consistent with the null hypothesis to estimate sampling distribution when null hypothesis is true</p></li>
+<li><p><strong>Permutation tests</strong> - tests based on resampling</p>
+<ul class="simple">
+<li><p>Permutation resample - drawn <strong>without</strong> replacement</p></li>
+<li><p>Permutation distribution</p></li>
+</ul>
+</li>
+<li><p>Permutation tests give accurate P-values when sampling distribution is skewed</p></li>
+<li><p>Resampling methods that move observations between two groups require that the two populations are identical (in shape, center, spread) when null is true</p></li>
+<li><p>Sources of variability</p>
+<ul class="simple">
+<li><p>Original sample chosen at random from population</p></li>
+<li><p>Resamples chosen at random from sample</p>
+<ul>
+<li><p>Added variation due to resampling is generally small</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>If the true one-sided P-value is <span class="math notranslate nohighlight">\(p\)</span>, the standard deviation of the estimated <em>P</em>-value is <span class="math notranslate nohighlight">\(\sqrt{p(1-p) / B}\)</span></p>
+<ul class="simple">
+<li><p>Choose B, the number of resamples, to obtain desired accuracy</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="general-procedure">
+<h3>General procedure<a class="headerlink" href="#general-procedure" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Compute statistic for original sample</p></li>
+<li><p>Choose permutation resamples that are consistent with null hypothesis of test and study design. Construct permutation distribution from high number of resamples.</p></li>
+<li><p>Find P-value by locating original statistic on permutation distribution</p></li>
+</ol>
+</div>
+<div class="section" id="types-of-problems">
+<h3>Types of problems<a class="headerlink" href="#types-of-problems" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Two-sample problems</p>
+<ul>
+<li><p>Null hypothesis: two populations are identical</p></li>
+<li><p>Compare population means, proportions, standard deviations, etc.</p></li>
+</ul>
+</li>
+<li><p>Matched pairs design</p>
+<ul>
+<li><p>Null hypothesis: only random differences within pairs</p></li>
+<li><p>Resample by permuting the two observations within each pair separately</p></li>
+</ul>
+</li>
+<li><p>Relationships with other quantitative variables</p>
+<ul>
+<li><p>Null hypothesis: variables not related</p></li>
+<li><p>Randomly reassign values to two variables</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://math.ntnu.edu.tw/%7Epwtsai/comp97/moore14.pdf">Bootstrap Methods and Permutation Testing Chapter</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./prep"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Anna Gu<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

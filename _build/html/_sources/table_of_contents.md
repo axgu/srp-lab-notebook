@@ -28,6 +28,6 @@
   - Logistic Regression Code Analysis
   - Prep Work
 * - 06/22/2022
-  - Logistic Regression Code Analysis (Continued)
+  - Logistic Regression Code Analysis and Bootstrap Methods and Permutation Testing
   - Prep Work
 ```
