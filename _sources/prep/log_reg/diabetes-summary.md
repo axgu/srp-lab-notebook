@@ -1,5 +1,4 @@
 # Diabetes Prediction Summary
-
 ## Initial Models
 Logistic regression was performed for a binary classification problem to predict whether a subject is diabetic or non-diabetic. Input variables provided in the dataset included:
 * Number of pregnancies (int)

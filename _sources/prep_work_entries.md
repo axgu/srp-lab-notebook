@@ -109,23 +109,26 @@ Files:
 * [Kaggle Dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset)
 * [Diabetes Prediction Analysis](./prep/log_reg/diabetes-summary.md)
 
-<i>5:00 pm, 460 mins</i> 
+<i>5:00 pm, 460 minutes</i> 
 
 ---
 
-<b>Logistic Regression Code Analysis</b><br>
+<b>Logistic Regression Code Analysis and Bootstrap Methods and Permutation Testing</b><br>
 <i>06/22/2022, 8:28 am</i>
 
 
 Synopsis: I will continue working on my analysis of the results of my logistic regression diabetes prediction program.
 
-Data: 
+Data: I edited my analysis of the diabetes prediction program. I mainly worked on including more information about each of the models I tested. This involved listing inputs and outputs clearly and labeling provided figures/graphs. I also did some editing to clarify parts of my summary that were too vague or confusing.
+
+Afterwards, I read about and took notes on bootstrap and permutation testing as methods of computational statistical inference. More specifically, the chapter included details about bootstrap distributions, resampling, accuracy, bootstrap confidence intervals, and permutation (significance) testing.
 
 Files:
 * [Diabetes Prediction Code](./prep/log_reg/diabetes-logreg.ipynb)
 * [Kaggle Dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset)
 * [Diabetes Prediction Analysis](./prep/log_reg/diabetes-summary.md)
+* [Bootstrap Methods and Permutation Testing Notes](./prep/bootstrap-notes.md)
 
-<i></i> 
+<i>3:23 pm, 415 minutes</i> 
 
 ---
