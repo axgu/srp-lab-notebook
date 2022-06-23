@@ -115,6 +115,40 @@ Output:
 :name: label
 ```
 
+## Permutation Testing
+
+To determine the benefit of applying logistic regression, a permutation test was conducted on the 6-dimensional model:
+
+$$
+H_{0}: \text{The trained logistic regression model is equally as effective as random chance at classifying diabetes.}
+$$
+
+$$
+H_{A}: \text{The trained logistic regression model is more effective than random chance at classifying diabetes.}
+$$
+
+The chosen statistic to measure the effect of using a logistic regression model is classification accuracy. The original sample used for the permutation test was the original diabetes testing dataset. The selected features in the 6-dimensional model were:
+* Number of pregnancies (int)
+* Glucose level (int)
+* Blood pressure (int)
+* BMI (float)
+* Diabetes pedigree function (float)
+* Age (int)
+
+It is unclear whether this dataset was randomly selected. However, the data within each feature/variable is exchangeable, so permutations of the original dataset can be taken to create resamples.
+
+From above, the test accuracy when applying the logistic regression model on the original diabetes testing dataset was 78.646%. 
+
+### Methodology
+5000 resamples of the original sample were created by permuting each feature independently. This was done in Python. The trained 6-dimensional logistic regression model was applied on each of the resamples. A classification accuracy was then calculated by $\text{accuracy} = \frac{\text{correct classifications}}{\text{total classifications}}$, and a permutation distribution was constructed with the resulting values. 
+
+![](./perm-distribution.png)
+
+The percentile for the test accuracy for the original dataset, 78.646%, was determined to be nearly 100%. As a result, the p-value was nearly 0.0.
+
+### Conclusions
+If it is assumed that the trained 6-dimensional logistic regression model is equally as effective as random chance at classifying diabetes, there is an approximately 0% chance of seeing an original sample classification accuracy as large or larger than the observed. Since approximately 0 is clearly lower than any reasonable significance value, there is sufficient evidence to conclude that the trained logistic regression model is more effective than random chance at classifying diabetes.
+
 
 ## Resources
 * [Diabetes Prediction Code](./diabetes-logreg.ipynb)

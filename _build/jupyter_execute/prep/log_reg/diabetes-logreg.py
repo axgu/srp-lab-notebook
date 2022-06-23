@@ -11,6 +11,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
+# ## Helper Functions
+
 # In[2]:
 
 
@@ -144,6 +146,9 @@ def scatterplot(X_test, Y_test, W, feature1, feature2):
     plt.show()
 
 
+# ## Model Creation
+# ### 8-dimensional model
+
 # In[9]:
 
 
@@ -154,6 +159,8 @@ X_train, X_test, Y_train, Y_test = splitData(sr, (0,1,2,3,4,5,6,7), filename)
 W = descent(X_train, Y_train)
 print("Testing Accuracy: ", accuracy(X_test, Y_test, W))
 
+
+# ### 6-dimensional model
 
 # In[10]:
 
@@ -176,7 +183,77 @@ plt.ylabel("Z-score")
 plt.xlabel("Input Features")
 
 
+# ### Permutation Test
+
 # In[11]:
+
+
+# Shuffle each column of X_test to create permutation
+def create_permutation(X):
+    new_X = X[:, 1]
+    np.random.shuffle(new_X)
+    for i in range(2, len(X[0])):
+        randCol = X[:, i]
+        np.random.shuffle(randCol)
+        new_X = np.concatenate((new_X, randCol), axis=0)
+    new_X = new_X.reshape(len(X), len(X[0]) - 1)
+    return new_X
+
+
+# In[12]:
+
+
+# Find p value
+def findP(t, arr):
+    count = 0
+    while count < len(arr) and arr[count] > t:
+        print(arr[count])
+        count += 1
+    p = count / len(arr)
+    return p
+
+
+# In[13]:
+
+
+# Take 10000 resamples
+acc = []
+test_acc = accuracy(X_test, Y_test, W) * 100
+X_c = np.copy(X_test)
+for i in range(5000):
+    new_X = create_permutation(X_c)
+    ones = np.ones(len(new_X))
+    ones = ones.reshape(len(ones), 1)
+    new_X = np.concatenate((ones, new_X), axis=1)
+    a = accuracy(new_X, Y_test, W) * 100
+    acc.append(a)
+
+acc = sorted(acc, reverse = True)
+p_val = findP(test_acc, acc)
+print(p_val)
+
+
+# In[14]:
+
+
+n, bins, patches = plt.hist(acc, bins='auto', color='#0504aa', rwidth=0.9)
+plt.grid(axis='y', alpha=0.75)
+plt.xlim(round(min(acc)) - 5, round(test_acc) + 2)
+plt.xlabel('Model Accuracy (%)')
+plt.ylabel('Frequency')
+plt.title('Diabetes Classification Performance')
+
+if p_val < 0.001:
+    pstr = "p < 0.001"
+else:
+    pstr = "p = " + str(p_val)
+plt.text(70, 35, pstr + "\n" + "test_acc = " + str(round(test_acc, 3)))
+plt.show()
+
+
+# ### Glucose Comparison
+
+# In[15]:
 
 
 # Glucose, BMI
@@ -187,7 +264,7 @@ print("Test Accuracy: ", accuracy(X_test, Y_test, W))
 scatterplot(X_test, Y_test, W, "Glucose", "BMI")
 
 
-# In[12]:
+# In[16]:
 
 
 # Glucose, Pregnancies
@@ -198,7 +275,7 @@ print("Test Accuracy: ", accuracy(X_test, Y_test, W))
 scatterplot(X_test, Y_test, W, "Glucose", "Pregnancies")
 
 
-# In[13]:
+# In[17]:
 
 
 # Glucose, DPF
@@ -209,7 +286,7 @@ print("Test Accuracy: ", accuracy(X_test, Y_test, W))
 scatterplot(X_test, Y_test, W, "Glucose", "Diabetes Pedigree Function")
 
 
-# In[14]:
+# In[18]:
 
 
 # BMI, Pregnancies
