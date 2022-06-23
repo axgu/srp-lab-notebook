@@ -132,3 +132,21 @@ Files:
 <i>3:23 pm, 415 minutes</i> 
 
 ---
+
+<b>Logistic Regression Model Permutation Test</b><br>
+<i>06/23/2022, 8:39 am</i>
+
+
+Synopsis: I will create a program in Python that performs a permutation test on the diabetes data with my logistic regression model.
+
+Data: 
+
+Files:
+* [Diabetes Prediction Code](./prep/log_reg/diabetes-logreg.ipynb)
+* [Kaggle Dataset](https://www.kaggle.com/datasets/kandij/diabetes-dataset)
+* [Diabetes Prediction Analysis](./prep/log_reg/diabetes-summary.md)
+* [Bootstrap Methods and Permutation Testing Notes](./prep/bootstrap-notes.md)
+
+<i></i> 
+
+---

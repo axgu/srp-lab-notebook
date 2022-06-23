@@ -30,4 +30,7 @@
 * - 06/22/2022
   - Logistic Regression Code Analysis and Bootstrap Methods and Permutation Testing
   - Prep Work
+* - 06/23/2022
+  - Logistic Regression Model Permutation Test
+  - Prep Work
 ```
