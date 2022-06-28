@@ -33,4 +33,19 @@
 * - 06/23/2022
   - Logistic Regression Model Permutation Test
   - Prep Work
+* - 06/24/2022
+  - Deep Learning Tutorials
+  - Prep Work
+* - 06/24/2022
+  - HCP Dataset Set Up and Software Installation
+  - HCP Data
+* - 06/26/2022
+  - HCP Dataset
+  - HCP Data
+* - 06/27/2022
+  - HCP Dataset Visualization
+  - HCP Data
+* - 06/28/2022
+  - HCP Dataset Summary
+  - HCP Data
 ```
