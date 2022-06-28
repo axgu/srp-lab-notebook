@@ -12,12 +12,18 @@ parts:
     - file: prep_work_entries
 - caption: Prep Work
   chapters:
-  - file: prep/deep_learning
+  - file: prep/deep_learning/deep_learning
     sections:
-    - file: prep/dl_intro_notes
-    - file: prep/dl_tutorial1
-    - file: prep/dl_tutorial1_code
+    - file: prep/deep_learning/dl_intro_notes
+    - file: prep/deep_learning/dl_tutorial1
+    - file: prep/deep_learning/dl_tutorial1_code
+    - file: prep/deep_learning/dl_tutorial2
+    - file: prep/deep_learning/dl_tutorial2_code
   - file: prep/log_reg/logistic_regression
     sections:
     - file: prep/log_reg/diabetes-logreg
     - file: prep/log_reg/diabetes-summary
+- caption: HCP Dataset
+  chapters:
+  - file: hcp_data/data.ipynb
+  - file: hcp_data/hcp_summary.md

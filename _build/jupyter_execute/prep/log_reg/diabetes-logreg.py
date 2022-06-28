@@ -27,7 +27,6 @@ def cost(X, Y, W):
 # In[3]:
 
 
-
 def gradient(X, Y, W):
     h = 1 / (1 + np.exp(-np.dot(X, W)))
     diff = h - Y
@@ -181,6 +180,7 @@ pd.plotting.parallel_coordinates(df, 'Outcome',colormap=plt.get_cmap("Set3"))
 plt.title("Observed Diabetes")
 plt.ylabel("Z-score")
 plt.xlabel("Input Features")
+
 
 
 # ### Permutation Test
