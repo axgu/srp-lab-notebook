@@ -4,12 +4,6 @@
 format: jb-book
 root: intro
 parts:
-- caption: Daily Log
-  chapters:
-  - file: table_of_contents
-  - file: entries
-    sections:
-    - file: prep_work_entries
 - caption: Prep Work
   chapters:
   - file: prep/deep_learning/deep_learning
@@ -25,5 +19,7 @@ parts:
     - file: prep/log_reg/diabetes-summary
 - caption: HCP Dataset
   chapters:
-  - file: hcp_data/data.ipynb
-  - file: hcp_data/hcp_summary.md
+  - file: hcp_data/data
+  - file: hcp_data/hcp_summary
+  - file: hcp_data/hcp_logreg_timefeature
+  - file: hcp_data/hcp_logreg_indivtime

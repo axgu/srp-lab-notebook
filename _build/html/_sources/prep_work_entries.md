@@ -228,13 +228,60 @@ Files:
 <i>06/28/2022, 8:13 am</i>
 
 
-Synopsis: I will be summarizing the HCP dataset.
+Synopsis: I will summarize my visualizations of the HCP dataset.
 
-Data: 
+Data: I wrote a summary of the work I did yesterday with the HCP dataset, providing an overview of the data and explanations of each of my visuals. I also read the lab's paper on classifying movie clips using various machine learning models. I started working on the logistic regression model applied to the HCP data.
 
 Files:
-* 
+* [HCP Visualization Summary](./hcp_data/hcp_summary.md)
+* [Learning brain dynamics for decoding and predicting individual differences by Misra et al.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008943)
 
-<i></i>
+<i>4:38 pm, 505 minutes</i>
+
+---
+
+<b>HCP Dataset Logistic Regression Program</b><br>
+<i>06/29/2022, 8:37 am</i>
+
+
+Synopsis: I will apply logistic regression to the HCP dataset.
+
+Data: I started writing the logistic regression program in Python. More specifically, I worked on dataset pre-processing aspect. 
+
+Files:
+* [HCP Logistic Regression Code](./hcp_data/hcp_logreg.ipynb)
+
+<i>10:00 am, 83 minutes</i>
+
+---
+
+<b>HCP Dataset Logistic Regression Program</b><br>
+<i>06/29/2022, 12:00 pm</i>
+
+
+Synopsis: I will apply logistic regression to the HCP dataset.
+
+Data: I continued working on running logistic regression on the HCP data. I was able to convert the dictionary into a 2-dimensional array and split it into training and testing sets. I used the sklearn LogisticRegression module to assess accuracy.
+
+Files:
+* [HCP Logistic Regression Code](./hcp_data/hcp_logreg.ipynb)
+
+<i>5:32 pm, 332 minutes</i>
+
+---
+
+<b>HCP Dataset Logistic Regression</b><br>
+<i>06/30/2022, 8:38 pm</i>
+
+
+Synopsis: I will apply logistic regression to the HCP dataset.
+
+Data: I wrote functions to perform logistic regression with (Time point, ROI) features. I ran this model and the one provided by the sci-kit learn library several times because the classification accuracy obtained was unexpectedly high. Then, I modified the program to classify at each time point, using ROIs as features, and graphed the accruacy over time. 
+
+Files:
+* [HCP Logistic Regression Code - (Time, ROI) Features](./hcp_data/hcp_logreg_timefeature.ipynb)
+* [HCP Logistic Regression Code - ROI Features](./hcp_data/hcp_logreg_indivtime.ipynb)
+
+<i>5:40 pm, 542 minutes</i>
 
 ---

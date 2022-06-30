@@ -156,4 +156,5 @@ for i in range(mArr.shape[0]):
 
 anim = cam.animate(blit=True, interval=20)
 # anim.save("homealone_vid.mp4",writer = 'ffmpeg',dpi=300,fps = 30)
+plt.show()
 
