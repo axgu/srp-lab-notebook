@@ -52,8 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Deep Learning" href="prep/deep_learning/deep_learning.html" />
-    <link rel="prev" title="Entries" href="entries.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,35 +113,6 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Daily Log
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="table_of_contents.html">
-   Table of Contents
-  </a>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="entries.html">
-   Entries
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Prep Work
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Prep Work
  </span>
 </p>
@@ -152,8 +121,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="prep/deep_learning/deep_learning.html">
    Deep Learning
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -184,8 +153,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="prep/log_reg/logistic_regression.html">
    Logistic Regression
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -210,8 +179,23 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="hcp_data/data.html">
+   Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="hcp_data/hcp_summary.html">
    HCP Dataset Summary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_data/hcp_logreg_timefeature.html">
+   Logistic Regression - (Time point, ROI) Features
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html">
+   Logistic Regression - ROI Features
   </a>
  </li>
 </ul>
@@ -504,11 +488,45 @@ title="Print to PDF"
 <hr class="docutils" />
 <p><b>HCP Dataset Summary</b><br>
 <i>06/28/2022, 8:13 am</i></p>
-<p>Synopsis: I will be summarizing the HCP dataset.</p>
-<p>Data:</p>
-<p>Files:
-*</p>
-<p><i></i></p>
+<p>Synopsis: I will summarize my visualizations of the HCP dataset.</p>
+<p>Data: I wrote a summary of the work I did yesterday with the HCP dataset, providing an overview of the data and explanations of each of my visuals. I also read the lab’s paper on classifying movie clips using various machine learning models. I started working on the logistic regression model applied to the HCP data.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/hcp_summary.html"><span class="doc std std-doc">HCP Visualization Summary</span></a></p></li>
+<li><p><a class="reference external" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008943">Learning brain dynamics for decoding and predicting individual differences by Misra et al.</a></p></li>
+</ul>
+<p><i>4:38 pm, 505 minutes</i></p>
+<hr class="docutils" />
+<p><b>HCP Dataset Logistic Regression Program</b><br>
+<i>06/29/2022, 8:37 am</i></p>
+<p>Synopsis: I will apply logistic regression to the HCP dataset.</p>
+<p>Data: I started writing the logistic regression program in Python. More specifically, I worked on dataset pre-processing aspect.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">HCP Logistic Regression Code</span></p></li>
+</ul>
+<p><i>10:00 am, 83 minutes</i></p>
+<hr class="docutils" />
+<p><b>HCP Dataset Logistic Regression Program</b><br>
+<i>06/29/2022, 12:00 pm</i></p>
+<p>Synopsis: I will apply logistic regression to the HCP dataset.</p>
+<p>Data: I continued working on running logistic regression on the HCP data. I was able to convert the dictionary into a 2-dimensional array and split it into training and testing sets. I used the sklearn LogisticRegression module to assess accuracy.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">HCP Logistic Regression Code</span></p></li>
+</ul>
+<p><i>5:32 pm, 332 minutes</i></p>
+<hr class="docutils" />
+<p><b>HCP Dataset Logistic Regression</b><br>
+<i>06/30/2022, 8:38 pm</i></p>
+<p>Synopsis: I will apply logistic regression to the HCP dataset.</p>
+<p>Data: I wrote functions to perform logistic regression with (Time point, ROI) features. I ran this model and the one provided by the sci-kit learn library several times because the classification accuracy obtained was unexpectedly high. Then, I modified the program to classify at each time point, using ROIs as features, and graphed the accruacy over time.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/hcp_logreg_timefeature.html"><span class="doc std std-doc">HCP Logistic Regression Code - (Time, ROI) Features</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html"><span class="doc std std-doc">HCP Logistic Regression Code - ROI Features</span></a></p></li>
+</ul>
+<p><i>5:40 pm, 542 minutes</i></p>
 <hr class="docutils" />
 </section>
 
@@ -539,20 +557,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="entries.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Entries</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="prep/deep_learning/deep_learning.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Deep Learning</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
