@@ -415,10 +415,13 @@ title="Print to PDF"
     <span class="n">X_test</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">y_train</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">y_test</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">testIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span> <span class="mi">76</span><span class="p">)</span>
+    
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">176</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">testIndex</span> <span class="o">=</span> <span class="n">index</span><span class="p">[:</span><span class="mi">76</span><span class="p">]</span>
+
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">testIndex</span><span class="p">:</span>
             <span class="n">X_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
             <span class="n">y_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
@@ -443,26 +446,28 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;HCP_movie_watching.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">TS</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># accList = []</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">createData</span><span class="p">(</span><span class="n">TS</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = LogisticRegression(multi_class=&#39;multinomial&#39;, solver=&#39;sag&#39;)</span>
-<span class="c1"># model.fit(X_train, y_train)</span>
 
-<span class="c1"># acc = model.score(X_test, y_test)</span>
-<span class="c1"># print(&quot;Accuracy: &quot;, acc)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="c1"># accList.append(acc)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cost Function</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Logistic Regression</span>
 <span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
     <span class="n">h</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">)))</span> <span class="c1"># hypothesis representation</span>
     <span class="n">cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">Y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="p">))</span> <span class="c1"># cost function</span>
@@ -489,51 +494,32 @@ title="Print to PDF"
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="n">weights</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createYMask</span><span class="p">(</span><span class="n">movie</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">createYMask</span><span class="p">(</span><span class="n">movie</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="n">yMasked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">==</span> <span class="n">movie</span>
     <span class="n">yMasked</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">yMasked</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">movieList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">TS</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="n">modelWeights</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">movie</span> <span class="ow">in</span> <span class="n">movieList</span><span class="p">:</span>
-    <span class="n">yMasked</span> <span class="o">=</span> <span class="n">createYMask</span><span class="p">(</span><span class="n">movie</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-    <span class="n">W</span> <span class="o">=</span> <span class="n">descent</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">yMasked</span><span class="p">)</span>
-    <span class="n">modelWeights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">)))</span>
 
-<span class="n">predY</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_test</span><span class="p">:</span>
-    <span class="n">probList</span> <span class="o">=</span> <span class="p">[</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span> <span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">modelWeights</span><span class="p">]</span>
-    <span class="n">predY</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">movieList</span><span class="p">[</span><span class="n">probList</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">probList</span><span class="p">))])</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">movieList = list(TS.keys())</span>
+<span class="sd">modelWeights = []</span>
+<span class="sd">for movie in movieList:</span>
+<span class="sd">    yMasked = createYMask(movie, y_train)</span>
+<span class="sd">    W = descent(X_train, yMasked)</span>
+<span class="sd">    modelWeights.append(W)</span>
+<span class="sd">predY = []</span>
+<span class="sd">for x in X_test:</span>
+<span class="sd">    probList = [sigmoid(x, W) for W in modelWeights]</span>
+<span class="sd">    predY.append(movieList[probList.index(max(probList))])</span>
 
-<span class="n">pMask</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">==</span> <span class="n">predY</span> <span class="c1"># create mask for values where predicted is correct</span>
-<span class="n">acc</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pMask</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">pMask</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9581056466302368
+<span class="sd">pMask = y_test == predY # create mask for values where predicted is correct</span>
+<span class="sd">acc = sum(pMask) / len(pMask)</span>
+<span class="sd">print(acc)</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </div>

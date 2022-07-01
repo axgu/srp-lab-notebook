@@ -53,10 +53,13 @@ def createData(movieDict):
     X_test = []
     y_train = []
     y_test = []
-    testIndex = np.random.randint(0, 176, 76)
+    
+    index = np.arange(176)
+    np.random.shuffle(index)
+    testIndex = index[:76]
+
     np.random.shuffle(X)
     for row in X:
-        print(row)
         if row[-1] in testIndex:
             X_test.append(row[:-2])
             y_test.append(row[-2])
@@ -81,23 +84,25 @@ def createData(movieDict):
 with open('HCP_movie_watching.pkl','rb') as f:
     TS = pickle.load(f)
 
+
+# In[4]:
+
+
+# accList = []
 X_train, X_test, y_train, y_test = createData(TS)
 
+model = LogisticRegression(max_iter = 1000)
+model.fit(X_train, y_train)
 
-# In[12]:
-
-
-# model = LogisticRegression(multi_class='multinomial', solver='sag')
-# model.fit(X_train, y_train)
-
-# acc = model.score(X_test, y_test)
-# print("Accuracy: ", acc)
+acc = model.score(X_test, y_test)
+# accList.append(acc)
+print(acc)
 
 
-# In[23]:
+# In[ ]:
 
 
-# Cost Function
+# Logistic Regression
 def cost(X, Y, W):
     h = 1 / (1 + np.exp(-np.dot(X, W))) # hypothesis representation
     cost = np.dot(Y, -np.log(h)) + np.dot((1-Y), np.log(1-h)) # cost function
@@ -125,34 +130,22 @@ def descent(X_train, Y_train, lr = 0.01):
 
     return weights
 
-
-# In[24]:
-
-
 def createYMask(movie, Y):
     yMasked = np.zeros(Y.shape)
     mask = Y == movie
     yMasked[mask] = 1
     return yMasked
+    
+def sigmoid(X, W):
+    return 1 / (1 + np.exp(-np.dot(X, W)))
 
-
-# In[25]:
-
-
+"""
 movieList = list(TS.keys())
 modelWeights = []
 for movie in movieList:
     yMasked = createYMask(movie, y_train)
     W = descent(X_train, yMasked)
     modelWeights.append(W)
-
-
-# In[26]:
-
-
-def sigmoid(X, W):
-    return 1 / (1 + np.exp(-np.dot(X, W)))
-
 predY = []
 for x in X_test:
     probList = [sigmoid(x, W) for W in modelWeights]
@@ -161,4 +154,11 @@ for x in X_test:
 pMask = y_test == predY # create mask for values where predicted is correct
 acc = sum(pMask) / len(pMask)
 print(acc)
+"""
+
+
+# In[ ]:
+
+
+
 

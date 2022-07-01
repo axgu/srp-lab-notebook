@@ -1,4 +1,4 @@
-# HCP Dataset Summary
+# HCP Dataset
 ## Overview
 Visuals were created for better understanding of the HCP movie watching dataset. Loaded with pickle, the dataset is a dictionary with 15 movie-data array pairs. The movies included are:
 * testretest
@@ -51,6 +51,8 @@ The data corresponding to a randomly selected ROI for all 15 movies was plotted,
 Line graphs were also created to visualize values at each ROI for certain time points. Data from the *Home Alone* movie was plotted, with ROIs on the x-axis and values on the y-axis.
 
 ![](roi_times.png)
+
+A video was created for this purpose as well. The value for each region of interest was plotted, and the video format was used to simulate each time point.
 
 <video src="homealone_vid.mp4" width=400px controls style="margin-left:20px">
 </video>

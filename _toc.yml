@@ -19,7 +19,11 @@ parts:
     - file: prep/log_reg/diabetes-summary
 - caption: HCP Dataset
   chapters:
-  - file: hcp_data/data
   - file: hcp_data/hcp_summary
-  - file: hcp_data/hcp_logreg_timefeature
-  - file: hcp_data/hcp_logreg_indivtime
+    sections:
+    - file: hcp_data/data
+  - file: hcp_data/hcp_logreg
+    sections:
+    - file: hcp_data/hcp_logreg_timefeature
+    - file: hcp_data/hcp_logreg_indivtime
+  

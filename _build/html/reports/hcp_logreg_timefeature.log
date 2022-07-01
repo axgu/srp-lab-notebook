@@ -32,9 +32,14 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-with open('HCP_movie_watching.pkl','rb') as f:
-    TS = pickle.load(f)
-
+# accList = []
 X_train, X_test, y_train, y_test = createData(TS)
+
+model = LogisticRegression(max_iter = 1000)
+model.fit(X_train, y_train)
+
+acc = model.score(X_test, y_test)
+# accList.append(acc)
+print(acc)
 -------------------
 

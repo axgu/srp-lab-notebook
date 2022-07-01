@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['performAcc = []', '', '# Run log reg for first 90 time points', 'for k in range(90):', '']
+['performAcc = []', '# permTestAcc = []', '# Run log reg for first 90 time points/seconds', 'for k in range(90):', '']
 ...
-['    model.fit(X_train, y_train)', '', '    acc = model.score(X_test, y_test)', '    #acc = runModel(X_train, X_test, y_train, y_test)', '    performAcc.append(acc)']
+['    acc = model.score(X_test, y_test)', '    # test = create_permutation(X_test)', '    # permAcc = model.score(test, y_test)', '    performAcc.append(acc)', '    # permTestAcc.append(permAcc)']
 -------------------
 

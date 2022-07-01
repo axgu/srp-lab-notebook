@@ -21,7 +21,9 @@ from matplotlib import pyplot as plt
 with open('HCP_movie_watching.pkl','rb') as f:
     TS = pickle.load(f)
 
-testIndex = np.random.randint(0, 176, 76)
+index = np.arange(176)
+np.random.shuffle(index)
+testIndex = index[:76]
 
 
 # In[3]:
@@ -55,67 +57,24 @@ def splitData(tList):
 # In[4]:
 
 
-"""
-def cost(X, Y, W):
-    h = 1 / (1 + np.exp(-np.dot(X, W))) # hypothesis representation
-    cost = np.dot(Y, -np.log(h)) + np.dot((1-Y), np.log(1-h)) # cost function
-    J = -1 / (len(X)) * np.sum(cost) # mean cost
-    return J
-def gradient(X, Y, W):
-    h = 1 / (1 + np.exp(-np.dot(X, W)))
-    diff = h - Y
-    grad = 1 / (len(X)) * np.dot(diff, X)
-    return grad
-def descent(X_train, Y_train, lr = 0.01):
-    weights = [0]*(len(X_train[0]))
-    loss = []
-    loss.append(cost(X_train, Y_train, weights))
-    count = 0
-    while count < 1000:
-        grad = gradient(X_train, Y_train, weights)
-        weights = weights - lr*grad
-        loss.append(cost(X_train, Y_train, weights))
-        count += 1
-
-    return weights
-
-def createYMask(movie, Y):
-    yMasked = np.zeros(Y.shape)
-    mask = Y == movie
-    yMasked[mask] = 1
-    return yMasked
-
-def sigmoid(X, W):
-    return 1 / (1 + np.exp(-np.dot(X, W)))
-
-def runModel(X_train, X_test, y_train, y_test):
-    movieList = list(TS.keys())
-    modelWeights = []
-    for movie in movieList:
-        yMasked = createYMask(movie, y_train)
-        W = descent(X_train, yMasked)
-        modelWeights.append(W)
-
-    predY = []
-    for x in X_test:
-        probList = [sigmoid(x, W) for W in modelWeights]
-        predY.append(movieList[probList.index(max(probList))])
-
-    pMask = y_test == predY # create mask for values where predicted is correct
-    acc = sum(pMask) / len(pMask)
-    return acc
-"""
+def create_permutation(X):
+    new_X = np.empty(X.shape)
+    for i in range(X.shape[-1]):
+        randCol = X[:, i]
+        np.random.shuffle(randCol)
+        new_X[:, i] = randCol
+    return new_X
 
 
 # In[5]:
 
 
 performAcc = []
-
-# Run log reg for first 90 time points
+# permTestAcc = []
+# Run log reg for first 90 time points/seconds
 for k in range(90):
 
-    # 2d arrays
+    # Timepoint - 2d array
     # Row: (subject, clip) combination
     # Column: ROIs at time point, movie clip, participant number
     #   - ROIs: features for model
@@ -123,11 +82,11 @@ for k in range(90):
     #   - participant number: to split into test/train sets
     timepoints = []     
     for key, val in TS.items():
-        if val.shape[-2] > k:
+        if val.shape[-2] > k:   # Account for clips with less than 90 time points
             if key == 'testretest':
                 for i in range(val.shape[0]):
                     for j in range(val.shape[-3]):
-                        subj = []
+                        subj = []       # Create new row
                         for l in range(val.shape[-1]):
                             subj.append(val[i][j][k][l])
                         subj.append(key)    # Add movie
@@ -144,19 +103,23 @@ for k in range(90):
         
     X_train, X_test, y_train, y_test = splitData(timepoints)
 
-    model = LogisticRegression(multi_class='ovr', max_iter = 1000)
+    # Train model
+    model = LogisticRegression(max_iter = 1000)
     model.fit(X_train, y_train)
 
     acc = model.score(X_test, y_test)
-    #acc = runModel(X_train, X_test, y_train, y_test)
+    # test = create_permutation(X_test)
+    # permAcc = model.score(test, y_test)
     performAcc.append(acc)
+    # permTestAcc.append(permAcc)
 
 
-# In[32]:
+# In[100]:
 
 
 xAx = [i for i in range(0,90)]
-plt.plot(xAx, performAcc, label="ovr log-reg")
+plt.plot(xAx, performAcc, label="log-reg")
+# plt.plot(xAx, permTestAcc, label="log-reg perm-test")
 plt.xlabel("Time (s)")
 plt.ylabel("Accuracy")
 plt.ylim(0,1)
