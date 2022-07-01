@@ -25,27 +25,28 @@ def createData(movieDict):
     # Reduce to 2 dimensions
     X = np.empty((176*18, 65*300+2), dtype="object")
 
-    
+    rCount = 0
     for key, row in movieDict.items():
-        print(row.shape)
         # Testretest
         if len(row.shape) == 4:
             for i in range(row.shape[0]):
                 for j in range(row.shape[-3]):
-                    X[j][-2] = 'testretest'
-                    X[j][-1] = j
+                    X[rCount][-2] = 'testretest'
+                    X[rCount][-1] = j
                     for k in range(65):
                         for l in range(row.shape[-1]):
-                            X[j][k*row.shape[-1] + l] = row[i][j][k][l]
+                            X[rCount][k*row.shape[-1] + l] = row[i][j][k][l]
+                    rCount += 1
                             
         # Otherwise
         else:
             for j in range(row.shape[-3]):
-                X[j][-2] = key
-                X[j][-1] = j
+                X[rCount][-2] = key
+                X[rCount][-1] = j
                 for k in range(65):
                     for l in range(row.shape[-1]):
-                            X[j][k*row.shape[-1] + l] = row[j][k][l]
+                        X[rCount][k*row.shape[-1] + l] = row[j][k][l]
+                rCount += 1
                          
     # Randomly split participants
     X_train = []
@@ -64,7 +65,10 @@ def createData(movieDict):
             y_train.append(row[-2])
 
     X_train = np.array(X_train).astype(float)
+    X_train = (X_train - np.mean(X_train)) / np.std(X_train)
     X_test = np.array(X_test).astype(float)
+    X_test = (X_test - np.mean(X_test)) / np.std(X_test)
+    
     y_train = np.array(y_train)
     y_test = np.array(y_test)
     return X_train, X_test, y_train, y_test
@@ -80,21 +84,17 @@ with open('HCP_movie_watching.pkl','rb') as f:
 X_train, X_test, y_train, y_test = createData(TS)
 
 
-# In[61]:
+# In[12]:
 
 
 # model = LogisticRegression(multi_class='multinomial', solver='sag')
 # model.fit(X_train, y_train)
 
-
-# In[62]:
-
-
 # acc = model.score(X_test, y_test)
 # print("Accuracy: ", acc)
 
 
-# In[63]:
+# In[23]:
 
 
 # Cost Function
@@ -126,7 +126,7 @@ def descent(X_train, Y_train, lr = 0.01):
     return weights
 
 
-# In[64]:
+# In[24]:
 
 
 def createYMask(movie, Y):
@@ -136,7 +136,7 @@ def createYMask(movie, Y):
     return yMasked
 
 
-# In[65]:
+# In[25]:
 
 
 movieList = list(TS.keys())
@@ -147,7 +147,7 @@ for movie in movieList:
     modelWeights.append(W)
 
 
-# In[69]:
+# In[26]:
 
 
 def sigmoid(X, W):

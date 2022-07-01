@@ -112,9 +112,16 @@ def runModel(X_train, X_test, y_train, y_test):
 
 performAcc = []
 
-# Run log reg for first 90 time series
+# Run log reg for first 90 time points
 for k in range(90):
-    timepoints = []     # 2d arrays: one row per (subject, clip) combination
+
+    # 2d arrays
+    # Row: (subject, clip) combination
+    # Column: ROIs at time point, movie clip, participant number
+    #   - ROIs: features for model
+    #   - movie clip: label
+    #   - participant number: to split into test/train sets
+    timepoints = []     
     for key, val in TS.items():
         if val.shape[-2] > k:
             if key == 'testretest':
@@ -123,9 +130,9 @@ for k in range(90):
                         subj = []
                         for l in range(val.shape[-1]):
                             subj.append(val[i][j][k][l])
-                        subj.append(key)
-                        subj.append(j)
-                        timepoints.append(subj)
+                        subj.append(key)    # Add movie
+                        subj.append(j)      # Add participant number
+                        timepoints.append(subj)     # Add new row to array
             else:
                 for j in range(val.shape[-3]):
                     subj = []
@@ -145,7 +152,7 @@ for k in range(90):
     performAcc.append(acc)
 
 
-# In[26]:
+# In[32]:
 
 
 xAx = [i for i in range(0,90)]

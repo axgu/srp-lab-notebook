@@ -481,9 +481,16 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">performAcc</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="c1"># Run log reg for first 90 time series</span>
+<span class="c1"># Run log reg for first 90 time points</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">90</span><span class="p">):</span>
-    <span class="n">timepoints</span> <span class="o">=</span> <span class="p">[]</span>     <span class="c1"># 2d arrays: one row per (subject, clip) combination</span>
+
+    <span class="c1"># 2d arrays</span>
+    <span class="c1"># Row: (subject, clip) combination</span>
+    <span class="c1"># Column: ROIs at time point, movie clip, participant number</span>
+    <span class="c1">#   - ROIs: features for model</span>
+    <span class="c1">#   - movie clip: label</span>
+    <span class="c1">#   - participant number: to split into test/train sets</span>
+    <span class="n">timepoints</span> <span class="o">=</span> <span class="p">[]</span>     
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">TS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;testretest&#39;</span><span class="p">:</span>
@@ -492,9 +499,9 @@ title="Print to PDF"
                         <span class="n">subj</span> <span class="o">=</span> <span class="p">[]</span>
                         <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
                             <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">])</span>
-                        <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-                        <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                        <span class="n">timepoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subj</span><span class="p">)</span>
+                        <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>    <span class="c1"># Add movie</span>
+                        <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>      <span class="c1"># Add participant number</span>
+                        <span class="n">timepoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subj</span><span class="p">)</span>     <span class="c1"># Add new row to array</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]):</span>
                     <span class="n">subj</span> <span class="o">=</span> <span class="p">[]</span>
