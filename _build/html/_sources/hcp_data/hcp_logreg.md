@@ -12,7 +12,7 @@ The data was split with 100 participants for training and 76 participants for te
 ### Logistic Regression Model
 At time point 0, a multinomial logistic regression model was created and fitted to the training data, using the sci-kit learn library in Python. Max_iters was set to 1000 and all other default parameter values were used. The model was then evaluated with the testing data at all 90 time points, and the accuracy was saved. Classification accuracy at each time point was plotted, as shown below:
 
-![](../_build/jupyter_execute/hcp_data/hcp_logreg_indivtime_6_0.png)
+![](../_build/jupyter_execute/hcp_data/hcp_logreg_indivtime_5_0.png)
 
 
 ---
