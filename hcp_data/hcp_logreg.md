@@ -10,9 +10,9 @@ At each time point, a general 2-dimensional array was created. Each row was desi
 The data was split with 100 participants for training and 76 participants for testing. A list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data stored in X_test and corresponding movie labels stored in y_test. The same was done for participants not selected in the test set, except with X_train and y_train, respectively. All feature data in both training and testing sets was normalized using z-scores.
 
 ### Logistic Regression Model
-At each of the first 90 time points, a multinomial logistic regression model was created and fitted to the training data, using the sci-kit learn library in Python. Max_iters was set to 1000 and all other default parameter values were used. The model was then evaluated with the testing data, and the accuracy was saved. Classification accuracy at each time point was plotted, as shown below:
+At time point 0, a multinomial logistic regression model was created and fitted to the training data, using the sci-kit learn library in Python. Max_iters was set to 1000 and all other default parameter values were used. The model was then evaluated with the testing data at all 90 time points, and the accuracy was saved. Classification accuracy at each time point was plotted, as shown below:
 
-![](../_build/jupyter_execute/hcp_data/hcp_logreg_indivtime_6_0.png)
+![](../_build/jupyter_execute/hcp_data/hcp_logreg_indivtime_5_0.png)
 
 
 ---

@@ -12,6 +12,7 @@ import scipy as scp
 import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.exceptions import NotFittedError
 from matplotlib import pyplot as plt
 
 
@@ -57,19 +58,8 @@ def splitData(tList):
 # In[4]:
 
 
-def create_permutation(X):
-    new_X = np.empty(X.shape)
-    for i in range(X.shape[-1]):
-        randCol = X[:, i]
-        np.random.shuffle(randCol)
-        new_X[:, i] = randCol
-    return new_X
-
-
-# In[5]:
-
-
 performAcc = []
+model = LogisticRegression(max_iter = 1000)
 # permTestAcc = []
 # Run log reg for first 90 time points/seconds
 for k in range(90):
@@ -103,23 +93,18 @@ for k in range(90):
         
     X_train, X_test, y_train, y_test = splitData(timepoints)
 
-    # Train model
-    model = LogisticRegression(max_iter = 1000)
-    model.fit(X_train, y_train)
-
+    if k == 0:
+        model.fit(X_train, y_train)
+    
     acc = model.score(X_test, y_test)
-    # test = create_permutation(X_test)
-    # permAcc = model.score(test, y_test)
     performAcc.append(acc)
-    # permTestAcc.append(permAcc)
 
 
-# In[100]:
+# In[119]:
 
 
 xAx = [i for i in range(0,90)]
 plt.plot(xAx, performAcc, label="log-reg")
-# plt.plot(xAx, permTestAcc, label="log-reg perm-test")
 plt.xlabel("Time (s)")
 plt.ylabel("Accuracy")
 plt.ylim(0,1)
