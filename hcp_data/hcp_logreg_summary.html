@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>HCP Dataset &#8212; My Project</title>
+    <title>HCP Logistic Regression Summary &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Visualization" href="data.html" />
-    <link rel="prev" title="Diabetes Prediction Summary" href="../prep/log_reg/diabetes-summary.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -179,45 +177,26 @@ const thebe_selector_output = ".output, .cell_output"
   HCP Dataset
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
-   HCP Dataset
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="data.html">
+   Visualization
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data.html">
-     Visualization
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="hcp_logreg.html">
-   HCP Logistic Regression
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_summary.html">
+   HCP Dataset Summary
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hcp_logreg_timefeature.html">
-     Logistic Regression - (Time point, ROI) Features
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hcp_logreg_indivtime.html">
-     Logistic Regression - ROI Features
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_logreg_timefeature.html">
+   Logistic Regression - (Time point, ROI) Features
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_logreg_indivtime.html">
+   Logistic Regression - ROI Features
+  </a>
  </li>
 </ul>
 
@@ -292,7 +271,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/hcp_data/hcp_summary.md"
+        <a href="../_sources/hcp_data/hcp_logreg_summary.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -352,41 +331,38 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#d-raster">
-   2D Raster
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-graphs">
-   Time Series Graphs
+  <a class="reference internal nav-link" href="#time-series-classification-with-roi-features">
+   Time Series Classification with ROI Features
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-rois">
-     Comparing ROIs
+    <a class="reference internal nav-link" href="#dataset-creation">
+     Dataset Creation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-movies">
-     Comparing Movies
+    <a class="reference internal nav-link" href="#logistic-regression-model">
+     Logistic Regression Model
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rois">
-   ROIs
+  <a class="reference internal nav-link" href="#classification-with-time-point-roi-features">
+   Classification with (Time point, ROI) Features
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#resources">
-   Resources
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Dataset Creation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Logistic Regression Model
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -397,7 +373,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>HCP Dataset</h1>
+                <h1>HCP Logistic Regression Summary</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -408,41 +384,38 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#d-raster">
-   2D Raster
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-graphs">
-   Time Series Graphs
+  <a class="reference internal nav-link" href="#time-series-classification-with-roi-features">
+   Time Series Classification with ROI Features
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-rois">
-     Comparing ROIs
+    <a class="reference internal nav-link" href="#dataset-creation">
+     Dataset Creation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-movies">
-     Comparing Movies
+    <a class="reference internal nav-link" href="#logistic-regression-model">
+     Logistic Regression Model
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rois">
-   ROIs
+  <a class="reference internal nav-link" href="#classification-with-time-point-roi-features">
+   Classification with (Time point, ROI) Features
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#resources">
-   Resources
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Dataset Creation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Logistic Regression Model
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -454,73 +427,38 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="hcp-dataset">
-<h1>HCP Dataset<a class="headerlink" href="#hcp-dataset" title="Permalink to this headline">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
-<p>Visuals were created for better understanding of the HCP movie watching dataset. Loaded with pickle, the dataset is a dictionary with 15 movie-data array pairs. The movies included are:</p>
-<ul class="simple">
-<li><p>testretest</p></li>
-<li><p>twomen</p></li>
-<li><p>bridgeville</p></li>
-<li><p>pockets</p></li>
-<li><p>overcome</p></li>
-<li><p>inception</p></li>
-<li><p>socialnet</p></li>
-<li><p>oceans</p></li>
-<li><p>flower</p></li>
-<li><p>hotel</p></li>
-<li><p>garden</p></li>
-<li><p>dreary</p></li>
-<li><p>homealone</p></li>
-<li><p>brokovich</p></li>
-<li><p>starwars</p></li>
-</ul>
-<p>All movie keys except ‘testretest’ are mapped to a 3 dimensional array with shape [# of participants, # of time points, # of ROIs].
-The ‘testretest’ movie is mapped to a 4 dimensional array with shape [# of runs, # of participants, # of time points, # of ROIs] since 4 runs were done for each participant. The following values are constant for all 15 movies:</p>
-<ul class="simple">
-<li><p>number of participants: 176</p></li>
-<li><p>number of ROIs: 300</p></li>
-</ul>
-<p>The number of time points varies between movies. Time points were normalized using maximums and minimums for comparison. For the figures created, individual participant responses at each (time point, ROI) were averaged to reduce the 3- or 4-dimensional array to a 2-dimensional array.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="hcp-logistic-regression-summary">
+<h1>HCP Logistic Regression Summary<a class="headerlink" href="#hcp-logistic-regression-summary" title="Permalink to this headline">#</a></h1>
+<section id="time-series-classification-with-roi-features">
+<h2>Time Series Classification with ROI Features<a class="headerlink" href="#time-series-classification-with-roi-features" title="Permalink to this headline">#</a></h2>
+<p>Multinomial logistic regression was applied to the HCP dataset for 15-way time series classification of movie clips. Code can be found <a class="reference internal" href="hcp_logreg_indivtime.html"><span class="doc std std-doc">here</span></a>.</p>
+<section id="dataset-creation">
+<h3>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Permalink to this headline">#</a></h3>
+<p>The dataset was transformed from a dictionary with movie clip names as keys and arrays of fMRI data as values (see <a class="reference internal" href="hcp_summary.html"><span class="doc std std-doc">summary</span></a>) to 2-dimensional arrays of X- and Y- train and test sets at each time point considered. Based on the findings from Misra et al., only the first 90 seconds, equivalent to the first 90 time points, were used.</p>
+<p>At each time point, a general 2-dimensional array was created. Each row was designated for a different subject-movie clip combination. For ‘testretest’ cases, different runs from the same subject were also compiled as separate rows. The number of rows varied between time points, as both ‘overcome’ and ‘testretest’ are clips shorter than 90 seconds. Columns were designated for distinct ROIs, as well as the movie label and participant subject, which were used for splitting up the array. Thus, each array had 300 feature columns, in addition to a movie label column and a participant number column.</p>
+<p>The data was split with 100 participants for training and 76 participants for testing. A list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data stored in X_test and corresponding movie labels stored in y_test. The same was done for participants not selected in the test set, except with X_train and y_train, respectively. All feature data in both training and testing sets was normalized using z-scores.</p>
 </section>
-<section id="d-raster">
-<h2>2D Raster<a class="headerlink" href="#d-raster" title="Permalink to this headline">#</a></h2>
-<p>Raster graphics were created to show the change in fMRI data for the 15 movies. Normalized time points were represented on the x-axis and regions of interest were represented on the y-axis for each raster. Color was determined by the data value.</p>
-<p><img alt="" src="../_images/roi_timeseries_map.png" /></p>
-</section>
-<section id="time-series-graphs">
-<h2>Time Series Graphs<a class="headerlink" href="#time-series-graphs" title="Permalink to this headline">#</a></h2>
-<p>Line graphs were created to visualize change in values across time points.</p>
-<section id="comparing-rois">
-<h3>Comparing ROIs<a class="headerlink" href="#comparing-rois" title="Permalink to this headline">#</a></h3>
-<p>Data from the <em>Home Alone</em> movie was used. Three ROIs were randomly selected and the corresponding data was plotted, with time points on the x-axis and values on the y-axis.</p>
-<p><img alt="" src="../_images/time_rois.png" /></p>
-</section>
-<section id="comparing-movies">
-<h3>Comparing Movies<a class="headerlink" href="#comparing-movies" title="Permalink to this headline">#</a></h3>
-<p>The data corresponding to a randomly selected ROI for all 15 movies was plotted, with time points on the x-axis and values on the y-axis.</p>
-<p><img alt="" src="../_images/time_movies.png" /></p>
+<section id="logistic-regression-model">
+<h3>Logistic Regression Model<a class="headerlink" href="#logistic-regression-model" title="Permalink to this headline">#</a></h3>
+<p>At each of the first 90 time points, a multinomial logistic regression model was created and fitted to the training data, using the sci-kit learn library in Python. Max_iters was set to 1000 and all other default parameter values were used. The model was then evaluated with the testing data, and the accuracy was saved. Classification accuracy at each time point was plotted, as shown below:</p>
+<p><img alt="" src="../_images/hcp_logreg_indivtime_6_0.png" /></p>
 </section>
 </section>
-<section id="rois">
-<h2>ROIs<a class="headerlink" href="#rois" title="Permalink to this headline">#</a></h2>
-<p>Line graphs were also created to visualize values at each ROI for certain time points. Data from the <em>Home Alone</em> movie was plotted, with ROIs on the x-axis and values on the y-axis.</p>
-<p><img alt="" src="../_images/roi_times.png" /></p>
-<p>A video was created for this purpose as well. The value for each region of interest was plotted, and the video format was used to simulate each time point.</p>
-<video src="homealone_vid.mp4" width=400px controls style="margin-left:20px">
-</video>
+<hr class="docutils" />
+<section id="classification-with-time-point-roi-features">
+<h2>Classification with (Time point, ROI) Features<a class="headerlink" href="#classification-with-time-point-roi-features" title="Permalink to this headline">#</a></h2>
+<p>A multinomial logistic regression model was applied to the HCP dataset for 15-way classification of movie clips, using features with both a time and ROI aspect. Code can be found <a class="reference internal" href="hcp_logreg_timefeature.html"><span class="doc std std-doc">here</span></a>.</p>
+<section id="id1">
+<h3>Dataset Creation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>The dataset was transformed from a dictionary with movie clip names as keys and arrays of fMRI data as values (see <a class="reference internal" href="hcp_summary.html"><span class="doc std std-doc">summary</span></a>) to 2-dimensional arrays of X- and Y- train and test sets. Since ‘overcome’ was 65 seconds long, only the first 65 time points were considered.</p>
+<p>An overall 2-dimensional array was created prior to splitting into X/Y train/test sets. Each row represented data for a subject-movie clip combination. Similar to the previous time series classification method, for ‘testretest’ cases, different runs from the same subject were also compiled as separate rows. Columns in the array contained time point-ROI combinations, as well as the movie label and participant subject; there were 65x300 feature columns, in addition to a movie label column and a participant number column.</p>
+<p>The data was split with 100 participants for training and 76 participants for testing. Similar to the method above, a list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data stored in X_test and corresponding movie labels stored in y_test. The same was done for participants not selected in the test set, except with X_train and y_train, respectively. All feature data in both training and testing sets was normalized using z-scores.</p>
 </section>
-<section id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="data.html"><span class="doc std std-doc">HCP Dataset Visualization Code</span></a></p></li>
-<li><p><a class="reference external" href="https://medium.datadriveninvestor.com/how-to-create-animation-using-matplotlib-and-celluloid-70533ba013e8">Celluloid Guide by Medium</a></p></li>
-<li><p><a class="reference external" href="https://matplotlib.org/stable/api/axes_api.html">Matplotlib Docs</a></p></li>
-</ul>
+<section id="id2">
+<h3>Logistic Regression Model<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>A multinomial logistic regression model was created and fitted to the training data, using the sci-kit learn library in Python. Max_iters was set to 1000 and all other default parameter values were used. The model was then evaluated with the testing data, and the accuracy found was around 96%.</p>
 </section>
-<div class="toctree-wrapper compound">
-</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -550,20 +488,6 @@ The ‘testretest’ movie is mapped to a 4 dimensional array with shape [# of r
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../prep/log_reg/diabetes-summary.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Diabetes Prediction Summary</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="data.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Visualization</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

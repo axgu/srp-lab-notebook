@@ -382,7 +382,9 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;HCP_movie_watching.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">TS</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-<span class="n">testIndex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span> <span class="mi">76</span><span class="p">)</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">176</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="n">testIndex</span> <span class="o">=</span> <span class="n">index</span><span class="p">[:</span><span class="mi">76</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -418,61 +420,13 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">def cost(X, Y, W):</span>
-<span class="sd">    h = 1 / (1 + np.exp(-np.dot(X, W))) # hypothesis representation</span>
-<span class="sd">    cost = np.dot(Y, -np.log(h)) + np.dot((1-Y), np.log(1-h)) # cost function</span>
-<span class="sd">    J = -1 / (len(X)) * np.sum(cost) # mean cost</span>
-<span class="sd">    return J</span>
-<span class="sd">def gradient(X, Y, W):</span>
-<span class="sd">    h = 1 / (1 + np.exp(-np.dot(X, W)))</span>
-<span class="sd">    diff = h - Y</span>
-<span class="sd">    grad = 1 / (len(X)) * np.dot(diff, X)</span>
-<span class="sd">    return grad</span>
-<span class="sd">def descent(X_train, Y_train, lr = 0.01):</span>
-<span class="sd">    weights = [0]*(len(X_train[0]))</span>
-<span class="sd">    loss = []</span>
-<span class="sd">    loss.append(cost(X_train, Y_train, weights))</span>
-<span class="sd">    count = 0</span>
-<span class="sd">    while count &lt; 1000:</span>
-<span class="sd">        grad = gradient(X_train, Y_train, weights)</span>
-<span class="sd">        weights = weights - lr*grad</span>
-<span class="sd">        loss.append(cost(X_train, Y_train, weights))</span>
-<span class="sd">        count += 1</span>
-
-<span class="sd">    return weights</span>
-
-<span class="sd">def createYMask(movie, Y):</span>
-<span class="sd">    yMasked = np.zeros(Y.shape)</span>
-<span class="sd">    mask = Y == movie</span>
-<span class="sd">    yMasked[mask] = 1</span>
-<span class="sd">    return yMasked</span>
-
-<span class="sd">def sigmoid(X, W):</span>
-<span class="sd">    return 1 / (1 + np.exp(-np.dot(X, W)))</span>
-
-<span class="sd">def runModel(X_train, X_test, y_train, y_test):</span>
-<span class="sd">    movieList = list(TS.keys())</span>
-<span class="sd">    modelWeights = []</span>
-<span class="sd">    for movie in movieList:</span>
-<span class="sd">        yMasked = createYMask(movie, y_train)</span>
-<span class="sd">        W = descent(X_train, yMasked)</span>
-<span class="sd">        modelWeights.append(W)</span>
-
-<span class="sd">    predY = []</span>
-<span class="sd">    for x in X_test:</span>
-<span class="sd">        probList = [sigmoid(x, W) for W in modelWeights]</span>
-<span class="sd">        predY.append(movieList[probList.index(max(probList))])</span>
-
-<span class="sd">    pMask = y_test == predY # create mask for values where predicted is correct</span>
-<span class="sd">    acc = sum(pMask) / len(pMask)</span>
-<span class="sd">    return acc</span>
-<span class="sd">&quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\ndef cost(X, Y, W):\n    h = 1 / (1 + np.exp(-np.dot(X, W))) # hypothesis representation\n    cost = np.dot(Y, -np.log(h)) + np.dot((1-Y), np.log(1-h)) # cost function\n    J = -1 / (len(X)) * np.sum(cost) # mean cost\n    return J\ndef gradient(X, Y, W):\n    h = 1 / (1 + np.exp(-np.dot(X, W)))\n    diff = h - Y\n    grad = 1 / (len(X)) * np.dot(diff, X)\n    return grad\ndef descent(X_train, Y_train, lr = 0.01):\n    weights = [0]*(len(X_train[0]))\n    loss = []\n    loss.append(cost(X_train, Y_train, weights))\n    count = 0\n    while count &lt; 1000:\n        grad = gradient(X_train, Y_train, weights)\n        weights = weights - lr*grad\n        loss.append(cost(X_train, Y_train, weights))\n        count += 1\n\n    return weights\n\ndef createYMask(movie, Y):\n    yMasked = np.zeros(Y.shape)\n    mask = Y == movie\n    yMasked[mask] = 1\n    return yMasked\n\ndef sigmoid(X, W):\n    return 1 / (1 + np.exp(-np.dot(X, W)))\n\ndef runModel(X_train, X_test, y_train, y_test):\n    movieList = list(TS.keys())\n    modelWeights = []\n    for movie in movieList:\n        yMasked = createYMask(movie, y_train)\n        W = descent(X_train, yMasked)\n        modelWeights.append(W)\n\n    predY = []\n    for x in X_test:\n        probList = [sigmoid(x, W) for W in modelWeights]\n        predY.append(movieList[probList.index(max(probList))])\n\n    pMask = y_test == predY # create mask for values where predicted is correct\n    acc = sum(pMask) / len(pMask)\n    return acc\n&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_permutation</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">new_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">randCol</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">randCol</span><span class="p">)</span>
+        <span class="n">new_X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">randCol</span>
+    <span class="k">return</span> <span class="n">new_X</span>
 </pre></div>
 </div>
 </div>
@@ -480,11 +434,11 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">performAcc</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Run log reg for first 90 time points</span>
+<span class="c1"># permTestAcc = []</span>
+<span class="c1"># Run log reg for first 90 time points/seconds</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">90</span><span class="p">):</span>
 
-    <span class="c1"># 2d arrays</span>
+    <span class="c1"># Timepoint - 2d array</span>
     <span class="c1"># Row: (subject, clip) combination</span>
     <span class="c1"># Column: ROIs at time point, movie clip, participant number</span>
     <span class="c1">#   - ROIs: features for model</span>
@@ -492,11 +446,11 @@ title="Print to PDF"
     <span class="c1">#   - participant number: to split into test/train sets</span>
     <span class="n">timepoints</span> <span class="o">=</span> <span class="p">[]</span>     
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">TS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>   <span class="c1"># Account for clips with less than 90 time points</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;testretest&#39;</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]):</span>
-                        <span class="n">subj</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="n">subj</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># Create new row</span>
                         <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
                             <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">])</span>
                         <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>    <span class="c1"># Add movie</span>
@@ -513,12 +467,29 @@ title="Print to PDF"
         
     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">splitData</span><span class="p">(</span><span class="n">timepoints</span><span class="p">)</span>
 
-    <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="c1"># Train model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
     <span class="n">acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-    <span class="c1">#acc = runModel(X_train, X_test, y_train, y_test)</span>
+    <span class="c1"># test = create_permutation(X_test)</span>
+    <span class="c1"># permAcc = model.score(test, y_test)</span>
     <span class="n">performAcc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+    <span class="c1"># permTestAcc.append(permAcc)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">subj</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<span class="ne">---&gt; </span><span class="mi">28</span>     <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">subj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -526,7 +497,8 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xAx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">)]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">performAcc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ovr log-reg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">performAcc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;log-reg&quot;</span><span class="p">)</span>
+<span class="c1"># plt.plot(xAx, permTestAcc, label=&quot;log-reg perm-test&quot;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -538,7 +510,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/hcp_logreg_indivtime_6_0.png" src="../_images/hcp_logreg_indivtime_6_0.png" />
+<img alt="../_images/hcp_logreg_indivtime_6_01.png" src="../_images/hcp_logreg_indivtime_6_01.png" />
 </div>
 </div>
 </section>

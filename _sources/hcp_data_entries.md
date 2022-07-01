@@ -87,3 +87,20 @@ Files:
 <i>5:40 pm, 542 minutes</i>
 
 ---
+
+<b>HCP Dataset Logistic Regression Summary</b><br>
+<i>07/01/2022, 7:30 am</i>
+
+
+Synopsis: I will apply logistic regression to the HCP dataset and summarize the results.
+
+Data:  
+
+Files:
+* [HCP Logistic Regression Overview](./hcp_data/hcp_logreg.md)
+* [HCP Logistic Regression Code - (Time, ROI) Features](./hcp_data/hcp_logreg_timefeature.ipynb)
+* [HCP Logistic Regression Code - ROI Features](./hcp_data/hcp_logreg_indivtime.ipynb)
+
+<i></i>
+
+---
