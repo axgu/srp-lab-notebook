@@ -387,27 +387,28 @@ title="Print to PDF"
     <span class="c1"># Reduce to 2 dimensions</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">176</span><span class="o">*</span><span class="mi">18</span><span class="p">,</span> <span class="mi">65</span><span class="o">*</span><span class="mi">300</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span>
 
-    
+    <span class="n">rCount</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">movieDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="c1"># Testretest</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]):</span>
-                    <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;testretest&#39;</span>
-                    <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+                    <span class="n">X</span><span class="p">[</span><span class="n">rCount</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;testretest&#39;</span>
+                    <span class="n">X</span><span class="p">[</span><span class="n">rCount</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
                     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">65</span><span class="p">):</span>
                         <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
-                            <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="o">*</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">]</span>
+                            <span class="n">X</span><span class="p">[</span><span class="n">rCount</span><span class="p">][</span><span class="n">k</span><span class="o">*</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">]</span>
+                    <span class="n">rCount</span> <span class="o">+=</span> <span class="mi">1</span>
                             
         <span class="c1"># Otherwise</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]):</span>
-                <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
-                <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="n">X</span><span class="p">[</span><span class="n">rCount</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">X</span><span class="p">[</span><span class="n">rCount</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
                 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">65</span><span class="p">):</span>
                     <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
-                            <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="o">*</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">]</span>
+                        <span class="n">X</span><span class="p">[</span><span class="n">rCount</span><span class="p">][</span><span class="n">k</span><span class="o">*</span><span class="n">row</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">]</span>
+                <span class="n">rCount</span> <span class="o">+=</span> <span class="mi">1</span>
                          
     <span class="c1"># Randomly split participants</span>
     <span class="n">X_train</span> <span class="o">=</span> <span class="p">[]</span>
@@ -426,7 +427,10 @@ title="Print to PDF"
             <span class="n">y_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 
     <span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
     <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_test</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
     <span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
     <span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
@@ -444,23 +448,13 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4, 176, 84, 300)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = LogisticRegression(multi_class=&#39;multinomial&#39;, solver=&#39;sag&#39;)</span>
 <span class="c1"># model.fit(X_train, y_train)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># acc = model.score(X_test, y_test)</span>
+
+<span class="c1"># acc = model.score(X_test, y_test)</span>
 <span class="c1"># print(&quot;Accuracy: &quot;, acc)</span>
 </pre></div>
 </div>
@@ -521,39 +515,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 4.31609323e-03  6.14887169e-03  4.53452522e-03 ...  4.72152925e-05
- -9.83087297e-03 -6.55919310e-03]
-[ 0.00646204  0.00415734  0.00890824 ...  0.00403777  0.00344235
- -0.00106615]
-[ 0.00498677  0.00558748  0.00751926 ...  0.00075747  0.00293276
- -0.0006267 ]
-[ 0.00265687  0.00501067  0.00621069 ...  0.00060875  0.00336237
- -0.00251431]
-[ 0.0068925   0.00766283  0.01091374 ... -0.00388291 -0.00383299
- -0.00625019]
-[7.77406593e-03 4.59182186e-03 6.29960223e-03 ... 3.75088706e-05
- 1.11880762e-02 1.91867297e-03]
-[ 0.00896773  0.00642047  0.01210803 ...  0.00137281 -0.00044694
- -0.00337771]
-[0.00463044 0.0060374  0.00595867 ... 0.00164268 0.00177911 0.0047781 ]
-[ 0.00879431  0.00402151  0.00923612 ... -0.00132012 -0.00480074
- -0.00550729]
-[ 0.00812091  0.00352184  0.00545422 ...  0.00077628  0.00114374
- -0.00576554]
-[ 0.00512857  0.00494274  0.00169858 ...  0.00159787 -0.00048169
- -0.0042462 ]
-[ 0.00383971  0.00125059  0.00385125 ...  0.00394294 -0.00079893
-  0.00387691]
-[ 0.00531169  0.00497184  0.00846108 ...  0.00042918  0.00274672
- -0.00485941]
-[ 0.00736933  0.00353653  0.008181   ...  0.00115601  0.00773015
- -0.00571043]
-[ 9.14599764e-03  9.69130338e-03  1.00342407e-02 ...  1.14116685e-05
- -7.61457048e-04 -1.25898624e-02]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -572,7 +533,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9722222222222222
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9581056466302368
 </pre></div>
 </div>
 </div>
