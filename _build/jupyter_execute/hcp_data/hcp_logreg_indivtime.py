@@ -93,14 +93,13 @@ for k in range(90):
         
     X_train, X_test, y_train, y_test = splitData(timepoints)
 
-    if k == 0:
-        model.fit(X_train, y_train)
+    model.fit(X_train, y_train)
     
     acc = model.score(X_test, y_test)
     performAcc.append(acc)
 
 
-# In[119]:
+# In[132]:
 
 
 xAx = [i for i in range(0,90)]
