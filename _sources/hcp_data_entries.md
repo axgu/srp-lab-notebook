@@ -101,6 +101,6 @@ Files:
 * [HCP Logistic Regression Code - (Time, ROI) Features](./hcp_data/hcp_logreg_timefeature.ipynb)
 * [HCP Logistic Regression Code - ROI Features](./hcp_data/hcp_logreg_indivtime.ipynb)
 
-<i></i>
+<i>4:30pm, 540 minutes</i>
 
 ---
