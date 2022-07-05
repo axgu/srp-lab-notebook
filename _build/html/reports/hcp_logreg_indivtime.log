@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['performAcc = []', 'model = LogisticRegression(max_iter = 1000)', '# permTestAcc = []', '# Run log reg for first 90 time points/seconds', 'for k in range(90):']
+['model = LogisticRegression(max_iter = 1000)', 'arr = []', 'for k in range(90):', '    for key, val in TS.items():', '        if val.shape[-2] > k:   # Account for clips with less than 90 time points']
 ...
-['', '    model.fit(X_train, y_train)', '    ', '    acc = model.score(X_test, y_test)', '    performAcc.append(acc)']
+['                        subj.append(val[j][k][l])', '                    subj.append(key)', '                    subj.append(k)', '                    subj.append(j)', '                    arr.append(subj)']
 -------------------
 
