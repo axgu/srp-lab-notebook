@@ -206,13 +206,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="hcp_data/hcp_logreg_timefeature.html">
-     Logistic Regression - (Time point, ROI) Features
+    <a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html">
+     Logistic Regression - ROI Features
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html">
-     Logistic Regression - ROI Features
+    <a class="reference internal" href="hcp_data/hcp_logreg_permtest.html">
+     Permutation Test
     </a>
    </li>
   </ul>
@@ -413,17 +413,38 @@ title="Print to PDF"
 </ul>
 <p><i>5:40 pm, 542 minutes</i></p>
 <hr class="docutils" />
-<p><b>HCP Dataset Logistic Regression Summary</b><br>
+<p><b>HCP Dataset Logistic Regression</b><br>
 <i>07/01/2022, 7:30 am</i></p>
 <p>Synopsis: I will apply logistic regression to the HCP dataset and summarize the results.</p>
 <p>Data:</p>
 <p>Files:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Overview</span></a></p></li>
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg_timefeature.html"><span class="doc std std-doc">HCP Logistic Regression Code - (Time, ROI) Features</span></a></p></li>
 <li><p><a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html"><span class="doc std std-doc">HCP Logistic Regression Code - ROI Features</span></a></p></li>
 </ul>
 <p><i>4:30pm, 540 minutes</i></p>
+<hr class="docutils" />
+<p><b>HCP Dataset Logistic Regression Summary</b><br>
+<i>07/05/2022, 10:00 am</i></p>
+<p>Synopsis: I will apply logistic regression to the HCP dataset and summarize the results.</p>
+<p>Data: I was able to resolve my confusion about the logistic regression model. I modified my previous logistic regression ROI feature program so that the model is trained once with data across all 90 time points considered. Then, the test data was split by time points. The fitted model was evaluated with this data and classification accuracy was calculated at each time point to create a time series plot.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Overview</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html"><span class="doc std std-doc">HCP Logistic Regression Code - ROI Features</span></a></p></li>
+</ul>
+<p><i>6:17 pm, 497 minutes</i></p>
+<hr class="docutils" />
+<p><b>Permutation Testing</b><br>
+<i>07/06/2022, 8:37 am</i></p>
+<p>Synopsis: I will use a permutation test to evaluate the effectiveness of the logistic regression model.</p>
+<p>Data:</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Overview</span></a></p></li>
+<li><p><span class="xref myst">Permutation Testing</span></p></li>
+</ul>
+<p><i></i></p>
 <hr class="docutils" />
 </section>
 

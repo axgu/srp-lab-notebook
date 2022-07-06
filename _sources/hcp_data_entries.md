@@ -88,7 +88,7 @@ Files:
 
 ---
 
-<b>HCP Dataset Logistic Regression Summary</b><br>
+<b>HCP Dataset Logistic Regression</b><br>
 <i>07/01/2022, 7:30 am</i>
 
 
@@ -98,9 +98,40 @@ Data:
 
 Files:
 * [HCP Logistic Regression Overview](./hcp_data/hcp_logreg.md)
-* [HCP Logistic Regression Code - (Time, ROI) Features](./hcp_data/hcp_logreg_timefeature.ipynb)
 * [HCP Logistic Regression Code - ROI Features](./hcp_data/hcp_logreg_indivtime.ipynb)
 
 <i>4:30pm, 540 minutes</i>
+
+---
+
+<b>HCP Dataset Logistic Regression Summary</b><br>
+<i>07/05/2022, 10:00 am</i>
+
+
+Synopsis: I will apply logistic regression to the HCP dataset and summarize the results.
+
+Data: I was able to resolve my confusion about the logistic regression model. I modified my previous logistic regression ROI feature program so that the model is trained once with data across all 90 time points considered. Then, the test data was split by time points. The fitted model was evaluated with this data and classification accuracy was calculated at each time point to create a time series plot.
+
+Files:
+* [HCP Logistic Regression Overview](./hcp_data/hcp_logreg.md)
+* [HCP Logistic Regression Code - ROI Features](./hcp_data/hcp_logreg_indivtime.ipynb)
+
+<i>6:17 pm, 497 minutes</i>
+
+---
+
+<b>Permutation Testing</b><br>
+<i>07/06/2022, 8:37 am</i>
+
+
+Synopsis: I will use a permutation test to evaluate the effectiveness of the logistic regression model.
+
+Data:  
+
+Files:
+* [HCP Logistic Regression Overview](./hcp_data/hcp_logreg.md)
+* [Permutation Testing](./hcp_data/hcp_log_reg_permtest.ipynb)
+
+<i></i>
 
 ---

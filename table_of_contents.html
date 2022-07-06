@@ -52,8 +52,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Entries" href="entries.html" />
-    <link rel="prev" title="Welcome" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,35 +113,6 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Daily Log
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Table of Contents
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="entries.html">
-   Entries
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prep_work_entries.html">
-     Prep Work
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Prep Work
  </span>
 </p>
@@ -152,8 +121,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="prep/deep_learning/deep_learning.html">
    Deep Learning
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -184,8 +153,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="prep/log_reg/logistic_regression.html">
    Logistic Regression
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -209,10 +178,44 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="hcp_data/hcp_summary.html">
-   HCP Dataset Summary
+   HCP Dataset
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_data/data.html">
+     Visualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_data/hcp_logreg.html">
+   HCP Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html">
+     Logistic Regression - ROI Features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_data/hcp_logreg_permtest.html">
+     Permutation Test
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -419,6 +422,26 @@ title="Print to PDF"
 <td><p>HCP Dataset Summary</p></td>
 <td><p>HCP Data</p></td>
 </tr>
+<tr class="row-even"><td><p>06/29/2022</p></td>
+<td><p>HCP Dataset Logistic Regression Program</p></td>
+<td><p>HCP Data</p></td>
+</tr>
+<tr class="row-odd"><td><p>06/30/2022</p></td>
+<td><p>HCP Dataset Logistic Regression</p></td>
+<td><p>HCP Data</p></td>
+</tr>
+<tr class="row-even"><td><p>07/01/2022</p></td>
+<td><p>HCP Dataset Logistic Regression</p></td>
+<td><p>HCP Data</p></td>
+</tr>
+<tr class="row-odd"><td><p>07/05/2022</p></td>
+<td><p>HCP Dataset Logistic Regression Summary</p></td>
+<td><p>HCP Data</p></td>
+</tr>
+<tr class="row-even"><td><p>07/06/2022</p></td>
+<td><p>Permutation Testing</p></td>
+<td><p>HCP Data</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -450,20 +473,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="entries.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Entries</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

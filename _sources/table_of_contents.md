@@ -48,4 +48,19 @@
 * - 06/28/2022
   - HCP Dataset Summary
   - HCP Data
+* - 06/29/2022
+  - HCP Dataset Logistic Regression Program
+  - HCP Data
+* - 06/30/2022
+  - HCP Dataset Logistic Regression
+  - HCP Data
+* - 07/01/2022
+  - HCP Dataset Logistic Regression
+  - HCP Data
+* - 07/05/2022
+  - HCP Dataset Logistic Regression Summary
+  - HCP Data
+* - 07/06/2022
+  - Permutation Testing
+  - HCP Data
 ```
