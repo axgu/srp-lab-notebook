@@ -430,7 +430,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take 200 resamples</span>
 <span class="n">acc</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">mean_acc</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">upper_acc</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">p_vals</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">startindex</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">endindex</span> <span class="o">=</span> <span class="mi">0</span>
@@ -450,7 +450,7 @@ title="Print to PDF"
     <span class="n">p</span> <span class="o">=</span> <span class="n">findP</span><span class="p">(</span><span class="n">performAcc</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">t_acc</span><span class="p">)</span>
     <span class="n">p_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     
-    <span class="n">mean_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t_acc</span><span class="p">))</span>
+    <span class="n">upper_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">t_acc</span><span class="p">,</span> <span class="mi">95</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -460,7 +460,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare accuracies</span>
 <span class="n">xAx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">)]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">performAcc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;log-reg&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">mean_acc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;perm-test&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">upper_acc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;perm-test&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -472,26 +472,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/hcp_logreg_permtest_5_0.png" src="../_images/hcp_logreg_permtest_5_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot p-values</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">p_vals</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;P Value&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Time-varying Logistic Regression Performance&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Time-varying Logistic Regression Performance&#39;)
-</pre></div>
-</div>
-<img alt="../_images/hcp_logreg_permtest_6_1.png" src="../_images/hcp_logreg_permtest_6_1.png" />
+<img alt="../_images/hcp_logreg_permtest_5_01.png" src="../_images/hcp_logreg_permtest_5_01.png" />
 </div>
 </div>
 </section>
