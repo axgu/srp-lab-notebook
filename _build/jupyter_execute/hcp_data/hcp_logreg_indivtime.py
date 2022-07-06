@@ -10,9 +10,7 @@ import numpy as np
 import pickle
 import scipy as scp
 import sklearn
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.exceptions import NotFittedError
 from matplotlib import pyplot as plt
 
 
@@ -84,14 +82,14 @@ for k in range(90):
                     arr.append(subj)
 
 
-# In[11]:
+# In[12]:
 
 
 X_train, X_test, y_train, y_test = splitData(arr)
 model.fit(X_train, y_train[:, 0])
 
 
-# In[12]:
+# In[13]:
 
 
 performAcc = []
@@ -105,7 +103,7 @@ for t in range(90):
     startindex = endindex
 
 
-# In[13]:
+# In[14]:
 
 
 xAx = [i for i in range(0,90)]

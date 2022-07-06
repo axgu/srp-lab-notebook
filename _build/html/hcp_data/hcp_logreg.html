@@ -214,6 +214,11 @@ const thebe_selector_output = ".output, .cell_output"
      Logistic Regression - ROI Features
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_permtest.html">
+     Permutation Test
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -365,6 +370,23 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutation-testing">
+   Permutation Testing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methodology">
+     Methodology
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conclusions">
+     Conclusions
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -401,6 +423,23 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutation-testing">
+   Permutation Testing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methodology">
+     Methodology
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conclusions">
+     Conclusions
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
                         </nav>
@@ -430,10 +469,10 @@ title="Print to PDF"
 <p><span class="math notranslate nohighlight">\(
 \begin{bmatrix}
 ROI_{1} &amp; ROI_{2} &amp; \cdots &amp; ROI_{300} &amp; \text{movie} &amp; \text{time} &amp; \text{subj} \\
--2.3054726 &amp; -1.6874946 &amp; \cdots &amp; -2.871706 &amp; 'testretest' &amp; 0 &amp; 0 \\
--0.037214182 &amp; 0.7795041 &amp; \cdots &amp; 1.4286939 &amp; 'testretest' &amp; 0 &amp; 1 \\
+-2.3054726 &amp; -1.6874946 &amp; \cdots &amp; -2.871706 &amp; \text{testretest} &amp; 0 &amp; 0 \\
+-0.037214182 &amp; 0.7795041 &amp; \cdots &amp; 1.4286939 &amp; \text{testretest} &amp; 0 &amp; 1 \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
--0.29585192 &amp; 0.38137275 &amp; \cdots &amp; -0.3323956 &amp; 'starwars' &amp; 89 &amp; 175 \\
+-0.29585192 &amp; 0.38137275 &amp; \cdots &amp; -0.3323956 &amp; \text{starwars} &amp; 89 &amp; 175 \\
 \end{bmatrix}
 \)</span></p>
 <p>The data was split with 100 participants for training and 76 participants for testing. A list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data stored in X_test and corresponding movie labels and time points stored in y_test. The same was done for participants not selected in the test set, except with X_train and y_train, respectively. All feature data in both training and testing sets was normalized using z-scores.</p>
@@ -445,7 +484,31 @@ ROI_{1} &amp; ROI_{2} &amp; \cdots &amp; ROI_{300} &amp; \text{movie} &amp; \tex
 <p><img alt="" src="../_images/hcp_logreg_indivtime_7_0.png" /></p>
 </section>
 </section>
-<hr class="docutils" />
+<section id="permutation-testing">
+<h2>Permutation Testing<a class="headerlink" href="#permutation-testing" title="Permalink to this headline">#</a></h2>
+<p>To determine the effectiveness of applying logistic regression for 15-way movie clip classification, permutation tests was conducted on the model:</p>
+<div class="math notranslate nohighlight">
+\[
+H_{0}: \text{The trained logistic regression model is equally as effective as random chance at classifying diabetes.}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+H_{A}: \text{The trained logistic regression model is more effective than random chance at classifying diabetes.}
+\]</div>
+<p>The chosen statistic to measure the effect of using a logistic regression model is classification accuracy. The original sample used for the permutation tests was the HCP testing dataset. The selected features were the 300 ROI. A permutation test was conducted at each time point considered, using only the data in the testing set that corresponded to that time point.</p>
+<p>It is unclear whether this dataset was randomly selected. However, the data within each feature/variable is exchangeable, so permutations of the original dataset can be taken to create resamples.</p>
+<section id="methodology">
+<h3>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">#</a></h3>
+<p>At each of the 90 time points considered, 200 resamples of the original sample were created by permuting each feature independently. This was done in Python. The fitted logistic regression model was applied on each of the resamples. A classification accuracy was then calculated by <span class="math notranslate nohighlight">\(\text{accuracy} = \frac{\text{correct classifications}}{\text{total classifications}}\)</span>, and a permutation distribution was constructed with the resulting values. The mean accuracy obtained from the original dataset and the mean accuracy obtained from each permutation distribution were plotted as time series.</p>
+<p><img alt="" src="../_images/hcp_logreg_permtest_5_0.png" /></p>
+<p>The p-values for the original classification accuracy in comparison to the permutation distribution at each time point were also plotted as a time series.</p>
+<p><img alt="" src="../_images/hcp_logreg_permtest_6_1.png" /></p>
+</section>
+<section id="conclusions">
+<h3>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">#</a></h3>
+<p>Based on the results from above, if it is assumed that the fitted logistic regression model is equally as effective as random chance at classifying movie clips, there is an approximately 0% chance of seeing an original sample classification accuracy as large or larger than the observed. Since approximately 0 is clearly lower than any reasonable significance value, there is sufficient evidence to conclude that the trained logistic regression model is more effective than random chance at classifying movie clips.</p>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>

@@ -25,4 +25,5 @@ parts:
   - file: hcp_data/hcp_logreg
     sections:
     - file: hcp_data/hcp_logreg_indivtime
+    - file: hcp_data/hcp_logreg_permtest
   
