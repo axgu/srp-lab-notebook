@@ -50,13 +50,9 @@ The chosen statistic to measure the effect of using a logistic regression model 
 It is unclear whether this dataset was randomly selected. However, the data within each feature/variable is exchangeable, so permutations of the original dataset can be taken to create resamples. 
 
 ### Methodology
-At each of the 90 time points considered, 200 resamples of the original sample were created by permuting each feature independently. This was done in Python. The fitted logistic regression model was applied on each of the resamples. A classification accuracy was then calculated by $\text{accuracy} = \frac{\text{correct classifications}}{\text{total classifications}}$, and a permutation distribution was constructed with the resulting values. The mean accuracy obtained from the original dataset and the mean accuracy obtained from each permutation distribution were plotted as time series.
+At each of the 90 time points considered, 200 resamples of the original sample were created by permuting each feature independently. This was done in Python. The fitted logistic regression model was applied on each of the resamples. A classification accuracy was then calculated by $\text{accuracy} = \frac{\text{correct classifications}}{\text{total classifications}}$, and a permutation distribution was constructed with the resulting values. The mean accuracy obtained from the original dataset and the 95th percentile of accuracies obtained from each permutation distribution were plotted as time series.
 
-![](../_build/html/_images/hcp_logreg_permtest_5_0.png)
-
-The p-values for the original classification accuracy in comparison to the permutation distribution at each time point were also plotted as a time series.
-
-![](../_build/html/_images/hcp_logreg_permtest_6_1.png)
+![](../_build/html/_images/hcp_logreg_permtest_5_01.png)
 
 
 ### Conclusions

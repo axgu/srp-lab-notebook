@@ -43,12 +43,12 @@ def findP(t, arr):
     return p
 
 
-# In[4]:
+# In[12]:
 
 
 # Take 200 resamples
 acc = []
-mean_acc = []
+upper_acc = []
 p_vals = []
 startindex = 0
 endindex = 0
@@ -68,16 +68,16 @@ for t in range(90):
     p = findP(performAcc[t], t_acc)
     p_vals.append(p)
     
-    mean_acc.append(np.mean(t_acc))
+    upper_acc.append(np.percentile(t_acc, 95))
 
 
-# In[5]:
+# In[13]:
 
 
 # Compare accuracies
 xAx = [i for i in range(0,90)]
 plt.plot(xAx, performAcc, label="log-reg")
-plt.plot(xAx, mean_acc, label="perm-test")
+plt.plot(xAx, upper_acc, label="perm-test")
 plt.xlabel("Time (s)")
 plt.ylabel("Accuracy")
 plt.ylim(0,1)
@@ -85,16 +85,4 @@ plt.xlim(0,90)
 plt.title("Time-varying Classification Accuracy")
 plt.legend()
 plt.show()
-
-
-# In[6]:
-
-
-# Plot p-values
-plt.plot(xAx, p_vals)
-plt.xlabel("Time (s)")
-plt.ylabel("P Value")
-plt.ylim(0,1)
-plt.xlim(0,90)
-plt.title("Time-varying Logistic Regression Performance")
 
