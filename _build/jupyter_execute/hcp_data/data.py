@@ -15,6 +15,8 @@ from celluloid import Camera
 with open('HCP_movie_watching.pkl','rb') as f:
     TS = pickle.load(f)
 print(TS.keys())
+for key, val in TS.items():
+    print(val.shape)
 
 
 # In[2]:

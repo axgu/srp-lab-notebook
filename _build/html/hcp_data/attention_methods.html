@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Attention Methods &#8212; My Project</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="LSTM Model" href="rnn_data_prep.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Prep Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../prep/deep_learning/deep_learning.html">
+   Deep Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_intro_notes.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial1.html">
+     Tutorial 1: Decoding Neural Responses
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial1_code.html">
+     Tutorial 1 Code
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial2.html">
+     Tutorial 2: Convolutional Neural Networks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../prep/log_reg/logistic_regression.html">
+   Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/log_reg/diabetes-logreg.html">
+     Diabetes Prediction with Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/log_reg/diabetes-summary.html">
+     Diabetes Prediction Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  HCP Dataset
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_summary.html">
+   HCP Dataset
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data.html">
+     Visualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_logreg.html">
+   HCP Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_indivtime.html">
+     Logistic Regression - ROI Features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_permtest.html">
+     Permutation Test
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple_inference.html">
+   Multiple Inference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recurrent_nn.html">
+   Recurrent Neural Network Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn_data_prep.html">
+   LSTM Model
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Attention Methods
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/hcp_data/attention_methods.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequence-to-sequence-models">
+   Sequence to Sequence Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem">
+     Problem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention">
+   Attention
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bahdanau-vs-luong-approach">
+     Bahdanau vs Luong Approach
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#encoder-model">
+       Encoder Model
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#alignment-scores">
+       Alignment Scores
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#decoder-model">
+       Decoder Model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#soft-vs-hard-attention">
+     Soft vs hard attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-vs-local-attention">
+     Global vs local attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Attention Methods</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequence-to-sequence-models">
+   Sequence to Sequence Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem">
+     Problem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention">
+   Attention
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bahdanau-vs-luong-approach">
+     Bahdanau vs Luong Approach
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#encoder-model">
+       Encoder Model
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#alignment-scores">
+       Alignment Scores
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#decoder-model">
+       Decoder Model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#soft-vs-hard-attention">
+     Soft vs hard attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-vs-local-attention">
+     Global vs local attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="attention-methods">
+<h1>Attention Methods<a class="headerlink" href="#attention-methods" title="Permalink to this headline">#</a></h1>
+<section id="sequence-to-sequence-models">
+<h2>Sequence to Sequence Models<a class="headerlink" href="#sequence-to-sequence-models" title="Permalink to this headline">#</a></h2>
+<p>Sequence to sequence models convert a sequence of one type to a sequence of another type. The encoder decoder architecture is often used to achieve this. Both the encoder and decoder are built with RNNs, but the entire model is trained end-to-end (i.e. from input into encoder to output from decoder).</p>
+<p>At each time <span class="math notranslate nohighlight">\(t\)</span>, recurrent neural networks are composed of the input, internal or hidden state, and output.</p>
+<p>The encoder inputs the data in time steps. It disregards the output at each <span class="math notranslate nohighlight">\(t\)</span>, but stores the internal state at <span class="math notranslate nohighlight">\(t\)</span> to calculate the internal state at <span class="math notranslate nohighlight">\(t+1\)</span>. The final information is the hidden state of the last time step, called the context vector.</p>
+<p>The context vector is passed into the decoder sequentially. The decoder calculates the next internal state using the input context vector data and the previous internal state. This information is used to calculate the output at each time step <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<section id="problem">
+<h3>Problem<a class="headerlink" href="#problem" title="Permalink to this headline">#</a></h3>
+<p>The issue with standard encoder decoder architecture arises when input sequences increase in length, as it becomes very difficult to capture information from the entire input sequence in one vector. Since this last internal state of the encoder is the only vector passed through to the decoder, performance of the model decreases.</p>
+</section>
+</section>
+<section id="attention">
+<h2>Attention<a class="headerlink" href="#attention" title="Permalink to this headline">#</a></h2>
+<p>When applied to a sequence to sequence model, attention determines and focuses the model on the most relevant input features for a certain output. In general, this is done by storing all hidden states in a matrix, instead of passing only the vector representing the last hidden state to the decoder. Having access to all internal state information, it creates mappings between outputs at all time steps of the decoder and all internal states of the encoder to determine and select features most influential in producing an output at a certain time step. The “attention” given to an input feature is quantified with alignment scores.</p>
+<p>Several attention mechanisms have been introduced.</p>
+<section id="bahdanau-vs-luong-approach">
+<h3>Bahdanau vs Luong Approach<a class="headerlink" href="#bahdanau-vs-luong-approach" title="Permalink to this headline">#</a></h3>
+<p>The attention mechanisms proposed by Bahdanau et al. and Luong et al. involve three aspects: the encoder model, alignment scores, and the decoder model. The main difference in approach between the two processes is when the decoder RNN is utilized.</p>
+<section id="encoder-model">
+<h4>Encoder Model<a class="headerlink" href="#encoder-model" title="Permalink to this headline">#</a></h4>
+<p>The first step for both methods is to pass inputs into the encoder RNN and store all hidden states.</p>
+</section>
+<section id="alignment-scores">
+<h4>Alignment Scores<a class="headerlink" href="#alignment-scores" title="Permalink to this headline">#</a></h4>
+<p>The process of calculating alignment scores differs slightly between the Bahdanau and Luong methods because the decoder RNN is used at different times.</p>
+<p>Bahdanau et al. calculated alignment scores using the following equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{score}_{\text{alignment}} = W_{\text{combined}} \cdot \tanh(W_{\text{decoder}} * H_{\text{decoder}} ^{(t-1)} + W_{\text{encoder}} \cdot H_{\text{encoder}})
+\]</div>
+<p><span class="math notranslate nohighlight">\(H_{\text{decoder}} ^{(t-1)}\)</span> is the vector representing the decoder hidden state at time step <span class="math notranslate nohighlight">\(t-1\)</span> and <span class="math notranslate nohighlight">\(H_{\text{encoder}}\)</span> is the matrix of all encoder outputs/hidden states.</p>
+<p>Luong et al. calculated alignment scores using three different equations:</p>
+<ul class="simple">
+<li><p>Dot:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{score}_{\text{alignment}} = H_{\text{encoder}} \cdot H_{\text{decoder}}
+\]</div>
+<ul class="simple">
+<li><p>General:
+$<span class="math notranslate nohighlight">\(
+\text{score}_{\text{alignment}} = W(H_{\text{encoder}} \cdot H_{\text{decoder}})
+\)</span>$</p></li>
+<li><p>Concat:
+$<span class="math notranslate nohighlight">\(
+\text{score}_{\text{alignment}} = W \cdot \tanh(W_\text{combined}(H_{\text{encoder}} + H_{\text{decoder}}))
+\)</span>$</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(H_{\text{decoder}}\)</span> is the vector representing the decoder hidden state at time step <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(H_{\text{encoder}}\)</span> is the matrix of all encoder outputs/hidden states.</p>
+<p>Both methods applied the <span class="math notranslate nohighlight">\(softmax\)</span> function on the alignment scores vector to obtain the attention weights. The context vector was then calculated by multiplying the attention weights with the encoder outputs.</p>
+</section>
+<section id="decoder-model">
+<h4>Decoder Model<a class="headerlink" href="#decoder-model" title="Permalink to this headline">#</a></h4>
+<p>For the Bahdanau attention method, the decoder RNN was used last. At time <span class="math notranslate nohighlight">\(t\)</span>, the context vector was concatenated with the <span class="math notranslate nohighlight">\(t-1\)</span> decoder output. This, along with the <span class="math notranslate nohighlight">\(t-1\)</span> hidden state, was fed into the decoder RNN to calculate the time step <span class="math notranslate nohighlight">\(t\)</span> hidden state. The new hidden state was passed through a classifier to obtain the output.</p>
+<p>For the Luong attention method, the decoder RNN was used first, prior to calculating the alignment scores. Thus, the hidden state at time step <span class="math notranslate nohighlight">\(t\)</span> instead of <span class="math notranslate nohighlight">\(t-1\)</span> was used for alignment scores and producing the final output.</p>
+</section>
+</section>
+<section id="soft-vs-hard-attention">
+<h3>Soft vs hard attention<a class="headerlink" href="#soft-vs-hard-attention" title="Permalink to this headline">#</a></h3>
+<p>Attention methods highlight the most relevant input features using probability distributions; the <span class="math notranslate nohighlight">\(softmax\)</span> activation function determines a weight that corresponds with each input.</p>
+<p>In soft attention, a weighted average of features and their weights is computed, and the result is fed into the RNN architecture. Generally, soft attention is parameterized by differentiable and thus continuous functions, so training can be completed via backpropagation.</p>
+<p>However, in hard attention, the obtained weights are used to sample one feature to input into the RNN architecture. Hard attention methods are generally described by discrete variables. Because of this, other techniques must be used to train structures other than standard gradient descent, which depends on differentiable functions.</p>
+</section>
+<section id="global-vs-local-attention">
+<h3>Global vs local attention<a class="headerlink" href="#global-vs-local-attention" title="Permalink to this headline">#</a></h3>
+<p>Global attention refers to when attention is calculated over the entire input sequence. Local attention refers to when a subsection of the input sequence is considered.</p>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://towardsdatascience.com/what-is-attention-mechanism-can-i-have-your-attention-please-3333637f2eac">What is attention mechanism?</a></p></li>
+<li><p><a class="reference external" href="https://lilianweng.github.io/posts/2018-06-24-attention/">Attention by Lilian Weng</a></p></li>
+<li><p><a class="reference external" href="https://blog.floydhub.com/attention-mechanism/">Attention Mechanism</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1409.0473.pdf">Neural Machine Translation by Jointly Learning to Align and Translate by Bahdanau et al.</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1508.04025.pdf">Effective Approaches to Attention-based Neural Machine Translation by Luong et al.</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./hcp_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="rnn_data_prep.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">LSTM Model</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Anna Gu<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

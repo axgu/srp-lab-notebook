@@ -32,8 +32,13 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['model = LogisticRegression(max_iter = 1000)', 'arr = []', 'for k in range(90):', '    for key, val in TS.items():', '        if val.shape[-2] > k:   # Account for clips with less than 90 time points']
-...
-['                        subj.append(val[j][k][l])', '                    subj.append(key)', '                    subj.append(k)', '                    subj.append(j)', '                    arr.append(subj)']
+X_train, X_test, y_train, y_test = splitData(reshapeData(TS))
+%store X_test
+%store y_test
+
+logmodel = LogisticRegression(max_iter = 1000)
+logmodel.fit(X_train, y_train[:, 0])
+
+%store logmodel
 -------------------
 

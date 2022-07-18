@@ -63,4 +63,25 @@
 * - 07/06/2022
   - Permutation Testing
   - HCP Data
+* - 07/07/2022
+  - Multiple Inference
+  - HCP Data
+* - 07/11/2022
+  - Recurrent Neural Networks
+  - RNN
+* - 07/12/2022
+  - RNN Data Processing
+  - RNN
+* - 07/13/2022
+  - RNN Training
+  - RNN
+* - 07/14/2022
+  - RNN Masking and Evaluation
+  - RNN
+* - 07/15/2022
+  - RNN with PyTorch
+  - RNN
+* - 07/18/2022
+  - Attention Methods
+  - RNN
 ```

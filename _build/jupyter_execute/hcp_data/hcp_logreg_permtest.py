@@ -10,15 +10,21 @@ import sys
 import numpy as np
 import scipy as scp
 import sklearn
+import pickle
 from sklearn.linear_model import LogisticRegression
 from matplotlib import pyplot as plt
 
-sys.path.insert(0, 'C:/Users/Anna&Megan/Documents/GitHub/srp-lab-notebook/_build/jupyter_execute/hcp_data')
-
-from hcp_logreg_indivtime import model, X_test, y_test, performAcc
-
 
 # In[2]:
+
+
+get_ipython().run_line_magic('store', '-r X_test')
+get_ipython().run_line_magic('store', '-r y_test')
+get_ipython().run_line_magic('store', '-r logmodel')
+get_ipython().run_line_magic('store', '-r logperformAcc')
+
+
+# In[3]:
 
 
 # Shuffle each column of X_test to create permutation
@@ -31,7 +37,7 @@ def create_permutation(X):
     return new_X
 
 
-# In[3]:
+# In[4]:
 
 
 # Find p value
@@ -43,7 +49,7 @@ def findP(t, arr):
     return p
 
 
-# In[12]:
+# In[5]:
 
 
 # Take 200 resamples
@@ -59,30 +65,20 @@ for t in range(90):
     X_c = np.copy(X_test[startindex: endindex,])
     for i in range(200):
         new_X = create_permutation(X_c)
-        a = model.score(new_X, y_test[startindex:endindex, 0])
+        a = logmodel.score(new_X, y_test[startindex:endindex, 0])
         t_acc.append(a)
     startindex = endindex
     t_acc = np.array(t_acc)
 
     t_acc = sorted(t_acc, reverse = True)
-    p = findP(performAcc[t], t_acc)
+    p = findP(logperformAcc[t], t_acc)
     p_vals.append(p)
     
     upper_acc.append(np.percentile(t_acc, 95))
 
 
-# In[13]:
+# In[12]:
 
 
-# Compare accuracies
-xAx = [i for i in range(0,90)]
-plt.plot(xAx, performAcc, label="log-reg")
-plt.plot(xAx, upper_acc, label="perm-test")
-plt.xlabel("Time (s)")
-plt.ylabel("Accuracy")
-plt.ylim(0,1)
-plt.xlim(0,90)
-plt.title("Time-varying Classification Accuracy")
-plt.legend()
-plt.show()
+get_ipython().run_line_magic('store', 'upper_acc')
 

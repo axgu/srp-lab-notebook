@@ -32,15 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-import sys
-import numpy as np
-import scipy as scp
-import sklearn
-from sklearn.linear_model import LogisticRegression
-from matplotlib import pyplot as plt
-
-sys.path.insert(0, 'C:/Users/Anna&Megan/Documents/GitHub/srp-lab-notebook/_build/jupyter_execute/hcp_data')
-
-from hcp_logreg_indivtime import model, X_test, y_test, performAcc
+['# Take 200 resamples', 'acc = []', 'upper_acc = []', 'p_vals = []', 'startindex = 0']
+...
+['    t_acc = sorted(t_acc, reverse = True)', '    p = findP(logperformAcc[t], t_acc)', '    p_vals.append(p)', '    ', '    upper_acc.append(np.percentile(t_acc, 95))']
 -------------------
 

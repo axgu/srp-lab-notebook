@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>LSTM Model &#8212; My Project</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Attention Methods" href="attention_methods.html" />
+    <link rel="prev" title="Recurrent Neural Network Notes" href="../recurrent_nn.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Prep Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../prep/deep_learning/deep_learning.html">
+   Deep Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_intro_notes.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial1.html">
+     Tutorial 1: Decoding Neural Responses
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial1_code.html">
+     Tutorial 1 Code
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial2.html">
+     Tutorial 2: Convolutional Neural Networks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../prep/log_reg/logistic_regression.html">
+   Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/log_reg/diabetes-logreg.html">
+     Diabetes Prediction with Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/log_reg/diabetes-summary.html">
+     Diabetes Prediction Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  HCP Dataset
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_summary.html">
+   HCP Dataset
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data.html">
+     Visualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_logreg.html">
+   HCP Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_indivtime.html">
+     Logistic Regression - ROI Features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_permtest.html">
+     Permutation Test
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple_inference.html">
+   Multiple Inference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recurrent_nn.html">
+   Recurrent Neural Network Notes
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   LSTM Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="attention_methods.html">
+   Attention Methods
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/hcp_data/rnn_data_prep.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/hcp_data/rnn_data_prep.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>LSTM Model</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="lstm-model">
+<h1>LSTM Model<a class="headerlink" href="#lstm-model" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">TimeDistributed</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">Input</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;HCP_movie_watching.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">TS</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">store</span> -r testIndex
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">splitDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">indexList</span> <span class="o">=</span> <span class="n">testIndex</span><span class="p">):</span>
+    <span class="n">trainDict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">testDict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">testvalArr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">trainvalArr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;testretest&quot;</span><span class="p">:</span>
+            <span class="n">testvalArr</span> <span class="o">=</span> <span class="n">testvalArr</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">testIndex</span><span class="p">:</span>
+                        <span class="n">testvalArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">p</span><span class="p">])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">trainvalArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">p</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">testIndex</span><span class="p">:</span>
+                        <span class="n">testvalArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">trainvalArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+        <span class="n">trainDict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">trainvalArr</span><span class="p">)</span>
+        <span class="n">testDict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">testvalArr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">trainDict</span><span class="p">,</span> <span class="n">testDict</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vectorize_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">classNums</span> <span class="o">=</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">classNums</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mf">100.</span><span class="p">:</span>
+                <span class="n">indexNum</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">indexNum</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reshape data into 3D array</span>
+
+<span class="k">def</span> <span class="nf">shaping</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="n">X_arr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y_arr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">keylist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">normalized_seq</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">X_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">normalized_seq</span><span class="p">)</span>
+            <span class="n">clip</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">))]</span>
+            <span class="n">y_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+        
+    <span class="n">X_padded</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">X_arr</span><span class="p">,</span> <span class="n">maxlen</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">truncating</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+    <span class="n">y_padded</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">y_arr</span><span class="p">,</span> <span class="n">maxlen</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">truncating</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="o">-</span><span class="mf">100.</span><span class="p">)</span>
+    <span class="n">y_padded</span> <span class="o">=</span> <span class="n">vectorize_labels</span><span class="p">(</span><span class="n">y_padded</span><span class="p">,</span> <span class="n">keylist</span><span class="p">,</span> <span class="n">classNums</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keylist</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">X_padded</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">y_padded</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">splitDict</span><span class="p">(</span><span class="n">TS</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">shaping</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">shaping</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createMask</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">time_seq</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">sample</span><span class="p">,</span> <span class="n">time_seq</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_seq</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">mask</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mask</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">createMask</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="n">recurrent_activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/60
+45/45 [==============================] - 20s 133ms/step - loss: 2.3635 - accuracy: 0.2564 - val_loss: 3.6496 - val_accuracy: 6.1728e-04
+Epoch 2/60
+45/45 [==============================] - 3s 74ms/step - loss: 2.0578 - accuracy: 0.3539 - val_loss: 4.0409 - val_accuracy: 2.1605e-04
+Epoch 3/60
+45/45 [==============================] - 3s 70ms/step - loss: 1.7994 - accuracy: 0.4350 - val_loss: 4.2560 - val_accuracy: 0.0011
+Epoch 4/60
+45/45 [==============================] - 3s 64ms/step - loss: 1.5729 - accuracy: 0.5142 - val_loss: 4.7349 - val_accuracy: 0.0013
+Epoch 5/60
+45/45 [==============================] - 3s 69ms/step - loss: 1.3534 - accuracy: 0.5942 - val_loss: 5.3094 - val_accuracy: 0.0019
+Epoch 6/60
+45/45 [==============================] - 3s 68ms/step - loss: 1.1270 - accuracy: 0.6689 - val_loss: 5.8335 - val_accuracy: 0.0032
+Epoch 7/60
+45/45 [==============================] - 3s 64ms/step - loss: 0.9339 - accuracy: 0.7296 - val_loss: 6.3174 - val_accuracy: 0.0066
+Epoch 8/60
+45/45 [==============================] - 3s 61ms/step - loss: 0.7921 - accuracy: 0.7645 - val_loss: 6.5421 - val_accuracy: 0.0148
+Epoch 9/60
+45/45 [==============================] - 3s 62ms/step - loss: 0.6889 - accuracy: 0.7949 - val_loss: 6.8010 - val_accuracy: 0.0244
+Epoch 10/60
+45/45 [==============================] - 3s 60ms/step - loss: 0.6435 - accuracy: 0.8030 - val_loss: 6.8487 - val_accuracy: 0.0239
+Epoch 11/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.5794 - accuracy: 0.8227 - val_loss: 6.9162 - val_accuracy: 0.0360
+Epoch 12/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.5341 - accuracy: 0.8345 - val_loss: 6.9187 - val_accuracy: 0.0497
+Epoch 13/60
+45/45 [==============================] - 3s 64ms/step - loss: 0.4723 - accuracy: 0.8521 - val_loss: 7.1132 - val_accuracy: 0.0552
+Epoch 14/60
+45/45 [==============================] - 3s 62ms/step - loss: 0.4423 - accuracy: 0.8596 - val_loss: 7.2881 - val_accuracy: 0.0621
+Epoch 15/60
+45/45 [==============================] - 3s 63ms/step - loss: 0.4192 - accuracy: 0.8655 - val_loss: 7.5448 - val_accuracy: 0.0594
+Epoch 16/60
+45/45 [==============================] - 3s 75ms/step - loss: 0.3903 - accuracy: 0.8731 - val_loss: 7.4137 - val_accuracy: 0.0681
+Epoch 17/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.3707 - accuracy: 0.8783 - val_loss: 7.5702 - val_accuracy: 0.0672
+Epoch 18/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.3537 - accuracy: 0.8836 - val_loss: 7.8096 - val_accuracy: 0.0648
+Epoch 19/60
+45/45 [==============================] - 3s 71ms/step - loss: 0.3361 - accuracy: 0.8865 - val_loss: 7.5253 - val_accuracy: 0.0723
+Epoch 20/60
+45/45 [==============================] - 3s 68ms/step - loss: 0.4309 - accuracy: 0.8536 - val_loss: 7.5824 - val_accuracy: 0.0650
+Epoch 21/60
+45/45 [==============================] - 3s 70ms/step - loss: 0.3785 - accuracy: 0.8725 - val_loss: 8.0224 - val_accuracy: 0.0615
+Epoch 22/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.3472 - accuracy: 0.8813 - val_loss: 8.1352 - val_accuracy: 0.0720
+Epoch 23/60
+45/45 [==============================] - 3s 64ms/step - loss: 0.3457 - accuracy: 0.8812 - val_loss: 8.2097 - val_accuracy: 0.0529
+Epoch 24/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.3332 - accuracy: 0.8849 - val_loss: 8.2998 - val_accuracy: 0.0643
+Epoch 25/60
+45/45 [==============================] - 3s 71ms/step - loss: 0.2985 - accuracy: 0.8956 - val_loss: 8.3176 - val_accuracy: 0.0791
+Epoch 26/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.2685 - accuracy: 0.9040 - val_loss: 8.4282 - val_accuracy: 0.0711
+Epoch 27/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.2521 - accuracy: 0.9098 - val_loss: 8.5983 - val_accuracy: 0.0710
+Epoch 28/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.2416 - accuracy: 0.9122 - val_loss: 8.6960 - val_accuracy: 0.0718
+Epoch 29/60
+45/45 [==============================] - 3s 63ms/step - loss: 0.2450 - accuracy: 0.9105 - val_loss: 8.6887 - val_accuracy: 0.0755
+Epoch 30/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.2515 - accuracy: 0.9089 - val_loss: 8.8710 - val_accuracy: 0.0647
+Epoch 31/60
+45/45 [==============================] - 3s 62ms/step - loss: 0.2279 - accuracy: 0.9160 - val_loss: 8.9099 - val_accuracy: 0.0666
+Epoch 32/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.2165 - accuracy: 0.9183 - val_loss: 9.2525 - val_accuracy: 0.0529
+Epoch 33/60
+45/45 [==============================] - 3s 62ms/step - loss: 0.2361 - accuracy: 0.9126 - val_loss: 8.9841 - val_accuracy: 0.0689
+Epoch 34/60
+45/45 [==============================] - 3s 60ms/step - loss: 0.2333 - accuracy: 0.9114 - val_loss: 9.1731 - val_accuracy: 0.0692
+Epoch 35/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.2234 - accuracy: 0.9157 - val_loss: 9.2827 - val_accuracy: 0.0773
+Epoch 36/60
+45/45 [==============================] - 3s 74ms/step - loss: 0.2072 - accuracy: 0.9211 - val_loss: 9.4819 - val_accuracy: 0.0689
+Epoch 37/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.2165 - accuracy: 0.9173 - val_loss: 9.3023 - val_accuracy: 0.0716
+Epoch 38/60
+45/45 [==============================] - 3s 70ms/step - loss: 0.1942 - accuracy: 0.9249 - val_loss: 9.4958 - val_accuracy: 0.0646
+Epoch 39/60
+45/45 [==============================] - 3s 70ms/step - loss: 0.1828 - accuracy: 0.9280 - val_loss: 9.5975 - val_accuracy: 0.0637
+Epoch 40/60
+45/45 [==============================] - 3s 70ms/step - loss: 0.1758 - accuracy: 0.9308 - val_loss: 9.6666 - val_accuracy: 0.0635
+Epoch 41/60
+45/45 [==============================] - 3s 71ms/step - loss: 0.1700 - accuracy: 0.9323 - val_loss: 9.6576 - val_accuracy: 0.0598
+Epoch 42/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.1658 - accuracy: 0.9338 - val_loss: 9.7632 - val_accuracy: 0.0618
+Epoch 43/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.1610 - accuracy: 0.9351 - val_loss: 9.8243 - val_accuracy: 0.0598
+Epoch 44/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.1568 - accuracy: 0.9362 - val_loss: 9.9922 - val_accuracy: 0.0564
+Epoch 45/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.1523 - accuracy: 0.9378 - val_loss: 9.9558 - val_accuracy: 0.0581
+Epoch 46/60
+45/45 [==============================] - 3s 72ms/step - loss: 0.1492 - accuracy: 0.9387 - val_loss: 10.0986 - val_accuracy: 0.0566
+Epoch 47/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.1468 - accuracy: 0.9395 - val_loss: 10.1909 - val_accuracy: 0.0560
+Epoch 48/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.1520 - accuracy: 0.9363 - val_loss: 10.2379 - val_accuracy: 0.0510
+Epoch 49/60
+45/45 [==============================] - 3s 64ms/step - loss: 0.2774 - accuracy: 0.8990 - val_loss: 9.3919 - val_accuracy: 0.0625
+Epoch 50/60
+45/45 [==============================] - 3s 69ms/step - loss: 0.3673 - accuracy: 0.8643 - val_loss: 9.8689 - val_accuracy: 0.0440
+Epoch 51/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.3169 - accuracy: 0.8862 - val_loss: 9.8440 - val_accuracy: 0.0657
+Epoch 52/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.2279 - accuracy: 0.9115 - val_loss: 10.0150 - val_accuracy: 0.0739
+Epoch 53/60
+45/45 [==============================] - 3s 69ms/step - loss: 0.1848 - accuracy: 0.9253 - val_loss: 10.2968 - val_accuracy: 0.0678
+Epoch 54/60
+45/45 [==============================] - 3s 67ms/step - loss: 0.1653 - accuracy: 0.9319 - val_loss: 10.0756 - val_accuracy: 0.0725
+Epoch 55/60
+45/45 [==============================] - 3s 65ms/step - loss: 0.1756 - accuracy: 0.9286 - val_loss: 10.1211 - val_accuracy: 0.0692
+Epoch 56/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.1547 - accuracy: 0.9363 - val_loss: 10.3651 - val_accuracy: 0.0605
+Epoch 57/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.1450 - accuracy: 0.9391 - val_loss: 10.4043 - val_accuracy: 0.0580
+Epoch 58/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.1376 - accuracy: 0.9411 - val_loss: 10.4793 - val_accuracy: 0.0577
+Epoch 59/60
+45/45 [==============================] - 3s 66ms/step - loss: 0.1326 - accuracy: 0.9431 - val_loss: 10.4939 - val_accuracy: 0.0589
+Epoch 60/60
+45/45 [==============================] - 3s 68ms/step - loss: 0.1309 - accuracy: 0.9434 - val_loss: 10.5381 - val_accuracy: 0.0617
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">findIndex</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">x</span><span class="p">]:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">x</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">index</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">prob</span><span class="p">):</span>
+    <span class="n">accArr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">correctCount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">totalCount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">findIndex</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="n">target</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="n">findIndex</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span> <span class="n">prob</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]):</span>
+                    <span class="n">correctCount</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">totalCount</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">correctCount</span> <span class="o">/</span> <span class="n">totalCount</span>
+        <span class="n">accArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">accArr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">pred_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43/43 [==============================] - 6s 52ms/step
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">store</span> acc
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stored &#39;acc&#39; (list)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./hcp_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../recurrent_nn.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Recurrent Neural Network Notes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="attention_methods.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Attention Methods</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Anna Gu<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

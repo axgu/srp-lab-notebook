@@ -11,18 +11,20 @@ import pickle
 import scipy as scp
 import sklearn
 from sklearn.linear_model import LogisticRegression
-from matplotlib import pyplot as plt
+
+with open('HCP_movie_watching.pkl','rb') as f:
+    TS = pickle.load(f)
 
 
 # In[2]:
 
 
-with open('HCP_movie_watching.pkl','rb') as f:
-    TS = pickle.load(f)
-
 index = np.arange(176)
+np.random.seed(0)
 np.random.shuffle(index)
 testIndex = index[:76]
+
+get_ipython().run_line_magic('store', 'testIndex')
 
 
 # In[3]:
@@ -56,63 +58,58 @@ def splitData(tList):
 # In[4]:
 
 
-model = LogisticRegression(max_iter = 1000)
-arr = []
-for k in range(90):
-    for key, val in TS.items():
-        if val.shape[-2] > k:   # Account for clips with less than 90 time points
-            if key == 'testretest':
-                for i in range(val.shape[0]):
+def reshapeData(dict):  
+    arr = []
+    for k in range(90):
+        for key, val in dict.items():
+            if val.shape[-2] > k:   # Account for clips with less than 90 time points
+                if key == 'testretest':
+                    for i in range(val.shape[0]):
+                        for j in range(val.shape[-3]):
+                            subj = []       # Create new row
+                            for l in range(val.shape[-1]):
+                                subj.append(val[i][j][k][l])
+                            subj.append(key)    # Add movie
+                            subj.append(k)
+                            subj.append(j)      # Add participant number
+                            arr.append(subj)     # Add new row to array
+                else:
                     for j in range(val.shape[-3]):
-                        subj = []       # Create new row
+                        subj = []
                         for l in range(val.shape[-1]):
-                            subj.append(val[i][j][k][l])
-                        subj.append(key)    # Add movie
+                            subj.append(val[j][k][l])
+                        subj.append(key)
                         subj.append(k)
-                        subj.append(j)      # Add participant number
-                        arr.append(subj)     # Add new row to array
-            else:
-                for j in range(val.shape[-3]):
-                    subj = []
-                    for l in range(val.shape[-1]):
-                        subj.append(val[j][k][l])
-                    subj.append(key)
-                    subj.append(k)
-                    subj.append(j)
-                    arr.append(subj)
+                        subj.append(j)
+                        arr.append(subj)
+    return arr
 
 
-# In[12]:
+# In[5]:
 
 
-X_train, X_test, y_train, y_test = splitData(arr)
-model.fit(X_train, y_train[:, 0])
+X_train, X_test, y_train, y_test = splitData(reshapeData(TS))
+get_ipython().run_line_magic('store', 'X_test')
+get_ipython().run_line_magic('store', 'y_test')
+
+logmodel = LogisticRegression(max_iter = 1000)
+logmodel.fit(X_train, y_train[:, 0])
+
+get_ipython().run_line_magic('store', 'logmodel')
 
 
-# In[13]:
+# In[6]:
 
 
-performAcc = []
+logperformAcc = []
 startindex = 0
 endindex = 0
 for t in range(90):
     while endindex < y_test.shape[0] and int(y_test[endindex, 1]) == t:
         endindex += 1
-    acc = model.score(X_test[startindex:endindex,], y_test[startindex:endindex, 0])
-    performAcc.append(acc)
+    acc = logmodel.score(X_test[startindex:endindex,], y_test[startindex:endindex, 0])
+    logperformAcc.append(acc)
     startindex = endindex
 
-
-# In[14]:
-
-
-xAx = [i for i in range(0,90)]
-plt.plot(xAx, performAcc, label="log-reg")
-plt.xlabel("Time (s)")
-plt.ylabel("Accuracy")
-plt.ylim(0,1)
-plt.xlim(0,90)
-plt.title("Time-varying Classification Accuracy")
-plt.legend()
-plt.show()
+get_ipython().run_line_magic('store', 'logperformAcc')
 

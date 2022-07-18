@@ -26,4 +26,10 @@ parts:
     sections:
     - file: hcp_data/hcp_logreg_indivtime
     - file: hcp_data/hcp_logreg_permtest
+  - file: multiple_inference
+- caption: RNN
+  chapters:
+  - file: recurrent_nn
+  - file: hcp_data/rnn_data_prep
+  - file: hcp_data/attention_methods
   
