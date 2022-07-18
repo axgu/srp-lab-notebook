@@ -45,11 +45,13 @@ $$
 $$
 
 * General:
+
 $$
 \text{score}_{\text{alignment}} = W(H_{\text{encoder}} \cdot H_{\text{decoder}})
 $$
 
 * Concat:
+
 $$
 \text{score}_{\text{alignment}} = W \cdot \tanh(W_\text{combined}(H_{\text{encoder}} + H_{\text{decoder}}))
 $$
@@ -77,6 +79,7 @@ Global attention refers to when attention is calculated over the entire input se
 
 
 ## Resources
+* [Sequence to Sequence Models](https://www.analyticsvidhya.com/blog/2020/08/a-simple-introduction-to-sequence-to-sequence-models/)
 * [What is attention mechanism?](https://towardsdatascience.com/what-is-attention-mechanism-can-i-have-your-attention-please-3333637f2eac)
 * [Attention by Lilian Weng](https://lilianweng.github.io/posts/2018-06-24-attention/)
 * [Attention Mechanism](https://blog.floydhub.com/attention-mechanism/)
