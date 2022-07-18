@@ -562,15 +562,19 @@ title="Print to PDF"
 \text{score}_{\text{alignment}} = H_{\text{encoder}} \cdot H_{\text{decoder}}
 \]</div>
 <ul class="simple">
-<li><p>General:
-$<span class="math notranslate nohighlight">\(
-\text{score}_{\text{alignment}} = W(H_{\text{encoder}} \cdot H_{\text{decoder}})
-\)</span>$</p></li>
-<li><p>Concat:
-$<span class="math notranslate nohighlight">\(
-\text{score}_{\text{alignment}} = W \cdot \tanh(W_\text{combined}(H_{\text{encoder}} + H_{\text{decoder}}))
-\)</span>$</p></li>
+<li><p>General:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+\text{score}_{\text{alignment}} = W(H_{\text{encoder}} \cdot H_{\text{decoder}})
+\]</div>
+<ul class="simple">
+<li><p>Concat:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{score}_{\text{alignment}} = W \cdot \tanh(W_\text{combined}(H_{\text{encoder}} + H_{\text{decoder}}))
+\]</div>
 <p><span class="math notranslate nohighlight">\(H_{\text{decoder}}\)</span> is the vector representing the decoder hidden state at time step <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(H_{\text{encoder}}\)</span> is the matrix of all encoder outputs/hidden states.</p>
 <p>Both methods applied the <span class="math notranslate nohighlight">\(softmax\)</span> function on the alignment scores vector to obtain the attention weights. The context vector was then calculated by multiplying the attention weights with the encoder outputs.</p>
 </section>
@@ -594,6 +598,7 @@ $<span class="math notranslate nohighlight">\(
 <section id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
+<li><p><a class="reference external" href="https://www.analyticsvidhya.com/blog/2020/08/a-simple-introduction-to-sequence-to-sequence-models/">Sequence to Sequence Models</a></p></li>
 <li><p><a class="reference external" href="https://towardsdatascience.com/what-is-attention-mechanism-can-i-have-your-attention-please-3333637f2eac">What is attention mechanism?</a></p></li>
 <li><p><a class="reference external" href="https://lilianweng.github.io/posts/2018-06-24-attention/">Attention by Lilian Weng</a></p></li>
 <li><p><a class="reference external" href="https://blog.floydhub.com/attention-mechanism/">Attention Mechanism</a></p></li>
