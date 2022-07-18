@@ -132,6 +132,21 @@ Files:
 * [HCP Logistic Regression Overview](./hcp_data/hcp_logreg.md)
 * [Permutation Testing](./hcp_data/hcp_log_reg_permtest.ipynb)
 
-<i></i>
+<i>5:23 pm, 526 minutes</i>
+
+---
+
+<b></b><br>
+<i>07/07/2022, 9:25 am</i>
+
+
+Synopsis: I will learn about multiple comparisons in statistical inference and feed forward neural networks.
+
+Data: I read about conducting analysis of variance (ANOVA) on multiple variables. I also learned about the problem with making multiple comparisons in statistical inference: the likelihood of getting a statistically significant result when no such effect exists (i.e. Type I error or false positive) increases. I took notes on a few methods to fix this issue, specifically on the Bonferroni method to control FWER and the Benjamini-Hochberg procedure to address FDR.
+
+Files:
+* [Multiple Inference Notes](./multiple_inference.md)
+
+<i>4:08 pm, 403 minutes</i>
 
 ---

@@ -4,8 +4,9 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search &#8212; My Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Recurrent Neural Network &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -30,7 +31,6 @@
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -50,19 +50,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" />
-  <script src="searchindex.js" defer></script>
-  
+    <link rel="search" title="Search" href="search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
     
-
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
 <!-- Checkboxes to toggle the left sidebar -->
@@ -103,7 +98,7 @@ const thebe_selector_output = ".output, .cell_output"
       <h1 class="site-logo" id="site-title">My Project</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="#" method="get">
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -314,6 +309,52 @@ title="Fullscreen mode"
 
 </button>
 
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/recurrent_nn_entries.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
     </div>
 </div>
 
@@ -325,7 +366,7 @@ title="Fullscreen mode"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1></h1>
+                <h1>Recurrent Neural Network</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -337,36 +378,89 @@ title="Fullscreen mode"
                 
               <div>
                 
-  <h1 id="search-documentation">Search</h1>
-  
-  <noscript>
-  <div class="admonition warning">
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  </noscript>
-  
-  
-  <p>
-    Searching for multiple words only shows matches that contain
-    all words.
-  </p>
-  
-  
-  <form action="" method="get">
-    <input type="text" name="q" aria-labelledby="search-documentation" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-    <input type="submit" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="recurrent-neural-network">
+<h1>Recurrent Neural Network<a class="headerlink" href="#recurrent-neural-network" title="Permalink to this headline">#</a></h1>
+<p><strong>Recurrent Neural Networks</strong></p>
+<p><em>07/11/2022, 8:40 am</em></p>
+<p>Synopsis: I will learn about LSTM models and apply one to the HCP dataset.</p>
+<p>Data: I sent Ms. Bosse an email updating her with my progress for the first few weeks of my internship. I also took notes on recurrent neural networks, and more specifically, Gated Recurrent Units. I also read about LSTMs, another RNN architecture. Finally, I looked into implementing an RNN using different Python libraries, including Pytorch, Tensorflow, and sklearn.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
+</ul>
+<p><em>5:12 pm, 512 minutes</em></p>
+<hr class="docutils" />
+<p><strong>RNN Data Processing</strong></p>
+<p><em>07/12/2022, 9:02 am</em></p>
+<p>Synopsis: I will apply a GRU network to the HCP dataset.</p>
+<p>Data: I learned about specific parameters and requirements with implementing a GRU model using Tensorflow and Pytorch. I also wrote code to split the HCP dataset into training and testing dictionaries. Then, I wrote a function that reshaped these dictionaries into 3D X (input) arrays of shape (batch x time x features) and 2D y (output) arrays of shape (batch x time). Instead of using all possible time points, I limited the sequence length to the first 90 time points. However, because some movie clips were sampled for times shorter than 90 seconds, I learned about padding and masking the data.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/rnn_data_prep.html"><span class="doc std std-doc">RNN Data Prep Program</span></a></p></li>
+</ul>
+<p><em>5:26 pm, 504 minutes</em></p>
+<hr class="docutils" />
+<p><strong>RNN Training</strong></p>
+<p><em>07/13/2022, 9:00 am</em></p>
+<p>Synopsis: I will apply a GRU network to the HCP dataset.</p>
+<p>Data: I built a GRU model using Tensorflow/Keras with a Masking layer, GRU layer, and TimeDistributed/Dense layer. The final layer was used to allow separate time calculations and also apply the softmax activation function to the previous outputs, since labels were one-hot encoded into 15D vectors. The model was trained with X and y training data, batch_size = 32, epoch = 50, and validation_split = 0.2. It was then used to predict clips of the input test data. Accuracy functions were written to evaluate the model, though the results indicate that there were some issues with masking, since there is a noticeable decrease in performance for time points after 65 seconds and 84 seconds, which is when overcome and testretest clips end, respectively.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/rnn_data_prep.html"><span class="doc std std-doc">RNN Data Prep Program</span></a></p></li>
+</ul>
+<p><em>5:01 pm, 481 minutes</em></p>
+<hr class="docutils" />
+<p><strong>RNN Masking and Evaluation</strong></p>
+<p><em>07/14/2022, 8:31 am</em></p>
+<p>Synopsis: I will learn more about masking and padding data and evaluate the performance of the neural network.</p>
+<p>Data: I learned about masking and padding in Keras, and tried to apply it to my model. An issue I encountered was that the Keras frameworks skip over the masked time step for all samples, not just the padded ones. I also corrected my accuracy function. Finally, I worked on optimizing the performance of the LSTM by tuning hyperparameters, such as changing batch size, epochs, dropout rate, etc.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/rnn_data_prep.html"><span class="doc std std-doc">RNN Data Prep Program</span></a></p></li>
+</ul>
+<p><em>4:40 pm, 489 minutes</em></p>
+<hr class="docutils" />
+<p><strong>RNN with PyTorch</strong></p>
+<p><em>07/15/2022, 9:15 am</em></p>
+<p>Synopsis: I will work on fixing the masking issue of the neural network.</p>
+<p>Data: I learned about implementing neural networks with PyTorch instead of Tensorflow.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">LSTM PyTorch Model</span></p></li>
+</ul>
+<p><em>2:33 pm, 318 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Attention Methods</strong></p>
+<p><em>07/14/2022, 8:50 am</em></p>
+<p>Synopsis: I will learn about attention methods.</p>
+<p>Data: I learned about sequence to sequence models, specifically about encoder decoder architectures. I also looked into LSTM models to understand how they worked. Then, I learned about the bottleneck problem in standard encoder decoder models and the solution provided by attention. I looked into several attention mechanisms within seq2seq problems, as well as a basic overview of self-attention.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/attention_methods.html"><span class="doc std std-doc">Attention Methods Notes</span></a></p></li>
+</ul>
+<p><em>5:50 pm, 540 minutes</em></p>
+<hr class="docutils" />
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               

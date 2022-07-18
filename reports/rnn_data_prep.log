@@ -32,8 +32,12 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# Take 200 resamples', 'acc = []', 'upper_acc = []', 'p_vals = []', 'startindex = 0']
-...
-['    t_acc = sorted(t_acc, reverse = True)', '    p = findP(logperformAcc[t], t_acc)', '    p_vals.append(p)', '    ', '    upper_acc.append(np.percentile(t_acc, 95))']
+import numpy as np
+import pickle
+import tensorflow as tf
+from tensorflow import keras
+from keras.models import Sequential
+from keras.layers import TimeDistributed, Dense, LSTM, Layer
+from keras import Input
 -------------------
 

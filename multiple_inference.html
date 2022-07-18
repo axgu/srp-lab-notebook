@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>HCP Data &#8212; My Project</title>
+    <title>Multiple Inference &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,8 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Recurrent Neural Network Notes" href="recurrent_nn.html" />
+    <link rel="prev" title="Permutation Test" href="hcp_data/hcp_logreg_permtest.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -177,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
   HCP Dataset
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hcp_data/hcp_summary.html">
    HCP Dataset
@@ -216,6 +220,33 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Multiple Inference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="recurrent_nn.html">
+   Recurrent Neural Network Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_data/rnn_data_prep.html">
+   LSTM Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_data/attention_methods.html">
+   Attention Methods
+  </a>
  </li>
 </ul>
 
@@ -290,7 +321,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/hcp_data_entries.md"
+        <a href="_sources/multiple_inference.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -327,23 +358,122 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#family-wise-error-rate">
+   Family-Wise Error Rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonferroni-correction">
+     Bonferroni Correction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#false-discovery-rate">
+   False Discovery Rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-benjamini-hochberg-procedure">
+     The Benjamini-Hochberg Procedure
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#theorem-benjamini-and-hochberg-1995">
+       Theorem (Benjamini and Hochberg (1995))
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>HCP Data</h1>
+                <h1>Multiple Inference</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#family-wise-error-rate">
+   Family-Wise Error Rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonferroni-correction">
+     Bonferroni Correction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#false-discovery-rate">
+   False Discovery Rate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-benjamini-hochberg-procedure">
+     The Benjamini-Hochberg Procedure
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#theorem-benjamini-and-hochberg-1995">
+       Theorem (Benjamini and Hochberg (1995))
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -351,111 +481,73 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="hcp-data">
-<h1>HCP Data<a class="headerlink" href="#hcp-data" title="Permalink to this headline">#</a></h1>
-<p><b>HCP Dataset Visualization</b><br>
-<i>06/27/2022, 8:24 am</i></p>
-<p>Synopsis: I will work on formatting and outputting the dataset.</p>
-<p>Data: I created several visuals to represent the HCP data using numpy and matplotlib. For all of my graphs, I averaged the values obtained by the participants at each (time point, ROI) coordinate, reducing the 3- or 4-dimensional array to a 2-dimensional array.</p>
-<p>I first made a subplot that contains 15 separate graphs, each representing a movie from the dataset. Each graph is a map, with time points on the x-axis and regions of interest (ROIs) on the y-axis; values are denoted by the color of each grid. I then visualized more specific parts of the data by creating line graphs of change in value across time points for randomly selected ROIs for the <em>Home Alone</em> movie, as well as change in value across time points for all 15 movies at a randomly selected ROI. Afterwards, I switched the time points and ROI variables and compared the <em>Home Alone</em> movie values at different ROIs for randomly selected time points. Finally, I created a video that shows the incremental change in values at each ROI for <em>Home Alone</em>.</p>
-<p>I also attended the LCE lab meeting virtually.</p>
-<p>Tomorrow, I will summarize the dataset and key takeaways from visualization. I will also start working on applying logistic regression to the movie watching data.</p>
-<p>Files:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="multiple-inference">
+<h1>Multiple Inference<a class="headerlink" href="#multiple-inference" title="Permalink to this headline">#</a></h1>
+<p>Testing multiple variables increases the probability of making type I errors. Specifically, the probability of making at least one type I error when testing <span class="math notranslate nohighlight">\(n\)</span> true null hypotheses is <span class="math notranslate nohighlight">\(1-(1-\alpha)^{n}\)</span>. On average, <span class="math notranslate nohighlight">\(\alpha n\)</span> will result in falsely significant results.</p>
+<section id="family-wise-error-rate">
+<h2>Family-Wise Error Rate<a class="headerlink" href="#family-wise-error-rate" title="Permalink to this headline">#</a></h2>
+<p>Family-wise error rate (FWER) is the probability of falsely rejecting at least one ture null hypothesis: <span class="math notranslate nohighlight">\(P[V \ge 1]\)</span>.</p>
+<p>A procedure is said to control FWER at level <span class="math notranslate nohighlight">\(\alpha\)</span> if <span class="math notranslate nohighlight">\(P[V \ge 1] \le \alpha\)</span>.</p>
+<section id="bonferroni-correction">
+<h3>Bonferroni Correction<a class="headerlink" href="#bonferroni-correction" title="Permalink to this headline">#</a></h3>
+<p>The Bonferroni method controls FWER: the goal is to ensure that <span class="math notranslate nohighlight">\(P(\text{reject any null hypothesis}) \le \alpha\)</span>. This is achieved by performing each test at significance level <span class="math notranslate nohighlight">\(\alpha / n\)</span> instead of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+P[\text{reject any null hypothesis}] 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= P[(\text{reject } H_{0}^{(1)}) \cup \cdots \cup (\text{reject } H _{0} ^{(n)})]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\le P[\text{reject } H_{0} ^{(1)}] + \dots + P[\text{reject } H_{0} ^{(n)}]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{\alpha} {n} + \dots + \frac{\alpha} {n} = \alpha
+\]</div>
+<p>In terms of <span class="math notranslate nohighlight">\(p\)</span>-values, the Bonferroni correction method rejects the null hypotheses whose corresponding <span class="math notranslate nohighlight">\(p\)</span>-values are at most <span class="math notranslate nohighlight">\(\alpha / n\)</span>.</p>
+<p>A disadvantage of controlling the FWER is that it may greatly reduce the power of the test to detect real effects, especially when <span class="math notranslate nohighlight">\(n\)</span>, the number of tested hypotheses, is large.</p>
+</section>
+</section>
+<section id="false-discovery-rate">
+<h2>False Discovery Rate<a class="headerlink" href="#false-discovery-rate" title="Permalink to this headline">#</a></h2>
+<p>False-discovery proportion (FDP) is defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+FDP = \begin{cases}
+\frac{V}{R}, &amp; R \ge 1 \\[2ex]
+0, &amp; R = 0
+\end{cases}
+\end{split}\]</div>
+<p>False-discovery rate (FDR) is the expected value of the FDP, <span class="math notranslate nohighlight">\(E(\text{FDP})\)</span>.</p>
+<p>In comparison to FWER, FDR allows toleratio n of some type I errors, as long as most of the discoveries made are true.</p>
+<section id="the-benjamini-hochberg-procedure">
+<h3>The Benjamini-Hochberg Procedure<a class="headerlink" href="#the-benjamini-hochberg-procedure" title="Permalink to this headline">#</a></h3>
+<p>The Benjamini-Hochberg (BH) procedure compares sorted <span class="math notranslate nohighlight">\(p\)</span>-values to a diagnoal cutoff line. It finds the largest <span class="math notranslate nohighlight">\(p\)</span>-value that falls below this line, and rejects the null hypotheses for all <span class="math notranslate nohighlight">\(p\)</span>-values up to this one:</p>
+<ol class="simple">
+<li><p>Sort p-values so that <span class="math notranslate nohighlight">\(P_{(1)} \le \dots \le P_{(n)}\)</span></p></li>
+<li><p>Find the largest <span class="math notranslate nohighlight">\(r\)</span> such that <span class="math notranslate nohighlight">\(P_{(r)} \le \frac{qr}{n}\)</span></p></li>
+<li><p>Reject null hypotheses <span class="math notranslate nohighlight">\(H_{0} ^{(1)}, \dots , H_{0} ^{(r)}\)</span></p></li>
+</ol>
+<section id="theorem-benjamini-and-hochberg-1995">
+<h4>Theorem (Benjamini and Hochberg (1995))<a class="headerlink" href="#theorem-benjamini-and-hochberg-1995" title="Permalink to this headline">#</a></h4>
+<p>Consider tests of <span class="math notranslate nohighlight">\(n\)</span> null hypotheses, <span class="math notranslate nohighlight">\(n_0\)</span> of which are true. If the test statistics of these tests are independent, then the FDR of the described procedure satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\text{FDR} \le \frac {n_{0} q} {n} \le q
+\]</div>
+</section>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/data.html"><span class="doc std std-doc">Data Visualization Code</span></a></p></li>
-<li><p><span class="xref myst">15 Plot Colormap</span></p></li>
-<li><p><span class="xref myst">Time Series for Selected ROIs</span></p></li>
-<li><p><span class="xref myst">Time Series for Movies</span></p></li>
-<li><p><span class="xref myst">Value Change by ROI for Selected Time Points</span></p></li>
-<li><p><span class="xref myst">Value Change by ROI Video</span></p></li>
+<li><p><a class="reference external" href="https://web.stanford.edu/class/archive/stats/stats200/stats200.1172/Lecture11.pdf">Introduction to Multiple Testing</a></p></li>
+<li><p><a class="reference external" href="https://web.ma.utexas.edu/users/mks/statmistakes/multipleinference.html">Multiple Inference Mistakes</a></p></li>
 </ul>
-<p><i>7:10 pm, 646 minutes</i></p>
-<hr class="docutils" />
-<p><b>HCP Dataset Summary</b><br>
-<i>06/28/2022, 8:13 am</i></p>
-<p>Synopsis: I will summarize my visualizations of the HCP dataset.</p>
-<p>Data: I wrote a summary of the work I did yesterday with the HCP dataset, providing an overview of the data and explanations of each of my visuals. I also read the lab’s paper on classifying movie clips using various machine learning models. I started working on the logistic regression model applied to the HCP data.</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/hcp_summary.html"><span class="doc std std-doc">HCP Visualization Summary</span></a></p></li>
-<li><p><a class="reference external" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008943">Learning brain dynamics for decoding and predicting individual differences by Misra et al.</a></p></li>
-</ul>
-<p><i>4:38 pm, 505 minutes</i></p>
-<hr class="docutils" />
-<p><b>HCP Dataset Logistic Regression Program</b><br>
-<i>06/29/2022, 8:37 am</i></p>
-<p>Synopsis: I will apply logistic regression to the HCP dataset.</p>
-<p>Data: I started writing the logistic regression program in Python. More specifically, I worked on dataset pre-processing aspect.</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Code</span></a></p></li>
-</ul>
-<p><i>10:00 am, 83 minutes</i></p>
-<hr class="docutils" />
-<p><b>HCP Dataset Logistic Regression Program</b><br>
-<i>06/29/2022, 12:00 pm</i></p>
-<p>Synopsis: I will apply logistic regression to the HCP dataset.</p>
-<p>Data: I continued working on running logistic regression on the HCP data. I was able to convert the dictionary into a 2-dimensional array and split it into training and testing sets. I used the sklearn LogisticRegression module to assess accuracy.</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Code</span></a></p></li>
-</ul>
-<p><i>5:32 pm, 332 minutes</i></p>
-<hr class="docutils" />
-<p><b>HCP Dataset Logistic Regression</b><br>
-<i>06/30/2022, 8:38 pm</i></p>
-<p>Synopsis: I will apply logistic regression to the HCP dataset.</p>
-<p>Data: I wrote functions to perform logistic regression with (Time point, ROI) features. I ran this model and the one provided by the sci-kit learn library several times because the classification accuracy obtained was unexpectedly high. Then, I modified the program to classify at each time point, using ROIs as features, and graphed the accruacy over time.</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg_timefeature.html"><span class="doc std std-doc">HCP Logistic Regression Code - (Time, ROI) Features</span></a></p></li>
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html"><span class="doc std std-doc">HCP Logistic Regression Code - ROI Features</span></a></p></li>
-</ul>
-<p><i>5:40 pm, 542 minutes</i></p>
-<hr class="docutils" />
-<p><b>HCP Dataset Logistic Regression</b><br>
-<i>07/01/2022, 7:30 am</i></p>
-<p>Synopsis: I will apply logistic regression to the HCP dataset and summarize the results.</p>
-<p>Data:</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Overview</span></a></p></li>
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html"><span class="doc std std-doc">HCP Logistic Regression Code - ROI Features</span></a></p></li>
-</ul>
-<p><i>4:30pm, 540 minutes</i></p>
-<hr class="docutils" />
-<p><b>HCP Dataset Logistic Regression Summary</b><br>
-<i>07/05/2022, 10:00 am</i></p>
-<p>Synopsis: I will apply logistic regression to the HCP dataset and summarize the results.</p>
-<p>Data: I was able to resolve my confusion about the logistic regression model. I modified my previous logistic regression ROI feature program so that the model is trained once with data across all 90 time points considered. Then, the test data was split by time points. The fitted model was evaluated with this data and classification accuracy was calculated at each time point to create a time series plot.</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Overview</span></a></p></li>
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg_indivtime.html"><span class="doc std std-doc">HCP Logistic Regression Code - ROI Features</span></a></p></li>
-</ul>
-<p><i>6:17 pm, 497 minutes</i></p>
-<hr class="docutils" />
-<p><b>Permutation Testing</b><br>
-<i>07/06/2022, 8:37 am</i></p>
-<p>Synopsis: I will use a permutation test to evaluate the effectiveness of the logistic regression model.</p>
-<p>Data:</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/hcp_logreg.html"><span class="doc std std-doc">HCP Logistic Regression Overview</span></a></p></li>
-<li><p><span class="xref myst">Permutation Testing</span></p></li>
-</ul>
-<p><i>5:23 pm, 526 minutes</i></p>
-<hr class="docutils" />
-<p><b></b><br>
-<i>07/07/2022, 9:25 am</i></p>
-<p>Synopsis: I will learn about multiple comparisons in statistical inference and feed forward neural networks.</p>
-<p>Data: I read about conducting analysis of variance (ANOVA) on multiple variables. I also learned about the problem with making multiple comparisons in statistical inference: the likelihood of getting a statistically significant result when no such effect exists (i.e. Type I error or false positive) increases. I took notes on a few methods to fix this issue, specifically on the Bonferroni method to control FWER and the Benjamini-Hochberg procedure to address FDR.</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="multiple_inference.html"><span class="doc std std-doc">Multiple Inference Notes</span></a></p></li>
-</ul>
-<p><i>4:08 pm, 403 minutes</i></p>
-<hr class="docutils" />
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -485,6 +577,20 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="hcp_data/hcp_logreg_permtest.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Permutation Test</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="recurrent_nn.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Recurrent Neural Network Notes</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

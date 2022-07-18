@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="HCP Dataset Summary" href="hcp_summary.html" />
-    <link rel="prev" title="Diabetes Prediction Summary" href="../prep/log_reg/diabetes-summary.html" />
+    <link rel="next" title="HCP Logistic Regression" href="hcp_logreg.html" />
+    <link rel="prev" title="HCP Dataset" href="hcp_summary.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -180,25 +180,44 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Visualization
-  </a>
- </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="hcp_summary.html">
-   HCP Dataset Summary
+   HCP Dataset
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Visualization
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hcp_logreg_timefeature.html">
-   Logistic Regression - (Time point, ROI) Features
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_logreg.html">
+   HCP Logistic Regression
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hcp_logreg_indivtime.html">
-   Logistic Regression - ROI Features
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_indivtime.html">
+     Logistic Regression - ROI Features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_permtest.html">
+     Permutation Test
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -376,11 +395,28 @@ title="Print to PDF"
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;HCP_movie_watching.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">TS</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">TS</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">TS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;testretest&#39;, &#39;twomen&#39;, &#39;bridgeville&#39;, &#39;pockets&#39;, &#39;overcome&#39;, &#39;inception&#39;, &#39;socialnet&#39;, &#39;oceans&#39;, &#39;flower&#39;, &#39;hotel&#39;, &#39;garden&#39;, &#39;dreary&#39;, &#39;homealone&#39;, &#39;brokovich&#39;, &#39;starwars&#39;])
+(4, 176, 84, 300)
+(176, 245, 300)
+(176, 222, 300)
+(176, 189, 300)
+(176, 65, 300)
+(176, 227, 300)
+(176, 260, 300)
+(176, 250, 300)
+(176, 181, 300)
+(176, 186, 300)
+(176, 205, 300)
+(176, 143, 300)
+(176, 233, 300)
+(176, 231, 300)
+(176, 256, 300)
 </pre></div>
 </div>
 </div>
@@ -421,7 +457,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Anna&amp;Megan\AppData\Local\Temp\ipykernel_7232\2450370645.py:6: UserWarning: This figure was using constrained_layout, but that is incompatible with subplots_adjust and/or tight_layout; disabling constrained_layout.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Anna&amp;Megan\AppData\Local\Temp\ipykernel_7864\2450370645.py:6: UserWarning: This figure was using constrained_layout, but that is incompatible with subplots_adjust and/or tight_layout; disabling constrained_layout.
   plt.subplots_adjust(wspace = 0.5, hspace = 0.5)
 </pre></div>
 </div>
@@ -462,7 +498,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14e831f88b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1fdad6410c0&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_3_1.png" src="../_images/data_3_1.png" />
@@ -486,7 +522,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14eff58c250&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1fdad65d630&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_4_1.png" src="../_images/data_4_1.png" />
@@ -524,7 +560,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14e822872b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1fdaae8bd60&gt;
 </pre></div>
 </div>
 <img alt="../_images/data_5_1.png" src="../_images/data_5_1.png" />
@@ -587,17 +623,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../prep/log_reg/diabetes-summary.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="hcp_summary.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Diabetes Prediction Summary</p>
+            <p class="prev-next-title">HCP Dataset</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="hcp_summary.html" title="next page">
+    <a class='right-next' id="next-link" href="hcp_logreg.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">HCP Dataset Summary</p>
+        <p class="prev-next-title">HCP Logistic Regression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

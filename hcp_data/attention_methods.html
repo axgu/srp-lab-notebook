@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>HCP Dataset &#8212; My Project</title>
+    <title>Attention Methods &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,10 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Visualization" href="data.html" />
-    <link rel="prev" title="Diabetes Prediction Summary" href="../prep/log_reg/diabetes-summary.html" />
+    <link rel="prev" title="LSTM Model" href="rnn_data_prep.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -179,12 +180,12 @@ const thebe_selector_output = ".output, .cell_output"
   HCP Dataset
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_summary.html">
    HCP Dataset
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
@@ -218,6 +219,33 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple_inference.html">
+   Multiple Inference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recurrent_nn.html">
+   Recurrent Neural Network Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rnn_data_prep.html">
+   LSTM Model
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Attention Methods
+  </a>
  </li>
 </ul>
 
@@ -292,7 +320,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/hcp_data/hcp_summary.md"
+        <a href="../_sources/hcp_data/attention_methods.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -352,36 +380,55 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#d-raster">
-   2D Raster
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-graphs">
-   Time Series Graphs
+  <a class="reference internal nav-link" href="#sequence-to-sequence-models">
+   Sequence to Sequence Models
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-rois">
-     Comparing ROIs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-movies">
-     Comparing Movies
+    <a class="reference internal nav-link" href="#problem">
+     Problem
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rois">
-   ROIs
+  <a class="reference internal nav-link" href="#attention">
+   Attention
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bahdanau-vs-luong-approach">
+     Bahdanau vs Luong Approach
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#encoder-model">
+       Encoder Model
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#alignment-scores">
+       Alignment Scores
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#decoder-model">
+       Decoder Model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#soft-vs-hard-attention">
+     Soft vs hard attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-vs-local-attention">
+     Global vs local attention
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#resources">
@@ -397,7 +444,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>HCP Dataset</h1>
+                <h1>Attention Methods</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -408,36 +455,55 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#d-raster">
-   2D Raster
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-graphs">
-   Time Series Graphs
+  <a class="reference internal nav-link" href="#sequence-to-sequence-models">
+   Sequence to Sequence Models
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-rois">
-     Comparing ROIs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparing-movies">
-     Comparing Movies
+    <a class="reference internal nav-link" href="#problem">
+     Problem
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rois">
-   ROIs
+  <a class="reference internal nav-link" href="#attention">
+   Attention
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bahdanau-vs-luong-approach">
+     Bahdanau vs Luong Approach
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#encoder-model">
+       Encoder Model
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#alignment-scores">
+       Alignment Scores
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#decoder-model">
+       Decoder Model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#soft-vs-hard-attention">
+     Soft vs hard attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-vs-local-attention">
+     Global vs local attention
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#resources">
@@ -454,73 +520,87 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="hcp-dataset">
-<h1>HCP Dataset<a class="headerlink" href="#hcp-dataset" title="Permalink to this headline">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
-<p>Visuals were created for better understanding of the HCP movie watching dataset. Loaded with pickle, the dataset is a dictionary with 15 movie-data array pairs. The movies included are:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="attention-methods">
+<h1>Attention Methods<a class="headerlink" href="#attention-methods" title="Permalink to this headline">#</a></h1>
+<section id="sequence-to-sequence-models">
+<h2>Sequence to Sequence Models<a class="headerlink" href="#sequence-to-sequence-models" title="Permalink to this headline">#</a></h2>
+<p>Sequence to sequence models convert a sequence of one type to a sequence of another type. The encoder decoder architecture is often used to achieve this. Both the encoder and decoder are built with RNNs, but the entire model is trained end-to-end (i.e. from input into encoder to output from decoder).</p>
+<p>At each time <span class="math notranslate nohighlight">\(t\)</span>, recurrent neural networks are composed of the input, internal or hidden state, and output.</p>
+<p>The encoder inputs the data in time steps. It disregards the output at each <span class="math notranslate nohighlight">\(t\)</span>, but stores the internal state at <span class="math notranslate nohighlight">\(t\)</span> to calculate the internal state at <span class="math notranslate nohighlight">\(t+1\)</span>. The final information is the hidden state of the last time step, called the context vector.</p>
+<p>The context vector is passed into the decoder sequentially. The decoder calculates the next internal state using the input context vector data and the previous internal state. This information is used to calculate the output at each time step <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<section id="problem">
+<h3>Problem<a class="headerlink" href="#problem" title="Permalink to this headline">#</a></h3>
+<p>The issue with standard encoder decoder architecture arises when input sequences increase in length, as it becomes very difficult to capture information from the entire input sequence in one vector. Since this last internal state of the encoder is the only vector passed through to the decoder, performance of the model decreases.</p>
+</section>
+</section>
+<section id="attention">
+<h2>Attention<a class="headerlink" href="#attention" title="Permalink to this headline">#</a></h2>
+<p>When applied to a sequence to sequence model, attention determines and focuses the model on the most relevant input features for a certain output. In general, this is done by storing all hidden states in a matrix, instead of passing only the vector representing the last hidden state to the decoder. Having access to all internal state information, it creates mappings between outputs at all time steps of the decoder and all internal states of the encoder to determine and select features most influential in producing an output at a certain time step. The “attention” given to an input feature is quantified with alignment scores.</p>
+<p>Several attention mechanisms have been introduced.</p>
+<section id="bahdanau-vs-luong-approach">
+<h3>Bahdanau vs Luong Approach<a class="headerlink" href="#bahdanau-vs-luong-approach" title="Permalink to this headline">#</a></h3>
+<p>The attention mechanisms proposed by Bahdanau et al. and Luong et al. involve three aspects: the encoder model, alignment scores, and the decoder model. The main difference in approach between the two processes is when the decoder RNN is utilized.</p>
+<section id="encoder-model">
+<h4>Encoder Model<a class="headerlink" href="#encoder-model" title="Permalink to this headline">#</a></h4>
+<p>The first step for both methods is to pass inputs into the encoder RNN and store all hidden states.</p>
+</section>
+<section id="alignment-scores">
+<h4>Alignment Scores<a class="headerlink" href="#alignment-scores" title="Permalink to this headline">#</a></h4>
+<p>The process of calculating alignment scores differs slightly between the Bahdanau and Luong methods because the decoder RNN is used at different times.</p>
+<p>Bahdanau et al. calculated alignment scores using the following equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{score}_{\text{alignment}} = W_{\text{combined}} \cdot \tanh(W_{\text{decoder}} * H_{\text{decoder}} ^{(t-1)} + W_{\text{encoder}} \cdot H_{\text{encoder}})
+\]</div>
+<p><span class="math notranslate nohighlight">\(H_{\text{decoder}} ^{(t-1)}\)</span> is the vector representing the decoder hidden state at time step <span class="math notranslate nohighlight">\(t-1\)</span> and <span class="math notranslate nohighlight">\(H_{\text{encoder}}\)</span> is the matrix of all encoder outputs/hidden states.</p>
+<p>Luong et al. calculated alignment scores using three different equations:</p>
 <ul class="simple">
-<li><p>testretest</p></li>
-<li><p>twomen</p></li>
-<li><p>bridgeville</p></li>
-<li><p>pockets</p></li>
-<li><p>overcome</p></li>
-<li><p>inception</p></li>
-<li><p>socialnet</p></li>
-<li><p>oceans</p></li>
-<li><p>flower</p></li>
-<li><p>hotel</p></li>
-<li><p>garden</p></li>
-<li><p>dreary</p></li>
-<li><p>homealone</p></li>
-<li><p>brokovich</p></li>
-<li><p>starwars</p></li>
+<li><p>Dot:</p></li>
 </ul>
-<p>All movie keys except ‘testretest’ are mapped to a 3 dimensional array with shape [# of participants, # of time points, # of ROIs].
-The ‘testretest’ movie is mapped to a 4 dimensional array with shape [# of runs, # of participants, # of time points, # of ROIs] since 4 runs were done for each participant. The following values are constant for all 15 movies:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{score}_{\text{alignment}} = H_{\text{encoder}} \cdot H_{\text{decoder}}
+\]</div>
 <ul class="simple">
-<li><p>number of participants: 176</p></li>
-<li><p>number of ROIs: 300</p></li>
+<li><p>General:
+$<span class="math notranslate nohighlight">\(
+\text{score}_{\text{alignment}} = W(H_{\text{encoder}} \cdot H_{\text{decoder}})
+\)</span>$</p></li>
+<li><p>Concat:
+$<span class="math notranslate nohighlight">\(
+\text{score}_{\text{alignment}} = W \cdot \tanh(W_\text{combined}(H_{\text{encoder}} + H_{\text{decoder}}))
+\)</span>$</p></li>
 </ul>
-<p>The number of time points varies between movies. Time points were normalized using maximums and minimums for comparison. For the figures created, individual participant responses at each (time point, ROI) were averaged to reduce the 3- or 4-dimensional array to a 2-dimensional array.</p>
+<p><span class="math notranslate nohighlight">\(H_{\text{decoder}}\)</span> is the vector representing the decoder hidden state at time step <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(H_{\text{encoder}}\)</span> is the matrix of all encoder outputs/hidden states.</p>
+<p>Both methods applied the <span class="math notranslate nohighlight">\(softmax\)</span> function on the alignment scores vector to obtain the attention weights. The context vector was then calculated by multiplying the attention weights with the encoder outputs.</p>
 </section>
-<section id="d-raster">
-<h2>2D Raster<a class="headerlink" href="#d-raster" title="Permalink to this headline">#</a></h2>
-<p>Raster graphics were created to show the change in fMRI data for the 15 movies. Normalized time points were represented on the x-axis and regions of interest were represented on the y-axis for each raster. Color was determined by the data value.</p>
-<p><img alt="" src="../_images/roi_timeseries_map.png" /></p>
-</section>
-<section id="time-series-graphs">
-<h2>Time Series Graphs<a class="headerlink" href="#time-series-graphs" title="Permalink to this headline">#</a></h2>
-<p>Line graphs were created to visualize change in values across time points.</p>
-<section id="comparing-rois">
-<h3>Comparing ROIs<a class="headerlink" href="#comparing-rois" title="Permalink to this headline">#</a></h3>
-<p>Data from the <em>Home Alone</em> movie was used. Three ROIs were randomly selected and the corresponding data was plotted, with time points on the x-axis and values on the y-axis.</p>
-<p><img alt="" src="../_images/time_rois.png" /></p>
-</section>
-<section id="comparing-movies">
-<h3>Comparing Movies<a class="headerlink" href="#comparing-movies" title="Permalink to this headline">#</a></h3>
-<p>The data corresponding to a randomly selected ROI for all 15 movies was plotted, with time points on the x-axis and values on the y-axis.</p>
-<p><img alt="" src="../_images/time_movies.png" /></p>
+<section id="decoder-model">
+<h4>Decoder Model<a class="headerlink" href="#decoder-model" title="Permalink to this headline">#</a></h4>
+<p>For the Bahdanau attention method, the decoder RNN was used last. At time <span class="math notranslate nohighlight">\(t\)</span>, the context vector was concatenated with the <span class="math notranslate nohighlight">\(t-1\)</span> decoder output. This, along with the <span class="math notranslate nohighlight">\(t-1\)</span> hidden state, was fed into the decoder RNN to calculate the time step <span class="math notranslate nohighlight">\(t\)</span> hidden state. The new hidden state was passed through a classifier to obtain the output.</p>
+<p>For the Luong attention method, the decoder RNN was used first, prior to calculating the alignment scores. Thus, the hidden state at time step <span class="math notranslate nohighlight">\(t\)</span> instead of <span class="math notranslate nohighlight">\(t-1\)</span> was used for alignment scores and producing the final output.</p>
 </section>
 </section>
-<section id="rois">
-<h2>ROIs<a class="headerlink" href="#rois" title="Permalink to this headline">#</a></h2>
-<p>Line graphs were also created to visualize values at each ROI for certain time points. Data from the <em>Home Alone</em> movie was plotted, with ROIs on the x-axis and values on the y-axis.</p>
-<p><img alt="" src="../_images/roi_times.png" /></p>
-<p>A video was created for this purpose as well. The value for each region of interest was plotted, and the video format was used to simulate each time point.</p>
-<video src="homealone_vid.mp4" width=400px controls style="margin-left:20px">
-</video>
+<section id="soft-vs-hard-attention">
+<h3>Soft vs hard attention<a class="headerlink" href="#soft-vs-hard-attention" title="Permalink to this headline">#</a></h3>
+<p>Attention methods highlight the most relevant input features using probability distributions; the <span class="math notranslate nohighlight">\(softmax\)</span> activation function determines a weight that corresponds with each input.</p>
+<p>In soft attention, a weighted average of features and their weights is computed, and the result is fed into the RNN architecture. Generally, soft attention is parameterized by differentiable and thus continuous functions, so training can be completed via backpropagation.</p>
+<p>However, in hard attention, the obtained weights are used to sample one feature to input into the RNN architecture. Hard attention methods are generally described by discrete variables. Because of this, other techniques must be used to train structures other than standard gradient descent, which depends on differentiable functions.</p>
+</section>
+<section id="global-vs-local-attention">
+<h3>Global vs local attention<a class="headerlink" href="#global-vs-local-attention" title="Permalink to this headline">#</a></h3>
+<p>Global attention refers to when attention is calculated over the entire input sequence. Local attention refers to when a subsection of the input sequence is considered.</p>
+</section>
 </section>
 <section id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="data.html"><span class="doc std std-doc">HCP Dataset Visualization Code</span></a></p></li>
-<li><p><a class="reference external" href="https://medium.datadriveninvestor.com/how-to-create-animation-using-matplotlib-and-celluloid-70533ba013e8">Celluloid Guide by Medium</a></p></li>
-<li><p><a class="reference external" href="https://matplotlib.org/stable/api/axes_api.html">Matplotlib Docs</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/what-is-attention-mechanism-can-i-have-your-attention-please-3333637f2eac">What is attention mechanism?</a></p></li>
+<li><p><a class="reference external" href="https://lilianweng.github.io/posts/2018-06-24-attention/">Attention by Lilian Weng</a></p></li>
+<li><p><a class="reference external" href="https://blog.floydhub.com/attention-mechanism/">Attention Mechanism</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1409.0473.pdf">Neural Machine Translation by Jointly Learning to Align and Translate by Bahdanau et al.</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1508.04025.pdf">Effective Approaches to Attention-based Neural Machine Translation by Luong et al.</a></p></li>
 </ul>
 </section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -550,19 +630,12 @@ The ‘testretest’ movie is mapped to a 4 dimensional array with shape [# of r
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../prep/log_reg/diabetes-summary.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="rnn_data_prep.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Diabetes Prediction Summary</p>
+            <p class="prev-next-title">LSTM Model</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="data.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Visualization</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
