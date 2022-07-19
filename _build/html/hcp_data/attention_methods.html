@@ -525,6 +525,8 @@ title="Print to PDF"
 <section id="sequence-to-sequence-models">
 <h2>Sequence to Sequence Models<a class="headerlink" href="#sequence-to-sequence-models" title="Permalink to this headline">#</a></h2>
 <p>Sequence to sequence models convert a sequence of one type to a sequence of another type. The encoder decoder architecture is often used to achieve this. Both the encoder and decoder are built with RNNs, but the entire model is trained end-to-end (i.e. from input into encoder to output from decoder).</p>
+<center><img src="https://miro.medium.com/max/1400/1*1JcHGUU7rFgtXC_mydUA_Q.jpeg" height="320"></center>
+<p><em>An encoder decoder model. Image courtesy of Towards Data Science.</em></p>
 <p>At each time <span class="math notranslate nohighlight">\(t\)</span>, recurrent neural networks are composed of the input, internal or hidden state, and output.</p>
 <p>The encoder inputs the data in time steps. It disregards the output at each <span class="math notranslate nohighlight">\(t\)</span>, but stores the internal state at <span class="math notranslate nohighlight">\(t\)</span> to calculate the internal state at <span class="math notranslate nohighlight">\(t+1\)</span>. The final information is the hidden state of the last time step, called the context vector.</p>
 <p>The context vector is passed into the decoder sequentially. The decoder calculates the next internal state using the input context vector data and the previous internal state. This information is used to calculate the output at each time step <span class="math notranslate nohighlight">\(t\)</span>.</p>
@@ -536,6 +538,8 @@ title="Print to PDF"
 <section id="attention">
 <h2>Attention<a class="headerlink" href="#attention" title="Permalink to this headline">#</a></h2>
 <p>When applied to a sequence to sequence model, attention determines and focuses the model on the most relevant input features for a certain output. In general, this is done by storing all hidden states in a matrix, instead of passing only the vector representing the last hidden state to the decoder. Having access to all internal state information, it creates mappings between outputs at all time steps of the decoder and all internal states of the encoder to determine and select features most influential in producing an output at a certain time step. The “attention” given to an input feature is quantified with alignment scores.</p>
+<center><img src="https://lilianweng.github.io/posts/2018-06-24-attention/bahdanau-fig3.png" height="320"></center>
+<p><em>Matrix of alignment scores of French to English translation from Bahdanau et al.</em></p>
 <p>Several attention mechanisms have been introduced.</p>
 <section id="bahdanau-vs-luong-approach">
 <h3>Bahdanau vs Luong Approach<a class="headerlink" href="#bahdanau-vs-luong-approach" title="Permalink to this headline">#</a></h3>
@@ -581,7 +585,11 @@ title="Print to PDF"
 <section id="decoder-model">
 <h4>Decoder Model<a class="headerlink" href="#decoder-model" title="Permalink to this headline">#</a></h4>
 <p>For the Bahdanau attention method, the decoder RNN was used last. At time <span class="math notranslate nohighlight">\(t\)</span>, the context vector was concatenated with the <span class="math notranslate nohighlight">\(t-1\)</span> decoder output. This, along with the <span class="math notranslate nohighlight">\(t-1\)</span> hidden state, was fed into the decoder RNN to calculate the time step <span class="math notranslate nohighlight">\(t\)</span> hidden state. The new hidden state was passed through a classifier to obtain the output.</p>
+<center><img src="https://www.researchgate.net/profile/Richard-Csaky/publication/323587007/figure/fig4/AS:601280988868613@1520367967790/Original-Attention-Mechanism-Bahdanau-et-al-2014.png" height="320"></center>
+<p><em>Attention model by Bahdanau et al.</em></p>
 <p>For the Luong attention method, the decoder RNN was used first, prior to calculating the alignment scores. Thus, the hidden state at time step <span class="math notranslate nohighlight">\(t\)</span> instead of <span class="math notranslate nohighlight">\(t-1\)</span> was used for alignment scores and producing the final output.</p>
+<center><img src="https://miro.medium.com/max/1002/1*LhEapXF1mtaB3rDgIjcceg.png" height="320"></center>
+<p><em>Attention model by Luong et al.</em></p>
 </section>
 </section>
 <section id="soft-vs-hard-attention">
