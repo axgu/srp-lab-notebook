@@ -3,6 +3,10 @@
 ## Sequence to Sequence Models
 Sequence to sequence models convert a sequence of one type to a sequence of another type. The encoder decoder architecture is often used to achieve this. Both the encoder and decoder are built with RNNs, but the entire model is trained end-to-end (i.e. from input into encoder to output from decoder).
 
+<center><img src="https://miro.medium.com/max/1400/1*1JcHGUU7rFgtXC_mydUA_Q.jpeg" height="320"></center>
+
+*An encoder decoder model. Image courtesy of Towards Data Science.*
+
 At each time $t$, recurrent neural networks are composed of the input, internal or hidden state, and output. 
 
 The encoder inputs the data in time steps. It disregards the output at each $t$, but stores the internal state at $t$ to calculate the internal state at $t+1$. The final information is the hidden state of the last time step, called the context vector.
@@ -15,6 +19,10 @@ The issue with standard encoder decoder architecture arises when input sequences
 
 ## Attention
 When applied to a sequence to sequence model, attention determines and focuses the model on the most relevant input features for a certain output. In general, this is done by storing all hidden states in a matrix, instead of passing only the vector representing the last hidden state to the decoder. Having access to all internal state information, it creates mappings between outputs at all time steps of the decoder and all internal states of the encoder to determine and select features most influential in producing an output at a certain time step. The "attention" given to an input feature is quantified with alignment scores.
+
+<center><img src="https://lilianweng.github.io/posts/2018-06-24-attention/bahdanau-fig3.png" height="320"></center>
+
+*Matrix of alignment scores of French to English translation from Bahdanau et al.* 
 
 Several attention mechanisms have been introduced.
 
@@ -63,8 +71,15 @@ Both methods applied the $softmax$ function on the alignment scores vector to ob
 #### Decoder Model
 For the Bahdanau attention method, the decoder RNN was used last. At time $t$, the context vector was concatenated with the $t-1$ decoder output. This, along with the $t-1$ hidden state, was fed into the decoder RNN to calculate the time step $t$ hidden state. The new hidden state was passed through a classifier to obtain the output.
 
+<center><img src="https://www.researchgate.net/profile/Richard-Csaky/publication/323587007/figure/fig4/AS:601280988868613@1520367967790/Original-Attention-Mechanism-Bahdanau-et-al-2014.png" height="320"></center>
+
+*Attention model by Bahdanau et al.*
+
 For the Luong attention method, the decoder RNN was used first, prior to calculating the alignment scores. Thus, the hidden state at time step $t$ instead of $t-1$ was used for alignment scores and producing the final output.
 
+<center><img src="https://miro.medium.com/max/1002/1*LhEapXF1mtaB3rDgIjcceg.png" height="320"></center>
+
+*Attention model by Luong et al.*
 
 ### Soft vs hard attention
 Attention methods highlight the most relevant input features using probability distributions; the $softmax$ activation function determines a weight that corresponds with each input.
