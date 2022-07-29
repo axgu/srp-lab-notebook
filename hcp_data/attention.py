@@ -208,7 +208,7 @@ def initialize_encoder_decoder(input_size, hidden_size, class_num, lr = 0.01, de
     loss_fn = nn.CrossEntropyLoss()
     return encoder, attent, decoder, encoder_optimizer, decoder_optimizer, loss_fn
 
-"""
+
 with open('HCP_movie_watching.pkl','rb') as f:
     TS = pickle.load(f)
 
@@ -225,4 +225,3 @@ encoder, attent, decoder, encoder_optimizer, decoder_optimizer, loss_fn = initia
 
 attention_loss = train_model(EPOCHS, encoder, decoder, train_loader, encoder_optimizer, decoder_optimizer, seq_len, loss_fn)
 accuracy_arr, test_loss = test_model(encoder, decoder, test_loader, seq_len, loss_fn)
-"""
