@@ -30,6 +30,9 @@ parts:
 - caption: RNN
   chapters:
   - file: recurrent_nn
-  - file: hcp_data/rnn_data_prep
+  - file: hcp_data/lstm-book
+- caption: Attention
+  chapters:
   - file: hcp_data/attention_methods
+  - file: hcp_data/attention-book
   
