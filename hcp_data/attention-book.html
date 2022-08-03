@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Attention Methods" href="attention_methods.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -317,7 +318,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/hcp_data/hcp_plot.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/hcp_data/attention-book.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -360,7 +361,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/hcp_data/hcp_plot.ipynb"
+        <a href="../_sources/hcp_data/attention-book.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -457,12 +458,74 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="kn">from</span> <span class="nn">lstm_data_prep</span> <span class="kn">import</span> <span class="n">prep</span>
+<span class="kn">from</span> <span class="nn">rnn_perm_test</span> <span class="kn">import</span> <span class="n">iterateSeq</span><span class="p">,</span> <span class="n">test_random_labels</span><span class="p">,</span> <span class="n">test_random_column_labels</span><span class="p">,</span> <span class="n">test_random_features</span>
 <span class="kn">from</span> <span class="nn">attention</span> <span class="kn">import</span> <span class="n">test_model</span><span class="p">,</span> <span class="n">initialize_encoder_decoder</span>
-<span class="kn">from</span> <span class="nn">lstm</span> <span class="kn">import</span> <span class="n">test_model_lstm</span><span class="p">,</span> <span class="n">initialize_lstm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;HCP_movie_watching.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">TS</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-<span class="o">%</span><span class="k">store</span> -r logperformAcc
-<span class="o">%</span><span class="k">store</span> -r lstm_accuracy
-<span class="o">%</span><span class="k">store</span> -r attention_accuracy
+<span class="n">input_size</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">n_layers</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">seq_len</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">class_num</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">test_loader</span> <span class="o">=</span> <span class="n">prep</span><span class="p">(</span><span class="n">TS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">encoder</span><span class="p">,</span> <span class="n">attent</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">encoder_optimizer</span><span class="p">,</span> <span class="n">decoder_optimizer</span><span class="p">,</span> <span class="n">loss_fn</span> <span class="o">=</span> <span class="n">initialize_encoder_decoder</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">class_num</span><span class="p">)</span>
+
+<span class="n">check</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;encoder-decoder.pt&quot;</span><span class="p">)</span>
+<span class="n">encoder</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">check</span><span class="p">[</span><span class="s2">&quot;encoder&quot;</span><span class="p">])</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">check</span><span class="p">[</span><span class="s2">&quot;decoder&quot;</span><span class="p">])</span>
+
+<span class="n">encoder</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="n">attention_accuracy</span><span class="p">,</span> <span class="n">loss_val</span> <span class="o">=</span> <span class="n">test_model</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Anna&amp;Megan\Documents\GitHub\srp-lab-notebook\hcp_data\attention.py:187: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  decoder_input = torch.tensor(new_input, device=device)
+c:\Users\Anna&amp;Megan\Documents\GitHub\srp-lab-notebook\hcp_data\attention.py:189: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  test_loss += loss_fn(decoder_output.view(curr_batch_size,-1), torch.tensor(y[:, j, :], device=device)).item()
+c:\Users\Anna&amp;Megan\Documents\GitHub\srp-lab-notebook\hcp_data\attention.py:192: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  output = torch.tensor(new_input.unsqueeze(1))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_permutation_acc</span> <span class="o">=</span> <span class="n">iterateSeq</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">TS</span><span class="p">,</span> <span class="n">numSamples</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">random_feature_acc</span> <span class="o">=</span> <span class="n">test_random_features</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">TS</span><span class="p">,</span> <span class="n">num_samples</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test with random labels</span>
+<span class="c1"># random_labels_samples_accuracy, _ = test_random_labels(encoder, decoder, loss_fn, TS)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_batch_labels_accuracy</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">test_random_column_labels</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">TS</span><span class="p">,</span> <span class="n">num_samples</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -471,9 +534,26 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare accuracies</span>
 <span class="n">xAx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">)]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">logperformAcc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;log-reg&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">attention_accuracy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;attention-seq&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">lstm_accuracy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;lstm&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">attention_accuracy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;attention-encoder-decoder&quot;</span><span class="p">)</span>
+<span class="c1"># plt.plot(xAx, attention_permutation_accuracy, label=&quot;permutation&quot;)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># Test with randomly generated label for each (batch, time step)</span>
+<span class="sd">for i, plot in enumerate(random_labels_samples_accuracy):</span>
+<span class="sd">    plot = np.insert(plot, 0, plot[0])</span>
+<span class="sd">    plt.plot(xAx, plot, label=&quot;random-&quot; + str(i+1))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Test with randomly generated label for each batch, same across time steps within batch</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">plot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">random_batch_labels_accuracy</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;random-labels-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Test with permuted inputs</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">plot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_permutation_acc</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;permutation-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Test with randomly generated inputs</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">plot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">random_feature_acc</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;random-inputs&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -485,7 +565,19 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/hcp_plot_1_0.png" src="../_images/hcp_plot_1_0.png" />
+<img alt="../_images/attention-book_6_0.png" src="../_images/attention-book_6_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">store</span> attention_accuracy
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stored &#39;attention_accuracy&#39; (ndarray)
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -516,6 +608,13 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="attention_methods.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Attention Methods</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>

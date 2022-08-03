@@ -51,7 +51,7 @@ Synopsis: I will apply logistic regression to the HCP dataset.
 Data: I started writing the logistic regression program in Python. More specifically, I worked on dataset pre-processing aspect. 
 
 Files:
-* [HCP Logistic Regression Code](./hcp_data/hcp_logreg.ipynb)
+* [HCP Logistic Regression Code (.py)](./hcp_data/logreg_timefeature.py)
 
 <i>10:00 am, 83 minutes</i>
 
@@ -66,7 +66,7 @@ Synopsis: I will apply logistic regression to the HCP dataset.
 Data: I continued working on running logistic regression on the HCP data. I was able to convert the dictionary into a 2-dimensional array and split it into training and testing sets. I used the sklearn LogisticRegression module to assess accuracy.
 
 Files:
-* [HCP Logistic Regression Code](./hcp_data/hcp_logreg.ipynb)
+* [HCP Logistic Regression Code (.py)](./hcp_data/logreg_timefeature.py)
 
 <i>5:32 pm, 332 minutes</i>
 
@@ -81,7 +81,7 @@ Synopsis: I will apply logistic regression to the HCP dataset.
 Data: I wrote functions to perform logistic regression with (Time point, ROI) features. I ran this model and the one provided by the sci-kit learn library several times because the classification accuracy obtained was unexpectedly high. Then, I modified the program to classify at each time point, using ROIs as features, and graphed the accruacy over time. 
 
 Files:
-* [HCP Logistic Regression Code - (Time, ROI) Features](./hcp_data/hcp_logreg_timefeature.ipynb)
+* [HCP Logistic Regression Code - (Time, ROI) Features (.py)](./hcp_data/logreg_timefeature.py)
 * [HCP Logistic Regression Code - ROI Features](./hcp_data/hcp_logreg_indivtime.ipynb)
 
 <i>5:40 pm, 542 minutes</i>

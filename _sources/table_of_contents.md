@@ -84,4 +84,10 @@
 * - 07/18/2022
   - Attention Methods
   - RNN
+* - 07/19/2022
+  - Attention Model
+  - RNN
+* - 07/20/2022
+  - Attention Model
+  - RNN
 ```

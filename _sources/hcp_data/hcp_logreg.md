@@ -38,11 +38,11 @@ The model was then evaluated with the testing data at all 90 time points, and th
 To determine the effectiveness of applying logistic regression for 15-way movie clip classification, permutation tests was conducted on the model:
 
 $$
-H_{0}: \text{The trained logistic regression model is equally as effective as random chance at classifying diabetes.}
+H_{0}: \text{The trained logistic regression model is equally as effective as random chance at classifying move clips.}
 $$
 
 $$
-H_{A}: \text{The trained logistic regression model is more effective than random chance at classifying diabetes.}
+H_{A}: \text{The trained logistic regression model is more effective than random chance at classifying movie clips.}
 $$
 
 The chosen statistic to measure the effect of using a logistic regression model is classification accuracy. The original sample used for the permutation tests was the HCP testing dataset. The selected features were the 300 ROI. A permutation test was conducted at each time point considered, using only the data in the testing set that corresponded to that time point.

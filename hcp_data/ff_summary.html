@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>HCP Logistic Regression &#8212; My Project</title>
+    <title>Feedforward Summary &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,12 +50,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Logistic Regression - ROI Features" href="hcp_logreg_indivtime.html" />
-    <link rel="prev" title="Visualization" href="data.html" />
+    <link rel="next" title="Feedforward Neural Network" href="ff.html" />
+    <link rel="prev" title="Multiple Inference" href="../multiple_inference.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -181,7 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
   HCP Dataset
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hcp_summary.html">
    HCP Dataset
@@ -199,11 +197,11 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_logreg.html">
    HCP Logistic Regression
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
@@ -232,10 +230,15 @@ const thebe_selector_output = ".output, .cell_output"
   Neural Networks
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Feedforward Summary
+  </a>
+ </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ff_summary.html">
-   Feedforward Neural Network Summary
+  <a class="reference internal" href="ff.html">
+   Feedforward Neural Network
   </a>
  </li>
 </ul>
@@ -335,7 +338,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/hcp_data/hcp_logreg.md"
+        <a href="../_sources/hcp_data/ff_summary.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -395,38 +398,19 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-classification-with-roi-features">
-   Time Series Classification with ROI Features
+  <a class="reference internal nav-link" href="#dataset-creation">
+   Dataset Creation
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dataset-creation">
-     Dataset Creation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#logistic-regression-model">
-     Logistic Regression Model
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#permutation-testing">
-   Permutation Testing
+  <a class="reference internal nav-link" href="#feedforward-neural-network">
+   Feedforward Neural Network
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#methodology">
-     Methodology
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conclusions">
-     Conclusions
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-inputs-testing">
+   Random Inputs Testing
+  </a>
  </li>
 </ul>
 
@@ -437,7 +421,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>HCP Logistic Regression</h1>
+                <h1>Feedforward Summary</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -448,38 +432,19 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#time-series-classification-with-roi-features">
-   Time Series Classification with ROI Features
+  <a class="reference internal nav-link" href="#dataset-creation">
+   Dataset Creation
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dataset-creation">
-     Dataset Creation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#logistic-regression-model">
-     Logistic Regression Model
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#permutation-testing">
-   Permutation Testing
+  <a class="reference internal nav-link" href="#feedforward-neural-network">
+   Feedforward Neural Network
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#methodology">
-     Methodology
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conclusions">
-     Conclusions
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-inputs-testing">
+   Random Inputs Testing
+  </a>
  </li>
 </ul>
 
@@ -491,11 +456,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="hcp-logistic-regression">
-<h1>HCP Logistic Regression<a class="headerlink" href="#hcp-logistic-regression" title="Permalink to this headline">#</a></h1>
-<section id="time-series-classification-with-roi-features">
-<h2>Time Series Classification with ROI Features<a class="headerlink" href="#time-series-classification-with-roi-features" title="Permalink to this headline">#</a></h2>
-<p>Multinomial logistic regression was applied to the HCP dataset for 15-way time series classification of movie clips. Code can be found <a class="reference internal" href="hcp_logreg_indivtime.html"><span class="doc std std-doc">here</span></a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="feedforward-summary">
+<h1>Feedforward Summary<a class="headerlink" href="#feedforward-summary" title="Permalink to this headline">#</a></h1>
+<p>A 3-layer feedforward neural network was applied to the HCP dataset for 15-way time series classification of movie clips. Code can be found <a class="reference internal" href="ff.html"><span class="doc std std-doc">here</span></a>.</p>
 <p>Dimensions of the data were used for the following purposes:</p>
 <ul class="simple">
 <li><p>Movie name - apply as label for classification</p></li>
@@ -504,52 +467,25 @@ title="Print to PDF"
 <li><p>Time point - categorize model results as time series of accuracies</p></li>
 </ul>
 <section id="dataset-creation">
-<h3>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Permalink to this headline">#</a></h3>
-<p>The dataset was transformed from a dictionary with movie clip names as keys and arrays of fMRI data as values (see <a class="reference internal" href="hcp_summary.html"><span class="doc std std-doc">summary</span></a>) to 2-dimensional arrays of X- and Y- train and test sets. Based on the findings from Misra et al., only the first 90 seconds, equivalent to the first 90 time points, were used.</p>
-<p>A 2-dimensional array was created containing data across all of the first 90 time points. Each row was designated for a different subject-movie clip combination. For ‘testretest’ cases, different runs from the same subject were also compiled as separate rows. Columns were designated for distinct ROIs. Thus, each array had 300 feature columns, in addition to a movie label column, a time point column, and a participant number column.</p>
-<p><span class="math notranslate nohighlight">\(
-\begin{bmatrix}
-ROI_{1} &amp; ROI_{2} &amp; \cdots &amp; ROI_{300} &amp; \text{movie} &amp; \text{time} &amp; \text{subj} \\
--2.3054726 &amp; -1.6874946 &amp; \cdots &amp; -2.871706 &amp; \text{testretest} &amp; 0 &amp; 0 \\
--0.037214182 &amp; 0.7795041 &amp; \cdots &amp; 1.4286939 &amp; \text{testretest} &amp; 0 &amp; 1 \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
--0.29585192 &amp; 0.38137275 &amp; \cdots &amp; -0.3323956 &amp; \text{starwars} &amp; 89 &amp; 175 \\
-\end{bmatrix}
-\)</span></p>
-<p>The data was split with 100 participants for training and 76 participants for testing. A list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data stored in X_test and corresponding movie labels and time points stored in y_test. The same was done for participants not selected in the test set, except with X_train and y_train, respectively. All feature data in both training and testing sets was normalized using z-scores.</p>
+<h2>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Permalink to this headline">#</a></h2>
+<p>The dataset was transformed from a dictionary with movie clip names as keys and arrays of fMRI data as values (see <a class="reference internal" href="hcp_summary.html"><span class="doc std std-doc">summary</span></a>) to 3-dimensional arrays of X- and Y- train and test sets. Only the first 90 seconds, equivalent to the first 90 time points, were used.</p>
+<p>The data was split with 100 participants for training and 76 participants for testing. A list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data and movie labels stored in a testing dictionary. The same was done for participants not selected in the test set, except with a training dictionary. Dimensions for the values of these dictionaries were the same as the in the original dataset, except for ‘testretest’ cases, different runs from the same subject were also compiled as separate batches, converting 4 dimensions to 3.</p>
+<p>For each dictionary, 3-dimensional arrays were created containing data across all of the first 90 time points. ROI input data was stored into an X_train or X_test array while movie labels were stored into a y_train or y_test array. ROI feature data was normalized with z-scores, and movie clip labels were one-hot encoded for each time step. Batches with less than 90 time steps were padded with 0.0. Thus, the X input sets had dimensions (batches, time steps = 90, features = 300) and the y label sets had dimensions (batches, time steps = 90, movie clips = 15).</p>
+<p>The training datasets and testing datasets were wrapped into tensors to input into the model.</p>
 </section>
-<section id="logistic-regression-model">
-<h3>Logistic Regression Model<a class="headerlink" href="#logistic-regression-model" title="Permalink to this headline">#</a></h3>
-<p>A multinomial logistic regression model was created using the sci-kit learn library in Python. The model was fitted using the X_train set as input and the y_train set as output across all considered time points. Max_iters was set to 1000 and all other default parameter values were used.</p>
-<p>The model was then evaluated with the testing data at all 90 time points, and the accuracy was saved. Classification accuracy at each time point was plotted, as shown below:</p>
-<p><img alt="" src="../_images/hcp_logreg_indivtime_7_0.png" /></p>
+<section id="feedforward-neural-network">
+<h2>Feedforward Neural Network<a class="headerlink" href="#feedforward-neural-network" title="Permalink to this headline">#</a></h2>
+<p>A three-layer feedforward architecture was created using PyTorch. The model consisted of an input layer, a fully connected hidden layer, and another fully connected output layer, as pictured below. The movie corresponding to the index of the maximum value of the 15-dimensional output vector was the predicted label. Padded values were not masked.</p>
+<p><img alt="" src="../_images/ff_neural_network.drawio.png" /></p>
+<p>The model was fitted using the X_train set as input and the y_train set as output across all considered time points. The Adam optimizer and cross entropy loss function were used in training. Learning rate was set to 0.001 and epochs was set to 500. The training loss across epochs were saved:</p>
+<p><img alt="" src="../_images/ff_train_loss.png" /></p>
+<p>The model was then evaluated with the testing data at all 90 time points, and the accuracy was saved. Classification accuracy at each time point was plotted.</p>
 </section>
+<section id="random-inputs-testing">
+<h2>Random Inputs Testing<a class="headerlink" href="#random-inputs-testing" title="Permalink to this headline">#</a></h2>
+<p>Random inputs based on the normal distribution were generated 20 times to fill the X_test dataset of dimensions (batches, time steps = 90, features = 300). The fitted feedforward neural network was applied on each of the randomly generated datasets, and a classification accuracy was calculated. The accuracy obtained from testing hte model on the original dataset and the 90th percentile of accuracies obtained from random inputs were compared as time series:</p>
+<p><img alt="" src="../_images/ff_accuracy.png" /></p>
 </section>
-<section id="permutation-testing">
-<h2>Permutation Testing<a class="headerlink" href="#permutation-testing" title="Permalink to this headline">#</a></h2>
-<p>To determine the effectiveness of applying logistic regression for 15-way movie clip classification, permutation tests was conducted on the model:</p>
-<div class="math notranslate nohighlight">
-\[
-H_{0}: \text{The trained logistic regression model is equally as effective as random chance at classifying move clips.}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-H_{A}: \text{The trained logistic regression model is more effective than random chance at classifying movie clips.}
-\]</div>
-<p>The chosen statistic to measure the effect of using a logistic regression model is classification accuracy. The original sample used for the permutation tests was the HCP testing dataset. The selected features were the 300 ROI. A permutation test was conducted at each time point considered, using only the data in the testing set that corresponded to that time point.</p>
-<p>It is unclear whether this dataset was randomly selected. However, the data within each feature/variable is exchangeable, so permutations of the original dataset can be taken to create resamples.</p>
-<section id="methodology">
-<h3>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">#</a></h3>
-<p>At each of the 90 time points considered, 200 resamples of the original sample were created by permuting each feature independently. This was done in Python. The fitted logistic regression model was applied on each of the resamples. A classification accuracy was then calculated by <span class="math notranslate nohighlight">\(\text{accuracy} = \frac{\text{correct classifications}}{\text{total classifications}}\)</span>, and a permutation distribution was constructed with the resulting values. The mean accuracy obtained from the original dataset and the 95th percentile of accuracies obtained from each permutation distribution were plotted as time series.</p>
-<p><img alt="" src="../_images/hcp_logreg_permtest_5_01.png" /></p>
-</section>
-<section id="conclusions">
-<h3>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">#</a></h3>
-<p>Based on the results from above, if it is assumed that the fitted logistic regression model is equally as effective as random chance at classifying movie clips, there is an approximately 0% chance of seeing an original sample classification accuracy as large or larger than the observed. Since approximately 0 is clearly lower than any reasonable significance value, there is sufficient evidence to conclude that the trained logistic regression model is more effective than random chance at classifying movie clips.</p>
-</section>
-</section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -579,17 +515,17 @@ H_{A}: \text{The trained logistic regression model is more effective than random
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="data.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../multiple_inference.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Visualization</p>
+            <p class="prev-next-title">Multiple Inference</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="hcp_logreg_indivtime.html" title="next page">
+    <a class='right-next' id="next-link" href="ff.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Logistic Regression - ROI Features</p>
+        <p class="prev-next-title">Feedforward Neural Network</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
