@@ -27,6 +27,10 @@ parts:
     - file: hcp_data/hcp_logreg_indivtime
     - file: hcp_data/hcp_logreg_permtest
   - file: multiple_inference
+- caption: Neural Networks
+  chapters:
+  - file: hcp_data/ff_summary
+  - file: hcp_data/ff
 - caption: RNN
   chapters:
   - file: recurrent_nn

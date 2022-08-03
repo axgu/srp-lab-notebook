@@ -4,6 +4,7 @@ from torch.utils.data import TensorDataset, DataLoader
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+import math
 from lstm_data_prep import numpy_prep
 from eval_model import find_lens
 from lstm import test_model_lstm
@@ -36,14 +37,16 @@ def permutation_prep(dictionary, batch_size=32):
 
     return permuted_test_loader
 
-def iterateLSTM(model, loss, dictionary, percentile = 95, seq_len = 90, numSamples = 100):
+def iterateLSTM(model, loss, dictionary, percentile = 90, seq_len = 90, num_samples = 100):
     permutations = []
-    for i in range(numSamples):
+    for i in range(num_samples):
         permuted_test_loader = permutation_prep(dictionary)
         permutedAccuracy = test_model_lstm(model, permuted_test_loader, loss, seq_len)
         permutations.append(permutedAccuracy)
     permutations = np.array(permutations)
-    plot = np.percentile(permutations, percentile, axis = 0)
+    permutations.sort(axis=0)
+    row = math.floor(num_samples * percentile / 100)
+    plot = permutations[row]
     return plot
 
 def iterateSeq(encoder, decoder, loss, dictionary, percentile = 95, seq_len = 90, numSamples = 100):

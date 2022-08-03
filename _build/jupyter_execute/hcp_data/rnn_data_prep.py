@@ -173,6 +173,12 @@ pred_test = model.predict(X_test)
 acc = accuracy(y_test.numpy(), pred_test)
 
 
+# In[ ]:
+
+
+
+
+
 # In[26]:
 
 

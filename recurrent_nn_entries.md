@@ -229,6 +229,40 @@ Files:
 * [RNN Permutation Test Code (.py)](./hcp_data/rnn_perm_test.py)
 * [Attention Model](./hcp_data/attention-book.ipynb)
 
+*4:00 pm, 441 minutes*
+
+---
+
+**Neural Networks**
+
+*08/01/2022, 8:27 am*
+
+
+Synopsis: I will continue analyzing why my attention model has such a high performance with permuted samples.
+
+Data: 
+
+Files:
+* [RNN Permutation Test Code (.py)](./hcp_data/rnn_perm_test.py)
+* [Attention Model](./hcp_data/attention-book.ipynb)
+
+*6:00 pm, 573 minutes*
+
+---
+
+**Attention Model Summary**
+
+*07/29/2022, 8:39 am*
+
+
+Synopsis: I will continue analyzing why my attention model has such a high performance with permuted samples.
+
+Data: 
+
+Files:
+* [RNN Permutation Test Code (.py)](./hcp_data/rnn_perm_test.py)
+* [Attention Model](./hcp_data/attention-book.ipynb)
+
 **
 
 ---

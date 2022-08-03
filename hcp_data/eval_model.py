@@ -1,8 +1,5 @@
 import numpy as np
 
-SEED = 66
-np.random.seed(SEED)
-
 def findIndex(val, arr):
     index = -1
     for x in range(arr.size):

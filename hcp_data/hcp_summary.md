@@ -28,7 +28,7 @@ The number of time points varies between movies. Time points were normalized usi
 
 Raster graphics were created to show the change in fMRI data for the 15 movies. Normalized time points were represented on the x-axis and regions of interest were represented on the y-axis for each raster. Color was determined by the data value.
 
-![](roi_timeseries_map.png)
+![](./images/roi_timeseries_map.png)
 
 ## Time Series Graphs
 
@@ -38,25 +38,21 @@ Line graphs were created to visualize change in values across time points.
 
 Data from the *Home Alone* movie was used. Three ROIs were randomly selected and the corresponding data was plotted, with time points on the x-axis and values on the y-axis. 
 
-![](time_rois.png)
+![](./images/time_rois.png)
 
 ### Comparing Movies
 
 The data corresponding to a randomly selected ROI for all 15 movies was plotted, with time points on the x-axis and values on the y-axis.
 
-![](time_movies.png)
+![](./images/time_movies.png)
 
 ## ROIs
 
 Line graphs were also created to visualize values at each ROI for certain time points. Data from the *Home Alone* movie was plotted, with ROIs on the x-axis and values on the y-axis.
 
-![](roi_times.png)
+![](./images/roi_times.png)
 
 A video was created for this purpose as well. The value for each region of interest was plotted, and the video format was used to simulate each time point.
-
-<video src="homealone_vid.mp4" width=400px controls style="margin-left:20px">
-</video>
-
 
 ## Resources
 * [HCP Dataset Visualization Code](data.ipynb)

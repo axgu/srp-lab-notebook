@@ -43,7 +43,7 @@ def splitDict(dictionary, indexList):
         testDict[key] = np.array(testvalArr)
     return trainDict, testDict
 
-def shaping(dictionary):
+def shaping(dictionary, pad = -100.):
     X_arr = []
     y_arr = np.empty((0, 90))
     keylist = list(dictionary.keys())
@@ -56,17 +56,17 @@ def shaping(dictionary):
                 clip.append("")
             clip = np.array(clip).reshape((1, 90))
             y_arr = np.concatenate((y_arr, clip), axis=0)
-    X_padded = paddingArr(np.array(X_arr))
+    X_padded = paddingArr(np.array(X_arr), pad=pad)
     y_vector = vectorize_labels(y_arr, keylist, len(keylist))
 
     return X_padded, y_vector
 
 
-def paddingArr(arr, max_len=90, num_features=300):
+def paddingArr(arr, max_len=90, num_features=300, pad = -100.):
     padded_arr = np.empty((arr.shape[0], max_len, num_features), dtype=float)
     for i, seq in enumerate(arr):
         rows = max(max_len - seq.shape[0], 0)
-        pad_vals = [[-100. for k in range(num_features)] for j in range(rows)]
+        pad_vals = [[pad for k in range(num_features)] for j in range(rows)]
         if rows > 0:
             newArr = np.concatenate((seq, np.array(pad_vals, dtype=float)), axis=0)
             padded_arr[i] = newArr
@@ -83,16 +83,16 @@ def vectorize_labels(labels, keys, classNums):
                 results[i][j][indexNum] = 1.
     return results
 
-def numpy_prep(dictionary):
+def numpy_prep(dictionary, pad = -100.):
     testIndex = determineTest()
 
     train, test = splitDict(dictionary, testIndex)
-    X_train, y_train = shaping(train)
-    X_test, y_test = shaping(test)
+    X_train, y_train = shaping(train, pad = pad)
+    X_test, y_test = shaping(test, pad = pad)
     return X_train, y_train, X_test, y_test
 
-def prep(dictionary, batch_size=32):
-    X_train, y_train, X_test, y_test = numpy_prep(dictionary)
+def prep(dictionary, pad=-100., batch_size=32):
+    X_train, y_train, X_test, y_test = numpy_prep(dictionary, pad)
     train_data = TensorDataset(torch.from_numpy(X_train).float(), torch.from_numpy(y_train).float())
     test_data = TensorDataset(torch.from_numpy(X_test).float(), torch.from_numpy(y_test).float())
 

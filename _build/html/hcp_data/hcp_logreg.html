@@ -221,6 +221,47 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple_inference.html">
+   Multiple Inference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ff_summary.html">
+   Feedforward Neural Network Summary
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  RNN
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recurrent_nn.html">
+   Recurrent Neural Network Notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Attention
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="attention_methods.html">
+   Attention Methods
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -489,11 +530,11 @@ ROI_{1} &amp; ROI_{2} &amp; \cdots &amp; ROI_{300} &amp; \text{movie} &amp; \tex
 <p>To determine the effectiveness of applying logistic regression for 15-way movie clip classification, permutation tests was conducted on the model:</p>
 <div class="math notranslate nohighlight">
 \[
-H_{0}: \text{The trained logistic regression model is equally as effective as random chance at classifying diabetes.}
+H_{0}: \text{The trained logistic regression model is equally as effective as random chance at classifying move clips.}
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-H_{A}: \text{The trained logistic regression model is more effective than random chance at classifying diabetes.}
+H_{A}: \text{The trained logistic regression model is more effective than random chance at classifying movie clips.}
 \]</div>
 <p>The chosen statistic to measure the effect of using a logistic regression model is classification accuracy. The original sample used for the permutation tests was the HCP testing dataset. The selected features were the 300 ROI. A permutation test was conducted at each time point considered, using only the data in the testing set that corresponded to that time point.</p>
 <p>It is unclear whether this dataset was randomly selected. However, the data within each feature/variable is exchangeable, so permutations of the original dataset can be taken to create resamples.</p>

@@ -212,16 +212,18 @@ def initialize_encoder_decoder(input_size, hidden_size, class_num, lr = 0.01, de
 with open('HCP_movie_watching.pkl','rb') as f:
     TS = pickle.load(f)
 
+"""
 input_size = 300
 hidden_size = 32
 n_layers = 1
 seq_len = 90
 class_num = 15
 
-EPOCHS = 23
+EPOCHS = 40
 
 train_loader, test_loader = prep(TS)
 encoder, attent, decoder, encoder_optimizer, decoder_optimizer, loss_fn = initialize_encoder_decoder(input_size, hidden_size, class_num)
 
 attention_loss = train_model(EPOCHS, encoder, decoder, train_loader, encoder_optimizer, decoder_optimizer, seq_len, loss_fn)
 accuracy_arr, test_loss = test_model(encoder, decoder, test_loader, seq_len, loss_fn)
+"""
