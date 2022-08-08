@@ -187,7 +187,7 @@ Files:
 
 Synopsis: I will perform a permutation test on my LSTM and Seq2Seq attention model.
 
-Data: 
+Data: I wrote functions to shuffle each feature along the time steps in a batch. I then ran a permutation test with 100 resamples and plotted a comparison of accuracy between logistic regression, LSTM, and attention performance.
 
 Files:
 * [RNN Permutation Test Code (.py)](./hcp_data/rnn_perm_test.py)
@@ -238,31 +238,61 @@ Files:
 *08/01/2022, 8:27 am*
 
 
-Synopsis: I will continue analyzing why my attention model has such a high performance with permuted samples.
+Synopsis: I will continue analyzing why my attention model has such a high performance with random inputs.
 
-Data: 
-
-Files:
-* [RNN Permutation Test Code (.py)](./hcp_data/rnn_perm_test.py)
-* [Attention Model](./hcp_data/attention-book.ipynb)
+Data: I learned more about attention mechanism through a meeting with mentors. I also watched videos and read about how neural networks work and backpropagation.
 
 *6:00 pm, 573 minutes*
 
 ---
 
-**Attention Model Summary**
+**Feedforward Network**
 
-*07/29/2022, 8:39 am*
+*08/02/2022, 8:53 am*
 
 
-Synopsis: I will continue analyzing why my attention model has such a high performance with permuted samples.
+Synopsis: I will build a feedforward neural network.
 
-Data: 
+Data: I built, trained, and evaluated a feedforward neural network in PyTorch that considers time steps blindly. I also tried adding the attention mechanism discussed in the meeting yesterday to a recurrent neural network and trained the model.
 
 Files:
 * [RNN Permutation Test Code (.py)](./hcp_data/rnn_perm_test.py)
 * [Attention Model](./hcp_data/attention-book.ipynb)
 
-**
+*6:20 pm, 567 minutes*
+
+---
+
+**Feedforward with Attention**
+
+*08/03/2022, 8:38 am*
+
+
+Synopsis: I will summarize what I did with the feedforward neural network.
+
+Data: I wrote a summary of my work with the feedforward neural network. I provided details about handling the dataset, architecture specification, training, and evaluating model performance. I had another meeting with my mentors to discuss adding an attention layer to a feedforward network. Then I tried implementing what was discussed. However, when I tried training the model, every epoch took over an hour and a half and the loss for several iterations was outputted as infinity.
+
+Files:
+* [Feedforward Network Summary](./hcp_data/ff_summary.md)
+* [Feedforward Attention](./hcp_data/ff_attention.ipynb)
+
+*5:30 pm, 532 minutes*
+
+---
+
+**Feedforward with Attention**
+
+*08/04/2022, 8:48 am*
+
+
+Synopsis: I will continue training the feedforward/attention architecture and evaluate its performance.
+
+Data: I retrained the feedforward with attention model since my computer restarted and training was incomplete. I also modified the feedforward network so that it trains data from each time point separately as its own classification problem. While my model was training, I also worked on organizing my code and Jupyter notebook.
+
+Files:
+* [Feedforward Network](./hcp_data/ff.ipynb)
+* [Feedforward Attention](./hcp_data/ff_attention.ipynb)
+
+*5:30 pm, 532 minutes*
 
 ---

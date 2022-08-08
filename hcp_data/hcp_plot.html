@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -231,7 +231,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="ff_summary.html">
-   Feedforward Neural Network Summary
+   Feedforward Summary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ff.html">
+   Feedforward Neural Network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ff_attention_summary.html">
+   Feedforward Attention Summary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ff_attention.html">
+   Feedforward with Attention
   </a>
  </li>
 </ul>
@@ -463,6 +478,20 @@ title="Print to PDF"
 <span class="o">%</span><span class="k">store</span> -r logperformAcc
 <span class="o">%</span><span class="k">store</span> -r lstm_accuracy
 <span class="o">%</span><span class="k">store</span> -r attention_accuracy
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 9&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">lstm_data_prep</span> <span class="kn">import</span> <span class="n">prep</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">attention</span> <span class="kn">import</span> <span class="n">test_model</span><span class="p">,</span> <span class="n">initialize_encoder_decoder</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">lstm</span> <span class="kn">import</span> <span class="n">test_model_lstm</span><span class="p">,</span> <span class="n">initialize_lstm</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;-r logperformAcc&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;-r lstm_accuracy&#39;</span><span class="p">)</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;test_model_lstm&#39; from &#39;lstm&#39; (C:\Users\Anna\Documents\GitHub\srp-lab-notebook\hcp_data\lstm.py)
 </pre></div>
 </div>
 </div>
