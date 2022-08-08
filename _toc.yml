@@ -31,6 +31,8 @@ parts:
   chapters:
   - file: hcp_data/ff_summary
   - file: hcp_data/ff
+  - file: hcp_data/ff_attention_summary
+  - file: hcp_data/ff_attention
 - caption: RNN
   chapters:
   - file: recurrent_nn

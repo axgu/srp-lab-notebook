@@ -25,38 +25,48 @@ with open('HCP_movie_watching.pkl','rb') as f:
 
 input_size = 300
 hidden_size = 32
-n_layers = 1
 seq_len = 90
 class_num = 15
 
-_, test_loader = prep(TS)
+train_loader, test_loader = prep(TS)
+
+
+# In[ ]:
+
+
+lstmModel = initialize_lstm(input_size, hidden_size, class_num, seq_len)
+train_loss = lstmModel.train(train_loader, 100)
 
 
 # In[12]:
 
 
-lstmModel, lstmOptim, lstmLoss = initialize_lstm(input_size, hidden_size, seq_len)
+lstmModel = initialize_lstm(input_size, hidden_size, seq_len)
+
+lstm = lstmModel.model
+lstmLoss = lstmModel.loss_fn
+lstmOptim = lstmModel.optim
 
 check = torch.load("lstm-model.pt")
-lstmModel.load_state_dict(check["lstm"])
+lstm.load_state_dict(check["lstm"])
 lstmOptim.load_state_dict(check["lstm_optimizer"])
 
-lstmModel.eval()
+lstm.eval()
 
-lstm_accuracy = test_model_lstm(lstmModel, test_loader, lstmLoss, seq_len)
+lstm_accuracy = lstmModel.test_lstm(test_loader)
 
 
 # In[21]:
 
 
 # Run permutation test on model
-permutation_lstm_accuracy = iterateLSTM(lstmModel, lstmLoss, TS, num_samples=1)
+# permutation_lstm_accuracy = iterateLSTM(lstmModel, lstmLoss, TS, num_samples=1)
 
 
 # In[16]:
 
 
-def generate_random_features(X_lens, num_batches, num_seq = 90, num_features = 300):
+def generate_random_features(X_lens, num_batches, num_seq = 90, num_features = 300, pad=-100.):
     X_random = []
     for i in range(num_batches):
         X_batch = np.random.normal(size=(X_lens[i], num_features))
@@ -67,7 +77,7 @@ def generate_random_features(X_lens, num_batches, num_seq = 90, num_features = 3
     X_random = np.array(X_random)
     return X_random
 
-def test_random_features(model, loss, dictionary, seq_len = 90, num_samples = 1, batch_size = 32):
+def test_random_features(model, dictionary, seq_len = 90, num_samples = 1, batch_size = 32):
     _, _, X, y = numpy_prep(dictionary)
     X_lens = find_lens(X)
     random_features_acc = []
@@ -75,7 +85,7 @@ def test_random_features(model, loss, dictionary, seq_len = 90, num_samples = 1,
         X_random = generate_random_features(X_lens, X.shape[0])
         X_random_data = TensorDataset(torch.from_numpy(X_random).float(), torch.from_numpy(y).float())
         X_random_loader = DataLoader(X_random_data, shuffle=True, batch_size=batch_size)
-        sample_acc = test_model_lstm(model, X_random_loader, loss, seq_len)
+        sample_acc = model.test_lstm(X_random_loader)
         random_features_acc.append(sample_acc)
     return random_features_acc
 
@@ -96,12 +106,6 @@ def find_lens(X):
     return X_lens
 
 
-# In[17]:
-
-
-rand_acc = test_random_features(lstmModel, lstmLoss, TS)
-
-
 # In[5]:
 
 
@@ -114,8 +118,6 @@ get_ipython().run_line_magic('store', 'permutation_lstm_accuracy')
 # Compare accuracies
 xAx = [i for i in range(0,90)]
 plt.plot(xAx, lstm_accuracy, label="lstm")
-plt.plot(xAx, permutation_lstm_accuracy, label="permutation")
-plt.plot(xAx, rand_acc[0], label="random")
 plt.xlabel("Time (s)")
 plt.ylabel("Accuracy")
 plt.ylim(0,1)

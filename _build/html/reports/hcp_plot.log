@@ -1,0 +1,47 @@
+Traceback (most recent call last):
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+    executenb(
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\site-packages\nbclient\client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\asyncio\base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\site-packages\nbclient\client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\Anna\AppData\Local\Programs\Python\Python39\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pickle
+import numpy as np
+import torch
+import random
+from matplotlib import pyplot as plt
+
+from lstm_data_prep import prep
+from attention import test_model, initialize_encoder_decoder
+from lstm import test_model_lstm, initialize_lstm
+
+%store -r logperformAcc
+%store -r lstm_accuracy
+%store -r attention_accuracy
+
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mImportError[0m                               Traceback (most recent call last)
+Input [1;32mIn [1][0m, in [0;36m<cell line: 9>[1;34m()[0m
+[0;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mlstm_data_prep[39;00m [38;5;28;01mimport[39;00m prep
+[0;32m      8[0m [38;5;28;01mfrom[39;00m [38;5;21;01mattention[39;00m [38;5;28;01mimport[39;00m test_model, initialize_encoder_decoder
+[1;32m----> 9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mlstm[39;00m [38;5;28;01mimport[39;00m test_model_lstm, initialize_lstm
+[0;32m     11[0m get_ipython()[38;5;241m.[39mrun_line_magic([38;5;124m'[39m[38;5;124mstore[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m-r logperformAcc[39m[38;5;124m'[39m)
+[0;32m     12[0m get_ipython()[38;5;241m.[39mrun_line_magic([38;5;124m'[39m[38;5;124mstore[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m-r lstm_accuracy[39m[38;5;124m'[39m)
+
+[1;31mImportError[0m: cannot import name 'test_model_lstm' from 'lstm' (C:\Users\Anna\Documents\GitHub\srp-lab-notebook\hcp_data\lstm.py)
+ImportError: cannot import name 'test_model_lstm' from 'lstm' (C:\Users\Anna\Documents\GitHub\srp-lab-notebook\hcp_data\lstm.py)
+

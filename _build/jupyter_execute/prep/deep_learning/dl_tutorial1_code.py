@@ -17,7 +17,7 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 
 
-# In[ ]:
+# In[2]:
 
 
 #@title Data retrieval and loading
@@ -43,7 +43,7 @@ if not os.path.isfile(fname):
         fid.write(r.content)
 
 
-# In[ ]:
+# In[3]:
 
 
 #@title Figure Settings
@@ -51,7 +51,7 @@ get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 plt.style.use("https://raw.githubusercontent.com/NeuromatchAcademy/course-content/master/nma.mplstyle")
 
 
-# In[ ]:
+# In[4]:
 
 
 #@title Plotting Functions
@@ -125,7 +125,7 @@ def plot_train_loss(train_loss):
   plt.show()
 
 
-# In[ ]:
+# In[5]:
 
 
 #@title Helper Functions
@@ -237,7 +237,7 @@ def stimulus_class(ori, n_classes):
   return torch.tensor(np.digitize(ori.squeeze(), bins)) - 1  # minus 1 to accomodate Python indexing
 
 
-# In[ ]:
+# In[6]:
 
 
 #@title
@@ -265,7 +265,7 @@ ax2.set_xticks(np.linspace(0, 360, 5))
 plt.tight_layout()
 
 
-# In[ ]:
+# In[7]:
 
 
 #@title
@@ -286,7 +286,7 @@ stimuli_train = stimuli_all[itrain]
 resp_train = resp_all[itrain]
 
 
-# In[ ]:
+# In[8]:
 
 
 class DeepNetReLU(nn.Module):
@@ -318,7 +318,7 @@ print('decoded orientation: %.2f degrees' % out)
 print('true orientation: %.2f degrees' % ori)
 
 
-# In[ ]:
+# In[9]:
 
 
 def train(net, loss_fn, train_data, train_labels, n_epochs=50, learning_rate=1e-4):

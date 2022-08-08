@@ -19,7 +19,7 @@ get_ipython().run_line_magic('store', '-r lstm_accuracy')
 get_ipython().run_line_magic('store', '-r attention_accuracy')
 
 
-# In[2]:
+# In[3]:
 
 
 # Compare accuracies

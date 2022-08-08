@@ -15,7 +15,7 @@ from sklearn.linear_model import LogisticRegression
 from matplotlib import pyplot as plt
 
 
-# In[2]:
+# In[8]:
 
 
 get_ipython().run_line_magic('store', '-r X_test')
@@ -24,7 +24,7 @@ get_ipython().run_line_magic('store', '-r logmodel')
 get_ipython().run_line_magic('store', '-r logperformAcc')
 
 
-# In[3]:
+# In[9]:
 
 
 # Shuffle each column of X_test to create permutation
@@ -37,7 +37,7 @@ def create_permutation(X):
     return new_X
 
 
-# In[4]:
+# In[10]:
 
 
 # Find p value
@@ -49,7 +49,7 @@ def findP(t, arr):
     return p
 
 
-# In[5]:
+# In[11]:
 
 
 # Take 200 resamples

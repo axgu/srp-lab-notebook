@@ -10,9 +10,13 @@ from eval_model import accuracy, epoch_time, find_lens
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-
 with open('HCP_movie_watching.pkl','rb') as f:
     TS = pickle.load(f)
+
+input_size = 300
+hidden_size = 32
+seq_len = 90
+class_num = 15
 
 class LSTMNetwork(nn.Module):
     def __init__(self, input_size, hidden_size, seq_length, num_layers = 1, num_classes = 15, drop = 0.01):
@@ -43,85 +47,100 @@ class LSTMNetwork(nn.Module):
     def init_hidden(self, batch_size):
         return (torch.zeros(self.num_layers, batch_size, self.hidden_size, device=device), torch.zeros(self.num_layers, batch_size, self.hidden_size, device=device))
 
+class Model:
+    def __init__(self, lstm, loss_fn, optimizer, input_size, hidden_size, output_size, seq_len):
+        self.model = lstm
+        self.loss_fn = loss_fn
+        self.optim = optimizer
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        self.seq_len = seq_len
+    
 
-def train_model(model, epochs, train_loader, criterion, optimizer, seq_len):
-    train_loss = []
-    best_loss = 1e10
+    def train(self, train_loader, epochs):
+        train_loss = []
+        best_loss = 1e10
 
-    model.train()
-    for i in range(epochs):
-        start = time.time()
-        avg_loss = 0.
-        for X, y in train_loader:
-            loss = 0.
-            curr_batch_size = X.shape[0]
-            h = model.init_hidden(curr_batch_size)
-            X, y = X.to(device), y.to(device)
-            optimizer.zero_grad()
+        self.model.train()
+        for i in range(epochs):
+            start = time.time()
+            avg_loss = 0.
+            for X, y in train_loader:
+                loss = 0.
+                curr_batch_size = X.shape[0]
+                h = self.model.init_hidden(curr_batch_size)
+                X, y = X.to(device), y.to(device)
+                self.optim.zero_grad()
 
-            X_lens = find_lens(X)
+                X_lens = find_lens(X)
 
-            output, h = model(X, X_lens, h)
+                output, h = self.model(X, X_lens, h)
 
-            output = torch.transpose(output, 1, 2)
-            y = torch.transpose(y, 1, 2)
+                output = torch.transpose(output, 1, 2)
+                y = torch.transpose(y, 1, 2)
 
-            loss += criterion(output, y)
-            
-            loss.backward()
-            optimizer.step()
-            avg_loss += loss.item()
+                loss += self.loss_fn(output, y)
+                
+                loss.backward()
+                self.optim.step()
+                avg_loss += loss.item()
 
-        end = time.time()
-        epoch_mins, epoch_secs = epoch_time(start, end)
-        if best_loss > avg_loss:
-            best_loss = avg_loss
-            torch.save({"lstm": model.state_dict(), "lstm_optimizer": optimizer.state_dict()}, 'lstm-model.pt')
+            end = time.time()
+            epoch_mins, epoch_secs = epoch_time(start, end)
+            if best_loss > avg_loss:
+                best_loss = avg_loss
+                self.saveModel()
+               
+            print("Epoch " + str(i + 1) + "/" + str(epochs))
+            print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
+            print("Training loss: " + str(avg_loss))
+            print()
+            train_loss.append(avg_loss)
+        
+        return train_loss
 
-        print("Epoch " + str(i + 1) + "/" + str(epochs))
-        print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
-        print("Training loss: " + str(avg_loss))
-        print()
-        train_loss.append(avg_loss)
-    return train_loss
+    def saveModel(self):
+        torch.save({"lstm": self.model.state_dict(), "lstm_optimizer": self.optim.state_dict()}, 'lstm-model.pt')
 
-def test_model_lstm(model, test_loader, criterion, seq_len):
-    model.eval()
-    test_loss = 0.
-    correct = np.zeros(seq_len)
-    total = np.zeros(seq_len)
+    def test_lstm(self, test_loader):
+        self.model.eval()
+        test_loss = 0.
+        correct = np.zeros(self.seq_len)
+        total = np.zeros(self.seq_len)
 
-    with torch.no_grad():
-        for X, y in test_loader:
-            curr_batch_size = X.shape[0]
-            h = model.init_hidden(curr_batch_size)
-            X, y = X.to(device), y.to(device)
+        with torch.no_grad():
+            for X, y in test_loader:
+                curr_batch_size = X.shape[0]
+                h = self.model.init_hidden(curr_batch_size)
+                X, y = X.to(device), y.to(device)
 
-            X_lens = find_lens(X)
+                X_lens = find_lens(X)
 
-            output, h = model(X, X_lens, h)
+                output, h = self.model(X, X_lens, h)
 
-            top_value, top_index = output.topk(1)
-            out = torch.zeros(curr_batch_size, seq_len, 15)
-            for clip in range(curr_batch_size):
-                for k in range(seq_len):
-                    out[clip][k][top_index[clip][k].item()] = 1
+                top_value, top_index = output.topk(1)
+                out = torch.zeros(curr_batch_size, self.seq_len, 15)
+                for clip in range(curr_batch_size):
+                    for k in range(self.seq_len):
+                        out[clip][k][top_index[clip][k].item()] = 1
 
-            output = torch.transpose(output, 1, 2).to(device)
-            y_hat = torch.transpose(y, 1, 2).to(device)
+                output = torch.transpose(output, 1, 2).to(device)
+                y_hat = torch.transpose(y, 1, 2).to(device)
 
-            test_loss += criterion(output, y_hat).item()
-            
-            correct, total = accuracy(y.cpu().numpy(), out.cpu().numpy(), correct, total)
+                test_loss += self.loss_fn(output, y_hat).item()
+                
+                correct, total = accuracy(y.cpu().numpy(), out.cpu().numpy(), correct, total)
 
-    accArr = correct / total
-    return accArr
+        accArr = correct / total
+        return accArr
 
-def initialize_lstm(input_size, hidden_size, seq_len, lr = 0.001):
-    model = LSTMNetwork(input_size, hidden_size, seq_len).to(device)
-    model_optimizer = optim.Adam(model.parameters(), lr=lr)
+def initialize_lstm(input_size, hidden_size, class_num, seq_len, lr = 0.001):
+    lstm = LSTMNetwork(input_size, hidden_size, seq_len).to(device)
+    lstm_optimizer = optim.Adam(model.parameters(), lr=lr)
     loss_fn = nn.CrossEntropyLoss()
-    return model, model_optimizer, loss_fn
+    model = Model(lstm, loss_fn, lstm_optimizer, input_size, hidden_size, class_num, seq_len)
+    return model
 
 
 """

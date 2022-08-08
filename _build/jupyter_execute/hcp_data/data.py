@@ -19,7 +19,7 @@ for key, val in TS.items():
     print(val.shape)
 
 
-# In[2]:
+# In[7]:
 
 
 r = np.array([i for i in range(300)])
@@ -56,7 +56,7 @@ cbar = fig.colorbar(im, ax=axs, shrink=0.6, location='bottom')
 
 
 
-# In[3]:
+# In[65]:
 
 
 def timeSeries(val, seed):
@@ -89,7 +89,7 @@ axs.set_title(movie)
 plt.legend()
 
 
-# In[4]:
+# In[64]:
 
 
 fig, axs = plt.subplots()
@@ -106,7 +106,7 @@ plt.title("ROI " + str(rIndex))
 plt.legend(bbox_to_anchor=(1, 1))
 
 
-# In[5]:
+# In[61]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -137,7 +137,7 @@ axs.set_title(movie)
 plt.legend()
 
 
-# In[6]:
+# In[75]:
 
 
 # Resource:

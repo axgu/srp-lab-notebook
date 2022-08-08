@@ -90,4 +90,40 @@
 * - 07/20/2022
   - Attention Model
   - RNN
+* - 07/20/2022
+  - Attention Model
+  - RNN
+* - 07/20/2022
+  - Attention Model
+  - RNN
+* - 07/21/2022
+  - Attention Model
+  - RNN
+* - 07/25/2022
+  - Attention Model Masking
+  - RNN
+* - 07/26/2022
+  - Attention Model Training
+  - RNN
+* - 07/27/2022
+  - Attention Model Permutation Test
+  - RNN
+* - 07/28/2022
+  - Attention Model Analysis
+  - RNN
+* - 07/29/2022
+  - Attention Model Summary
+  - RNN
+* - 08/01/2022
+  - Neural Networks
+  - RNN
+* - 08/02/2022
+  - Feedforward Network
+  - RNN
+* - 08/03/2022
+  - Feedforward with Attention
+  - RNN
+* - 08/04/2022
+  - Feedforward with Attention
+  - RNN
 ```

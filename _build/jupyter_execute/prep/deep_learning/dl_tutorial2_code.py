@@ -14,7 +14,7 @@ from torch import nn
 from torch import optim
 
 
-# In[5]:
+# In[2]:
 
 
 # @title Figure settings
@@ -22,7 +22,7 @@ get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 plt.style.use("https://raw.githubusercontent.com/NeuromatchAcademy/course-content/master/nma.mplstyle")
 
 
-# In[7]:
+# In[3]:
 
 
 # @title Data retrieval and loading
@@ -48,7 +48,7 @@ if not os.path.isfile(fname):
                 fid.write(r.content)
 
 
-# In[8]:
+# In[4]:
 
 
 # @title Plotting Functions
@@ -111,7 +111,7 @@ def plot_example_activations(stimuli, act, channels=[0]):
     ax.set_title('activation\n strength')
 
 
-# In[9]:
+# In[5]:
 
 
 # @title Helper Functions

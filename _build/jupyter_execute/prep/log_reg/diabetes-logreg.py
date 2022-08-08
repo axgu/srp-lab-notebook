@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 
 # ## Helper Functions
 
-# In[2]:
+# In[260]:
 
 
 # Cost Function
@@ -24,7 +24,7 @@ def cost(X, Y, W):
     return J
 
 
-# In[3]:
+# In[261]:
 
 
 def gradient(X, Y, W):
@@ -34,7 +34,7 @@ def gradient(X, Y, W):
     return grad
 
 
-# In[4]:
+# In[262]:
 
 
 # Dataset from: https://www.kaggle.com/datasets/kandij/diabetes-dataset
@@ -47,7 +47,7 @@ def createData(fName):
     return X, Y
 
 
-# In[5]:
+# In[263]:
 
 
 def splitData(split, cols, filename):
@@ -68,7 +68,7 @@ def splitData(split, cols, filename):
     return X_train, X_test, Y_train, Y_test
 
 
-# In[6]:
+# In[264]:
 
 
 def descent(X_train, Y_train, lr = 0.001):
@@ -102,7 +102,7 @@ def descent(X_train, Y_train, lr = 0.001):
     return weights
 
 
-# In[7]:
+# In[265]:
 
 
 def accuracy(X, Y, W):
@@ -113,7 +113,7 @@ def accuracy(X, Y, W):
     return acc
 
 
-# In[8]:
+# In[266]:
 
 
 def scatterplot(X_test, Y_test, W, feature1, feature2):
@@ -148,7 +148,7 @@ def scatterplot(X_test, Y_test, W, feature1, feature2):
 # ## Model Creation
 # ### 8-dimensional model
 
-# In[9]:
+# In[267]:
 
 
 filename = "diabetes2.csv"
@@ -161,7 +161,7 @@ print("Testing Accuracy: ", accuracy(X_test, Y_test, W))
 
 # ### 6-dimensional model
 
-# In[10]:
+# In[268]:
 
 
 X_train, X_test, Y_train, Y_test = splitData(sr, (0,1,2,5,6,7), filename)
@@ -185,7 +185,7 @@ plt.xlabel("Input Features")
 
 # ### Permutation Test
 
-# In[11]:
+# In[ ]:
 
 
 # Shuffle each column of X_test to create permutation
@@ -200,7 +200,7 @@ def create_permutation(X):
     return new_X
 
 
-# In[12]:
+# In[ ]:
 
 
 # Find p value
@@ -213,7 +213,7 @@ def findP(t, arr):
     return p
 
 
-# In[13]:
+# In[ ]:
 
 
 # Take 10000 resamples
@@ -233,7 +233,7 @@ p_val = findP(test_acc, acc)
 print(p_val)
 
 
-# In[14]:
+# In[ ]:
 
 
 n, bins, patches = plt.hist(acc, bins='auto', color='#0504aa', rwidth=0.9)
@@ -253,7 +253,7 @@ plt.show()
 
 # ### Glucose Comparison
 
-# In[15]:
+# In[269]:
 
 
 # Glucose, BMI
@@ -264,7 +264,7 @@ print("Test Accuracy: ", accuracy(X_test, Y_test, W))
 scatterplot(X_test, Y_test, W, "Glucose", "BMI")
 
 
-# In[16]:
+# In[270]:
 
 
 # Glucose, Pregnancies
@@ -275,7 +275,7 @@ print("Test Accuracy: ", accuracy(X_test, Y_test, W))
 scatterplot(X_test, Y_test, W, "Glucose", "Pregnancies")
 
 
-# In[17]:
+# In[271]:
 
 
 # Glucose, DPF
@@ -286,7 +286,7 @@ print("Test Accuracy: ", accuracy(X_test, Y_test, W))
 scatterplot(X_test, Y_test, W, "Glucose", "Diabetes Pedigree Function")
 
 
-# In[18]:
+# In[272]:
 
 
 # BMI, Pregnancies
