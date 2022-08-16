@@ -223,7 +223,7 @@ Files:
 
 Synopsis: I will continue analyzing why my attention model has such a high performance with permuted samples.
 
-Data: 
+Data: I met with my mentors briefly to discuss possible issues with my attention model. I also tried to determine the issue with my attention encoder decoder architecture.
 
 Files:
 * [RNN Permutation Test Code (.py)](./hcp_data/rnn_perm_test.py)
@@ -294,5 +294,40 @@ Files:
 * [Feedforward Attention](./hcp_data/ff_attention.ipynb)
 
 *5:30 pm, 532 minutes*
+
+---
+
+**Feedforward with Attention Summary**
+
+*08/05/2022, 9:00 am*
+
+
+Synopsis: I will continue training the feedforward/attention architecture and evaluate its performance.
+
+Data: I summarized work with the feedforward attention architecture, including documenting the math for the attention mechanism and summarizing parts of the code written. 
+
+Files:
+* [Feedforward Attention Summary](./hcp_data/ff_sattention_summary.md)
+* [Feedforward Attention](./hcp_data/ff_attention.ipynb)
+
+*3:30 pm, 390 minutes*
+
+---
+
+**Feedforward Wrap-Up**
+
+*08/08/2022, 8:40 am*
+
+
+Synopsis: I will wrap up work with the feedforward network and feedforward attention model.
+
+Data: I ran permutation tests on the model fitted at each time point in the feedforward neural network. I also wrote another program to perform logistic regression in a similar manner, by considering data from each time step as a separate classification problem. This model was trained and tested on HCP data and fed random feature values. Then, I retrained the feedforward attention model at a smaller learning rate with more epochs. I also sent Ms. Bosse and email updating my progress.
+
+Files:
+* [Feedforward Neural Network](./hcp_data/ff.ipynb)
+* [Logistic Regression](./hcp_data/logistic_regression.ipynb)
+* [Feedforward Attention](./hcp_data/ff_attention.ipynb)
+
+*3:40 pm, 420 minutes*
 
 ---

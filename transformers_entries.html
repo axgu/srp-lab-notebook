@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Recurrent Neural Network Notes &#8212; My Project</title>
+    <title>Transformers &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,12 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="hcp_data/lstm-book.html" />
-    <link rel="prev" title="Feedforward Neural Network" href="hcp_data/ff.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -232,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
   Neural Networks
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hcp_data/ff_summary.html">
    Feedforward Summary
@@ -250,11 +246,11 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="recurrent_nn.html">
    Recurrent Neural Network Notes
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
@@ -376,7 +372,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/recurrent_nn.md"
+        <a href="_sources/transformers_entries.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -413,144 +409,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualization">
-   Visualization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#backpropagation-through-time-bptt">
-   Backpropagation through Time (BPTT)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vanishing-exploding-gradients-problem">
-   Vanishing/Exploding Gradients Problem
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gated-recurrent-units-grus">
-   Gated Recurrent Units (GRUs)
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#update-gate">
-     Update gate
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reset-gate">
-     Reset gate
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#current-memory-content">
-     Current memory content
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#final-memory-at-current-time-step">
-     Final memory at current time step
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#resources">
-   Resources
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Recurrent Neural Network Notes</h1>
+                <h1>Transformers</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualization">
-   Visualization
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#backpropagation-through-time-bptt">
-   Backpropagation through Time (BPTT)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vanishing-exploding-gradients-problem">
-   Vanishing/Exploding Gradients Problem
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gated-recurrent-units-grus">
-   Gated Recurrent Units (GRUs)
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#update-gate">
-     Update gate
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reset-gate">
-     Reset gate
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#current-memory-content">
-     Current memory content
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#final-memory-at-current-time-step">
-     Final memory at current time step
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#resources">
-   Resources
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -558,90 +433,58 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="recurrent-neural-network-notes">
-<h1>Recurrent Neural Network Notes<a class="headerlink" href="#recurrent-neural-network-notes" title="Permalink to this headline">#</a></h1>
-<p>In RNNs, hidden layers connect back to themselves, so states of hidden layers at one time point can be used as input to the hidden layers at the next time point. As a result, RNNs have a memory, which allows them to store information about past computations.</p>
-<p>RNNs are recurrent because they perform same computation (weights, biases) for every element in the input sequence.</p>
-<section id="visualization">
-<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">#</a></h2>
-<p>At time point t of an RNN:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-o^{t} = f(h^{t}; \theta) \\
-h^{t} = g(h^{t-1}, x^{t}; \theta),
-\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(o^{t}\)</span> is the output of the RNN at time point <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(x^{5}\)</span> is the input to the RNN at time <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(h^{t}\)</span> is the state of the hidden layers at time <span class="math notranslate nohighlight">\(t\)</span>. Parameters <span class="math notranslate nohighlight">\(\theta\)</span>, the weights and biases for the network, remain the same at all time points.</p>
-<p>A graphical model can also be used to illustrate the relationship between variables in an RNN:</p>
-<center><img src="https://ds055uzetaobb.cloudfront.net/brioche/uploads/1Ly6D30GeF-rnn.png?width=100"></center>
-<p>This model can also be unrolled or unfolded by expanding the computation graph over time. Slices, or states of the entire RNN, are connected at each time point <span class="math notranslate nohighlight">\(t\)</span> similar to layers in a feedforward nerual network. However, the size of an unfolded RNN depends on the size of its input and output.</p>
-<center><img src="https://ds055uzetaobb.cloudfront.net/brioche/uploads/fRVnZm2yoe-rnn_unfolded.png?width=200"></center>
-</section>
-<section id="backpropagation-through-time-bptt">
-<h2>Backpropagation through Time (BPTT)<a class="headerlink" href="#backpropagation-through-time-bptt" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="transformers">
+<h1>Transformers<a class="headerlink" href="#transformers" title="Permalink to this headline">#</a></h1>
+<p><strong>Transformers</strong></p>
+<p><em>08/10/2022, 8:40 am</em></p>
+<p>Synopsis: I will learn about self attention and the transformer architecture.</p>
+<p>Data:</p>
+<p>Files:</p>
 <ul class="simple">
-<li><p>Backpropagation algorithm applied to unrolled RNN</p></li>
-<li></li>
+<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
 </ul>
-</section>
-<section id="vanishing-exploding-gradients-problem">
-<h2>Vanishing/Exploding Gradients Problem<a class="headerlink" href="#vanishing-exploding-gradients-problem" title="Permalink to this headline">#</a></h2>
+<p><em>5:10 am, 510 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Simple Transformer Implementation</strong></p>
+<p><em>08/11/2022, 8:55 am</em></p>
+<p>Synopsis: I will implement a basic transformer architecture.</p>
+<p>Data:</p>
+<p>Files:</p>
 <ul class="simple">
-<li><p>RNNs have issues modeling long-term dependencies (i.e. relationships between elements in the sequence separated by large period of time)</p></li>
-<li><p>Problem arises from the gradient at early time slices being the product of many partial derivatives</p>
-<ul>
-<li><p>Gradients will <strong>vanish</strong>, or become very small, when the partial derivatives <span class="math notranslate nohighlight">\(&lt; 1\)</span>; learning will become very slow</p></li>
-<li><p>They will <strong>explode</strong>, or become very large, when the partial derivates are <span class="math notranslate nohighlight">\(&gt; 1\)</span>; learning will become unstable</p></li>
+<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
 </ul>
-</li>
-</ul>
-</section>
-<section id="gated-recurrent-units-grus">
-<h2>Gated Recurrent Units (GRUs)<a class="headerlink" href="#gated-recurrent-units-grus" title="Permalink to this headline">#</a></h2>
-<p>GRUs are a form of RNN architecture that solves the vanishing gradient problem. It has an update gate and a reset gate to decide what information should be passed to the output. Both of these gates can be trained to keep information for long time periods.</p>
-<section id="update-gate">
-<h3>Update gate<a class="headerlink" href="#update-gate" title="Permalink to this headline">#</a></h3>
-<p>The update gate determines the information from previous time steps that is passed along to future time steps. It is updated for time step <span class="math notranslate nohighlight">\(t\)</span> using:</p>
-<div class="math notranslate nohighlight">
-\[
-z_{t} = \sigma(W^{(z)}x_{t} + U^{(z)}h_{t-1}),
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_{t}\)</span> is the input at <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(W(z)\)</span> is the input weights, <span class="math notranslate nohighlight">\(h_{t-1}\)</span> is the previous hidden state, and <span class="math notranslate nohighlight">\(U(z)\)</span> is the hidden state weights.</p>
-</section>
-<section id="reset-gate">
-<h3>Reset gate<a class="headerlink" href="#reset-gate" title="Permalink to this headline">#</a></h3>
-<p>The reset gate decides how much of the past information should be forgotten. It is calculated for time step <span class="math notranslate nohighlight">\(t\)</span> using:</p>
-<div class="math notranslate nohighlight">
-\[
-r_{t} = \sigma(W^{(r)}x_{t} + U^{(r)}h_{t-1})
-\]</div>
-</section>
-<section id="current-memory-content">
-<h3>Current memory content<a class="headerlink" href="#current-memory-content" title="Permalink to this headline">#</a></h3>
-<p>A new memory content is calculated using the reset gate:</p>
-<div class="math notranslate nohighlight">
-\[
-h'_{t} = \tanh(Wx_{t} + r_{t}\odot Uh_{t-1})
-\]</div>
-<p>The <span class="math notranslate nohighlight">\(\odot\)</span> operator represents the Hadamard (element-wise) product.</p>
-</section>
-<section id="final-memory-at-current-time-step">
-<h3>Final memory at current time step<a class="headerlink" href="#final-memory-at-current-time-step" title="Permalink to this headline">#</a></h3>
-<p>The network calculates <span class="math notranslate nohighlight">\(h_{t}\)</span>, which holds information for the current unit, using the update gate. It is updated using:</p>
-<div class="math notranslate nohighlight">
-\[
-h_{t} = z_{t} \odot h_{t-1} + (1-z_{t}) \odot h'_{t}
-\]</div>
-</section>
-</section>
-<section id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
+<p><em>3:28 am, 393 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Transformers with Position Encoding</strong></p>
+<p><em>08/12/2022, 8:35 am</em></p>
+<p>Synopsis: I will add position encoding to my transformer architecture.</p>
+<p>Data:</p>
+<p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://brilliant.org/wiki/recurrent-neural-network/">Recurrent Neural Networks from Brilliant</a></p></li>
-<li><p><a class="reference external" href="https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be">GRUs from Towards Data Science</a></p></li>
+<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
 </ul>
-</section>
-<div class="toctree-wrapper compound">
-</div>
+<p><em>3:25 am, 410 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Transformers Training and Evaluation</strong></p>
+<p><em>08/15/2022, 8:45 am</em></p>
+<p>Synopsis: I will add position encoding to my transformer architecture.</p>
+<p>Data:</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
+</ul>
+<p><em>4:55 am, 490 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Transformers Summary</strong></p>
+<p><em>08/16/2022, 8:40 am</em></p>
+<p>Synopsis: I will summarize the work done with transformers.</p>
+<p>Data:</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
+</ul>
+<p><em>4:55 am, 490 minutes</em></p>
+<hr class="docutils" />
 </section>
 
     <script type="text/x-thebe-config">
@@ -671,20 +514,6 @@ h_{t} = z_{t} \odot h_{t-1} + (1-z_{t}) \odot h'_{t}
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="hcp_data/ff.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Feedforward Neural Network</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="hcp_data/lstm-book.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
