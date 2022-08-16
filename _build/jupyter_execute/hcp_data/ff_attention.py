@@ -109,10 +109,10 @@ class FFModel:
         best_loss = avg_loss
         torch.save({"ff_attention": self.model.state_dict(), "ff_att_optimizer": self.optimizer.state_dict()}, 'ff-attention-model.pt')
 
-      print("Epoch " + str(i + 1) + "/" + str(n_epochs))
-      print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
-      print("Training loss: " + str(loss.item()))
-      print()
+      # print("Epoch " + str(i + 1) + "/" + str(n_epochs))
+      # print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
+      # print("Training loss: " + str(loss.item()))
+      # print()
 
       train_loss.append(avg_loss)
         
@@ -143,25 +143,30 @@ class FFModel:
       correct, total = accuracy(y.cpu().numpy(), final.cpu().numpy(), correct, total)
       ff_accuracy = correct / total
     return ff_accuracy, loss
-
-
-# In[4]:
-
-
-def random_samples(X, num_seq=90, pad=0.):
+  
+  def random_samples(self, X, pad=0.):
     X_random = []
     X_lens = find_lens(X)
     for i in range(X.shape[0]):
-        X_batch = np.random.normal(size=(X_lens[i], X.shape[-1]))
-        if X_lens[i] < num_seq:
-            X_pad = np.array([[pad]*300]*(num_seq - X_lens[i]))
-            X_batch = np.append(X_batch, X_pad, axis=0)
-        X_random.append(X_batch)
+      X_batch = np.random.normal(size=(X_lens[i], X.shape[-1]))
+      if X_lens[i] < self.seq_len:
+        X_pad = np.array([[pad]*X.shape[-1]]*(self.seq_len - X_lens[i]))
+        X_batch = np.append(X_batch, X_pad, axis=0)
+      X_random.append(X_batch)
     X_random = np.array(X_random)
     return X_random
+    
+  def rand_test(self, X, y_test, n_samples=20, percentile=90):
+    rand_acc_array = []
+    for sample in range(n_samples):
+      X_random = torch.from_numpy(self.random_samples(X)).float().to(device)
+      gru_rand_acc, _ = self.eval(X_random, y_test)
+      rand_acc_array.append(gru_rand_acc)
+    plot = np.percentile(np.sort(np.array(rand_acc_array), axis=0), percentile, axis=0)
+    return plot
 
 
-# In[5]:
+# In[4]:
 
 
 with open('HCP_movie_watching.pkl','rb') as f:
@@ -177,7 +182,7 @@ X_test = torch.from_numpy(X_t).float().to(device)
 y_test = torch.from_numpy(y_t).float().to(device)
 
 
-# In[12]:
+# In[20]:
 
 
 EPOCHS = 15
@@ -192,6 +197,11 @@ loss_fn = nn.CrossEntropyLoss()
 optimizer = optim.Adam(ff_attention.parameters(), lr=learning_rate)
 
 model = FFModel(ff_attention, loss_fn, optimizer, seq_len)
+
+
+# In[ ]:
+
+
 train_loss = model.train(train_loader, n_epochs=EPOCHS)
 
 
@@ -204,14 +214,7 @@ ff_accuracy, loss = model.eval(X_test, y_test)
 # In[14]:
 
 
-n_samples = 20
-percentile = 90
-rand_acc_array = []
-for sample in range(n_samples):
-    X_random = torch.from_numpy(random_samples(X_t)).float().to(device)
-    ff_rand_acc, _ = model.eval(X_random, y_test)
-    rand_acc_array.append(ff_rand_acc)
-plot = np.percentile(np.sort(np.array(rand_acc_array), axis=0), percentile, axis=0)
+ff_rand_acc = model.rand_test(X_test, y_test)
 
 
 # In[15]:

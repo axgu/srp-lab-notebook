@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Recurrent Neural Network Notes" href="../recurrent_nn.html" />
+    <link rel="next" title="GRU Attention Model" href="gru_attention.html" />
     <link rel="prev" title="Feedforward Attention Summary" href="ff_attention_summary.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -230,38 +230,35 @@ const thebe_selector_output = ".output, .cell_output"
   Neural Networks
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="ff_summary.html">
    Feedforward Summary
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ff.html">
+     Feedforward Neural Network
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ff.html">
-   Feedforward Neural Network
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ff_attention_summary.html">
-   Feedforward Attention Summary
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Feedforward with Attention
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  RNN
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../recurrent_nn.html">
    Recurrent Neural Network Notes
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -269,10 +266,39 @@ const thebe_selector_output = ".output, .cell_output"
   Attention
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="attention_methods.html">
    Attention Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ff_attention_summary.html">
+   Feedforward Attention Summary
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Feedforward with Attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gru_attention.html">
+   GRU Attention Model
   </a>
  </li>
 </ul>
@@ -547,10 +573,10 @@ title="Print to PDF"
         <span class="n">best_loss</span> <span class="o">=</span> <span class="n">avg_loss</span>
         <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">({</span><span class="s2">&quot;ff_attention&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;ff_att_optimizer&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()},</span> <span class="s1">&#39;ff-attention-model.pt&#39;</span><span class="p">)</span>
 
-      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoch &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">))</span>
-      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">epoch_mins</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; minutes &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">epoch_secs</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; seconds&quot;</span><span class="p">)</span>
-      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training loss: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
-      <span class="nb">print</span><span class="p">()</span>
+      <span class="c1"># print(&quot;Epoch &quot; + str(i + 1) + &quot;/&quot; + str(n_epochs))</span>
+      <span class="c1"># print(&quot;Time: &quot; + str(epoch_mins) + &quot; minutes &quot; + str(epoch_secs) + &quot; seconds&quot;)</span>
+      <span class="c1"># print(&quot;Training loss: &quot; + str(loss.item()))</span>
+      <span class="c1"># print()</span>
 
       <span class="n">train_loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avg_loss</span><span class="p">)</span>
         
@@ -581,23 +607,27 @@ title="Print to PDF"
       <span class="n">correct</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">final</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">correct</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
       <span class="n">ff_accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span>
     <span class="k">return</span> <span class="n">ff_accuracy</span><span class="p">,</span> <span class="n">loss</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_samples</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">num_seq</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+  
+  <span class="k">def</span> <span class="nf">random_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
     <span class="n">X_random</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">X_lens</span> <span class="o">=</span> <span class="n">find_lens</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="n">X_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">X_lens</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-        <span class="k">if</span> <span class="n">X_lens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">num_seq</span><span class="p">:</span>
-            <span class="n">X_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pad</span><span class="p">]</span><span class="o">*</span><span class="mi">300</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">num_seq</span> <span class="o">-</span> <span class="n">X_lens</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-            <span class="n">X_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_batch</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">X_random</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span>
+      <span class="n">X_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">X_lens</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+      <span class="k">if</span> <span class="n">X_lens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span><span class="p">:</span>
+        <span class="n">X_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pad</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span> <span class="o">-</span> <span class="n">X_lens</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">X_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_batch</span><span class="p">,</span> <span class="n">X_pad</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+      <span class="n">X_random</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span>
     <span class="n">X_random</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_random</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">X_random</span>
+    
+  <span class="k">def</span> <span class="nf">rand_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+    <span class="n">rand_acc_array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
+      <span class="n">X_random</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_samples</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+      <span class="n">gru_rand_acc</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X_random</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+      <span class="n">rand_acc_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gru_rand_acc</span><span class="p">)</span>
+    <span class="n">plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rand_acc_array</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">percentile</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plot</span>
 </pre></div>
 </div>
 </div>
@@ -633,70 +663,13 @@ title="Print to PDF"
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">ff_attention</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">FFModel</span><span class="p">(</span><span class="n">ff_attention</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">)</span>
-<span class="n">train_loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="n">EPOCHS</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/15
-Time: 27 minutes 54 seconds
-Training loss: 13.135824203491211
-
-Epoch 2/15
-Time: 21 minutes 19 seconds
-Training loss: 8.719453811645508
-
-Epoch 3/15
-Time: 21 minutes 12 seconds
-Training loss: 3.7043213844299316
-
-Epoch 4/15
-Time: 21 minutes 28 seconds
-Training loss: 0.13815240561962128
-
-Epoch 5/15
-Time: 21 minutes 36 seconds
-Training loss: 7.688119888305664
-
-Epoch 6/15
-Time: 20 minutes 56 seconds
-Training loss: 0.00010762186138890684
-
-Epoch 7/15
-Time: 20 minutes 54 seconds
-Training loss: 1.4533601999282837
-
-Epoch 8/15
-Time: 19 minutes 32 seconds
-Training loss: 2.0200395584106445
-
-Epoch 9/15
-Time: 19 minutes 38 seconds
-Training loss: 1.166556477546692
-
-Epoch 10/15
-Time: 19 minutes 32 seconds
-Training loss: 3.0988223552703857
-
-Epoch 11/15
-Time: 19 minutes 39 seconds
-Training loss: 1.6879284381866455
-
-Epoch 12/15
-Time: 19 minutes 45 seconds
-Training loss: 0.13247111439704895
-
-Epoch 13/15
-Time: 25 minutes 54 seconds
-Training loss: 0.02154727280139923
-
-Epoch 14/15
-Time: 27 minutes 4 seconds
-Training loss: 6.2802653312683105
-
-Epoch 15/15
-Time: 30 minutes 43 seconds
-Training loss: 6.4598307609558105
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="n">EPOCHS</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -710,14 +683,7 @@ Training loss: 6.4598307609558105
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">percentile</span> <span class="o">=</span> <span class="mi">90</span>
-<span class="n">rand_acc_array</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
-    <span class="n">X_random</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">random_samples</span><span class="p">(</span><span class="n">X_t</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    <span class="n">ff_rand_acc</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X_random</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-    <span class="n">rand_acc_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ff_rand_acc</span><span class="p">)</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rand_acc_array</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">percentile</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff_rand_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">rand_test</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -777,10 +743,10 @@ Training loss: 6.4598307609558105
             <p class="prev-next-title">Feedforward Attention Summary</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../recurrent_nn.html" title="next page">
+    <a class='right-next' id="next-link" href="gru_attention.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Recurrent Neural Network Notes</p>
+        <p class="prev-next-title">GRU Attention Model</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

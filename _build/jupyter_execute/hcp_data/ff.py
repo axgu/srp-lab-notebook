@@ -30,8 +30,8 @@ class FF(nn.Module):
     self.out_layer = nn.Linear(n_hidden, n_outputs)
 
   def forward(self, x):
-    y = self.in_layer(x)
-    y = self.out_layer(y)
+    y = torch.tanh(self.in_layer(x))
+    y = torch.relu(self.out_layer(y))
 
     return y
 
@@ -141,7 +141,7 @@ X_test = torch.from_numpy(X_t).float().to(device).permute(1, 0, 2)
 y_test = torch.from_numpy(y_t).float().to(device).permute(1, 0, 2)
 
 
-# In[22]:
+# In[42]:
 
 
 EPOCHS = 500
@@ -160,7 +160,7 @@ model = Model(ff, loss_fn, optimizer, n_input, n_hidden, n_output)
 ff_accuracy, rand_acc = model.train(X_train, y_train, X_test, y_test, rand_test=True)
 
 
-# In[24]:
+# In[44]:
 
 
 xAx = [i for i in range(0,90)]

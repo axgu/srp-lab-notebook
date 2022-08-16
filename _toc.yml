@@ -17,6 +17,7 @@ parts:
     sections:
     - file: prep/log_reg/diabetes-logreg
     - file: prep/log_reg/diabetes-summary
+
 - caption: HCP Dataset
   chapters:
   - file: hcp_data/hcp_summary
@@ -27,18 +28,28 @@ parts:
     - file: hcp_data/hcp_logreg_indivtime
     - file: hcp_data/hcp_logreg_permtest
   - file: multiple_inference
+
 - caption: Neural Networks
   chapters:
   - file: hcp_data/ff_summary
-  - file: hcp_data/ff
-  - file: hcp_data/ff_attention_summary
-  - file: hcp_data/ff_attention
-- caption: RNN
-  chapters:
+    sections:
+    - file: hcp_data/ff
   - file: recurrent_nn
-  - file: hcp_data/lstm-book
+    sections:
+    - file: hcp_data/lstm-book
+
 - caption: Attention
   chapters:
   - file: hcp_data/attention_methods
-  - file: hcp_data/attention-book
+    sections:
+    - file: hcp_data/attention-book
+  - file: hcp_data/ff_attention_summary
+    sections:
+    - file: hcp_data/ff_attention
+  - file: hcp_data/gru_attention
+  - file: hcp_data/transformers_summary
+    sections:
+    - file: hcp_data/transformer
+    - file: hcp_data/transformer_multihead
+    - file: hcp_data/transformer_position
   

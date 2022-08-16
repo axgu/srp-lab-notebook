@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Transformers Summary &#8212; My Project</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Single-head and Single-layer" href="transformer.html" />
+    <link rel="prev" title="GRU Attention Model" href="gru_attention.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Prep Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../prep/deep_learning/deep_learning.html">
+   Deep Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_intro_notes.html">
+     Intro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial1.html">
+     Tutorial 1: Decoding Neural Responses
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial1_code.html">
+     Tutorial 1 Code
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/deep_learning/dl_tutorial2.html">
+     Tutorial 2: Convolutional Neural Networks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../prep/log_reg/logistic_regression.html">
+   Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/log_reg/diabetes-logreg.html">
+     Diabetes Prediction with Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../prep/log_reg/diabetes-summary.html">
+     Diabetes Prediction Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  HCP Dataset
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_summary.html">
+   HCP Dataset
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data.html">
+     Visualization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_logreg.html">
+   HCP Logistic Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_indivtime.html">
+     Logistic Regression - ROI Features
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_logreg_permtest.html">
+     Permutation Test
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple_inference.html">
+   Multiple Inference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ff_summary.html">
+   Feedforward Summary
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ff.html">
+     Feedforward Neural Network
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../recurrent_nn.html">
+   Recurrent Neural Network Notes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Attention
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="attention_methods.html">
+   Attention Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ff_attention_summary.html">
+   Feedforward Attention Summary
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ff_attention.html">
+     Feedforward with Attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gru_attention.html">
+   GRU Attention Model
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   Transformers Summary
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformer.html">
+     Single-head and Single-layer
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformer_multihead.html">
+     Multi-head and Multilayer
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformer_position.html">
+     Position Encoding
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/hcp_data/transformers_summary.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-creation">
+   Dataset Creation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformer-architecture">
+   Transformer Architecture
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#self-attention">
+     Self-Attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-and-evaluation">
+   Training and Evaluation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-inputs-testing">
+     Random Inputs Testing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-head-attention">
+   Multi-Head Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#position-encoding">
+   Position Encoding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Transformers Summary</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-creation">
+   Dataset Creation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformer-architecture">
+   Transformer Architecture
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#self-attention">
+     Self-Attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-and-evaluation">
+   Training and Evaluation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-inputs-testing">
+     Random Inputs Testing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-head-attention">
+   Multi-Head Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#position-encoding">
+   Position Encoding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="transformers-summary">
+<h1>Transformers Summary<a class="headerlink" href="#transformers-summary" title="Permalink to this headline">#</a></h1>
+<p>A transformer was applied to the HCP dataset for 15-way time series classification of movie clips.</p>
+<p>Dimensions of the data were used for the following purposes:</p>
+<ul class="simple">
+<li><p>Movie name - apply as label for classification</p></li>
+<li><p>ROI - use as features for classification</p></li>
+<li><p>Subject - split into training and testing sets</p></li>
+<li><p>Time point - categorize model results as time series of accuracies</p></li>
+</ul>
+<section id="dataset-creation">
+<h2>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Permalink to this headline">#</a></h2>
+<p>The dataset was transformed from a dictionary with movie clip names as keys and arrays of fMRI data as values to 3-dimensional arrays of X- and Y- train and test sets. Only the first 90 seconds, equivalent to the first 90 time points, were used.</p>
+<p>The data was split with 100 participants for training and 76 participants for testing. A list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data and movie labels stored in a testing dictionary. The same was done for participants not selected in the test set, except with a training dictionary. Dimensions for the values of these dictionaries were the same as the in the original dataset, except for ‘testretest’ cases, different runs from the same subject were also compiled as separate batches, converting 4 dimensions to 3.</p>
+<p>For each dictionary, 3-dimensional arrays were created containing data across all of the first 90 time points. ROI input data was stored in an X_train or X_test array while movie labels were stored in a y_train or y_test array. ROI feature data was normalized with z-scores, and movie clip labels were one-hot encoded for each time step. Batches with less than 90 time steps were padded with 0.0. Thus, the X input sets had dimensions (batches, time steps = 90, features = 300) and the y label sets had dimensions (batches, time steps = 90, movie clips = 15).</p>
+<p>The training datasets and testing datasets were wrapped into tensors to input into the model.</p>
+</section>
+<section id="transformer-architecture">
+<h2>Transformer Architecture<a class="headerlink" href="#transformer-architecture" title="Permalink to this headline">#</a></h2>
+<p>A transformer encoder block, consisting of a self-attention layer, concatenation and layer normalization, a feedforward layer, and concatenation and layer normalization, was implemented in PyTorch. The structure of the transformer encoder block is depicted below.</p>
+<p><img alt="" src="../_images/transformer-block.jpg" /></p>
+<p>The initial model was created with 1 attention head and 1 layer of the transformer encoder block.</p>
+<section id="self-attention">
+<h3>Self-Attention<a class="headerlink" href="#self-attention" title="Permalink to this headline">#</a></h3>
+<p>Self-attention is used to determine how two input vectors are related, based on the question at hand (i.e. classification). The operation is performed by taking in an n-dimensional <span class="math notranslate nohighlight">\(x_{i}\)</span> vector and outputting an n-dimensional <span class="math notranslate nohighlight">\(y_{i}\)</span> vector. In this case, <span class="math notranslate nohighlight">\(n=300\)</span>, the number of features, and <span class="math notranslate nohighlight">\(1 \le i \le 90\)</span>, the sequence length. The self-attention mechanism does not consider sequence order, as it performs a set-to-set transformation.</p>
+<p>The input vector <span class="math notranslate nohighlight">\(x_{i}\)</span> is utilized for three purposes in the self-attention operation:</p>
+<ol class="simple">
+<li><p>Query - compared to other vectors to establish weights for <span class="math notranslate nohighlight">\(y_{i}\)</span></p></li>
+<li><p>Key - compared to other vectors to establish weights for the output of vector <span class="math notranslate nohighlight">\(y_{j}\)</span>, where <span class="math notranslate nohighlight">\(j\)</span> is a different time point</p></li>
+<li><p>Value - used as part of a weighted sum to calculate the output vector</p></li>
+</ol>
+<p>The <span class="math notranslate nohighlight">\(x_{i}\)</span> vector is transformed using weight matrices <span class="math notranslate nohighlight">\(\boldsymbol W_{q}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol W_{k}\)</span>, and <span class="math notranslate nohighlight">\(\boldsymbol W_{v}\)</span> to produce vectors <span class="math notranslate nohighlight">\(q_{i}\)</span>, <span class="math notranslate nohighlight">\(k_{i}\)</span>, and <span class="math notranslate nohighlight">\(v_{i}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+q_{i} = \boldsymbol W_{q} x_{i} \hspace{1cm}
+k_{i} = \boldsymbol W_{k} x_{i} \hspace{1cm}
+v_{i} = \boldsymbol W_{v} x_{i}
+\]</div>
+<p>Output vector <span class="math notranslate nohighlight">\(y_{i}\)</span> is calculated using the following:</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i} = \Sigma _{j=1} ^{k} w_{ij} x_{j}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(w_{ij}\)</span> is not a parameter of the neural network, but determined from a dot product operation:</p>
+<div class="math notranslate nohighlight">
+\[
+w'_{ij} = q_{i} ^{T} k_{j}\newline
+w_{ij} = softmax(w'_{ij})
+\]</div>
+<p>The self-attention operation is performed as part of the PyTorch TransformerEncoder class.</p>
+</section>
+</section>
+<section id="training-and-evaluation">
+<h2>Training and Evaluation<a class="headerlink" href="#training-and-evaluation" title="Permalink to this headline">#</a></h2>
+<p>The model was fitted using the X_train set as input and the y_train set as output across all considered time points. The Adam optimizer and cross-entropy loss function were used in training. Learning rate was set to 0.001 and epochs were set to 50 for the single-head, single-layer transformer. Padded values were not masked.</p>
+<p>The model was then evaluated with the testing data at all 90 time points. Accuracy for most time steps was around 83%. Classification accuracy at each time point was plotted.</p>
+<section id="random-inputs-testing">
+<h3>Random Inputs Testing<a class="headerlink" href="#random-inputs-testing" title="Permalink to this headline">#</a></h3>
+<p>Random inputs based on the normal distribution were generated 20 times to fill the X_test dataset of dimensions (batches, time steps = 90, features = 300). The fitted transformer model was applied to each of the randomly generated datasets, and classification accuracy was calculated. The accuracy obtained from testing the model on the original dataset and the 90th percentile of accuracies obtained from random inputs were compared as time series:</p>
+<p><img alt="" src="../_images/transformer_single_accuracy.png" /></p>
+</section>
+</section>
+<section id="multi-head-attention">
+<h2>Multi-Head Attention<a class="headerlink" href="#multi-head-attention" title="Permalink to this headline">#</a></h2>
+<p>Multi-head attention was used to represent various relationships between values at different time points. In multi-head self-attention, several self-attention operations are performed in parallel, each with its query, key, and value transforms. The output vectors from these attention heads are concatenated and passed through a linear layer to reduce dimensions to the initial input size. To increase efficiency, each 300-dimensional feature input vector is split evenly among the heads.</p>
+<p>A transformer model with 4 attention heads and 6 layers of transformer encoder blocks was built, trained, and evaluated with test data and random inputs:</p>
+<p><img alt="" src="../_images/transformer_multi_accuracy.png" /></p>
+</section>
+<section id="position-encoding">
+<h2>Position Encoding<a class="headerlink" href="#position-encoding" title="Permalink to this headline">#</a></h2>
+<p>Since the basic self-attention operation treats input data as sets instead of sequences with specific orderings, position encoding was introduced to preserve time order. The position of each 300-dimensional input vector within the time sequence was mapped to a position vector and added to the original input vector for the model to interpret. The function utilized for position encoding was</p>
+<div class="math notranslate nohighlight">
+\[
+PE_{(pos, 2i)} = \sin (\frac {pos} {10000 ^ {2i / d_{model}}})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+PE_{(pos, 2i+1)} = \cos (\frac {pos} {10000 ^ {2i / d_{model}}}).
+\]</div>
+<p>A single-head, single-layer transformer model with position encoding was implemented. Epochs were set to 20 and the learning rate was set to 0.001. Classification accuracies were compared between the two single-head attention models to determine the effect of position encoding.</p>
+<p><img alt="" src="../_images/transformer_single_position.png" /></p>
+<p>A transformer model with 4 attention heads, 6 transformer encoder blocks, and position encoding was also created for comparison with the initial multi-head, multilayer transformer. In training, epochs were set to 50 and the learning rate was set to 0.0005.</p>
+<p><img alt="" src="../_images/transformer_multi_position.png" /></p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://peterbloem.nl/blog/transformers">Transformers from Scratch</a></p></li>
+<li><p><a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a></p></li>
+<li><p><a class="reference external" href="https://deeplearning.neuromatch.io/tutorials/W3D1_AttentionAndTransformers/student/W3D1_Tutorial1.html#implement-positionalencoding-function">Attention and Transformers by Neuromatch</a></p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./hcp_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="gru_attention.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">GRU Attention Model</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="transformer.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Single-head and Single-layer</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Anna Gu<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

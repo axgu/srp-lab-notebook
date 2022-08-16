@@ -229,37 +229,34 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="hcp_data/ff_summary.html">
    Feedforward Summary
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_data/ff.html">
+     Feedforward Neural Network
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hcp_data/ff.html">
-   Feedforward Neural Network
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hcp_data/ff_attention_summary.html">
-   Feedforward Attention Summary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hcp_data/ff_attention.html">
-   Feedforward with Attention
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  RNN
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="recurrent_nn.html">
    Recurrent Neural Network Notes
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -268,9 +265,38 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="hcp_data/attention_methods.html">
    Attention Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hcp_data/ff_attention_summary.html">
+   Feedforward Attention Summary
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hcp_data/ff_attention.html">
+     Feedforward with Attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hcp_data/gru_attention.html">
+   GRU Attention Model
   </a>
  </li>
 </ul>
@@ -550,7 +576,7 @@ title="Print to PDF"
 <p><strong>Attention Model Summary</strong></p>
 <p><em>07/29/2022, 8:39 am</em></p>
 <p>Synopsis: I will continue analyzing why my attention model has such a high performance with permuted samples.</p>
-<p>Data:</p>
+<p>Data: I met with my mentors briefly to discuss possible issues with my attention model. I also tried to determine the issue with my attention encoder decoder architecture.</p>
 <p>Files:</p>
 <ul class="simple">
 <li><p><span class="xref myst">RNN Permutation Test Code (.py)</span></p></li>
@@ -596,6 +622,29 @@ title="Print to PDF"
 <li><p><a class="reference internal" href="hcp_data/ff_attention.html"><span class="doc std std-doc">Feedforward Attention</span></a></p></li>
 </ul>
 <p><em>5:30 pm, 532 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Feedforward with Attention Summary</strong></p>
+<p><em>08/05/2022, 9:00 am</em></p>
+<p>Synopsis: I will continue training the feedforward/attention architecture and evaluate its performance.</p>
+<p>Data: I summarized work with the feedforward attention architecture, including documenting the math for the attention mechanism and summarizing parts of the code written.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">Feedforward Attention Summary</span></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff_attention.html"><span class="doc std std-doc">Feedforward Attention</span></a></p></li>
+</ul>
+<p><em>3:30 pm, 390 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Feedforward Wrap-Up</strong></p>
+<p><em>08/08/2022, 8:40 am</em></p>
+<p>Synopsis: I will wrap up work with the feedforward network and feedforward attention model.</p>
+<p>Data: I ran permutation tests on the model fitted at each time point in the feedforward neural network. I also wrote another program to perform logistic regression in a similar manner, by considering data from each time step as a separate classification problem. This model was trained and tested on HCP data and fed random feature values. Then, I retrained the feedforward attention model at a smaller learning rate with more epochs. I also sent Ms. Bosse and email updating my progress.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/ff.html"><span class="doc std std-doc">Feedforward Neural Network</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/logistic_regression.html"><span class="doc std std-doc">Logistic Regression</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff_attention.html"><span class="doc std std-doc">Feedforward Attention</span></a></p></li>
+</ul>
+<p><em>3:40 pm, 420 minutes</em></p>
 <hr class="docutils" />
 </section>
 

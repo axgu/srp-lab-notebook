@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Feedforward with Attention" href="ff_attention.html" />
-    <link rel="prev" title="Feedforward Neural Network" href="ff.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="attention-book.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -232,38 +232,35 @@ const thebe_selector_output = ".output, .cell_output"
   Neural Networks
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="ff_summary.html">
    Feedforward Summary
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ff.html">
+     Feedforward Neural Network
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ff.html">
-   Feedforward Neural Network
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Feedforward Attention Summary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ff_attention.html">
-   Feedforward with Attention
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  RNN
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../recurrent_nn.html">
    Recurrent Neural Network Notes
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -271,10 +268,39 @@ const thebe_selector_output = ".output, .cell_output"
   Attention
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="attention_methods.html">
    Attention Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   Feedforward Attention Summary
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ff_attention.html">
+     Feedforward with Attention
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gru_attention.html">
+   GRU Attention Model
   </a>
  </li>
 </ul>
@@ -492,14 +518,14 @@ title="Print to PDF"
 <h2>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Permalink to this headline">#</a></h2>
 <p>The dataset was transformed from a dictionary with movie clip names as keys and arrays of fMRI data as values (see <a class="reference internal" href="hcp_summary.html"><span class="doc std std-doc">summary</span></a>) to 3-dimensional arrays of X- and Y- train and test sets. Only the first 90 seconds, equivalent to the first 90 time points, were used.</p>
 <p>The data was split with 100 participants for training and 76 participants for testing. A list of participants used for the testing data set was randomly generated. Participant numbers within this list had corresponding ROI feature data and movie labels stored in a testing dictionary. The same was done for participants not selected in the test set, except with a training dictionary. Dimensions for the values of these dictionaries were the same as the in the original dataset, except for ‘testretest’ cases, different runs from the same subject were also compiled as separate batches, converting 4 dimensions to 3.</p>
-<p>For each dictionary, 3-dimensional arrays were created containing data across all of the first 90 time points. ROI input data was stored into an X_train or X_test array while movie labels were stored into a y_train or y_test array. ROI feature data was normalized with z-scores, and movie clip labels were one-hot encoded for each time step. Batches with less than 90 time steps were padded with 0.0. Thus, the X input sets had dimensions (batches, time steps = 90, features = 300) and the y label sets had dimensions (batches, time steps = 90, movie clips = 15).</p>
+<p>For each dictionary, 3-dimensional arrays were created containing data across all of the first 90 time points. ROI input data was stored in an X_train or X_test array while movie labels were stored in a y_train or y_test array. ROI feature data was normalized with z-scores, and movie clip labels were one-hot encoded for each time step. Batches with less than 90 time steps were padded with 0.0. Thus, the X input sets had dimensions (batches, time steps = 90, features = 300) and the y label sets had dimensions (batches, time steps = 90, movie clips = 15).</p>
 <p>The training datasets and testing datasets were wrapped into tensors to input into the model.</p>
 </section>
 <section id="feedforward-neural-network">
 <h2>Feedforward Neural Network<a class="headerlink" href="#feedforward-neural-network" title="Permalink to this headline">#</a></h2>
 <p>A feedforward architecture was created using PyTorch. The model consisted of an input layer, a fully connected hidden layer, an attention layer, and another fully connected output layer, as pictured below. The movie corresponding to the index of the maximum value of the 15-dimensional output vector was the predicted label. Padded values were not masked.</p>
 <p><img alt="" src="../_images/ff_neural_network_attention.drawio.png" /></p>
-<p>The model was fitted using the X_train set as input and the y_train set as output across all considered time points. Time points are considered blindly, so the training set consists of 300-dimensional input vectors from all 100 train participants and across all 90 time points considered. The Adam optimizer and cross entropy loss function were used in training. Learning rate was set to 0.01 and epochs were set to 5.</p>
+<p>The model was fitted using the X_train set as input and the y_train set as output across all considered time points. Time points are considered blindly, so the training set consists of 300-dimensional input vectors from all 100 train participants and across all 90 time points considered. The Adam optimizer and cross-entropy loss function were used in training. Learning rate was set to 0.01 and epochs were set to 5.</p>
 <p>The model was then evaluated with the testing data at all 90 time points, and the accuracy was saved. Classification accuracy at each time point was plotted.</p>
 </section>
 <section id="attention">
@@ -527,9 +553,11 @@ c_{i} = \Sigma _{j=1} ^{T} \alpha_{ij} h_{j}
 </section>
 <section id="random-inputs">
 <h2>Random Inputs<a class="headerlink" href="#random-inputs" title="Permalink to this headline">#</a></h2>
-<p>Random inputs based on the normal distribution were generated 20 times to fill the X_test dataset of dimensions (batches, time steps = 90, features = 300). The fitted feedforward attention model was applied on each of the randomly generated datasets, and a classification accuracy was calculated. The accuracy obtained from testing the model on the original dataset and the 90th percentile of accuracies obtained from random inputs were compared as time series:</p>
+<p>Random inputs based on the normal distribution were generated 20 times to fill the X_test dataset of dimensions (batches, time steps = 90, features = 300). The fitted feedforward attention model was applied to each of the randomly generated datasets, and a classification accuracy was calculated. The accuracy obtained from testing the model on the original dataset and the 90th percentile of accuracies obtained from random inputs were compared as time series:</p>
 <p><img alt="" src="../_images/ff_attention_accuracy.png" /></p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -559,11 +587,11 @@ c_{i} = \Sigma _{j=1} ^{T} \alpha_{ij} h_{j}
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="ff.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="attention-book.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Feedforward Neural Network</p>
+            <p class="prev-next-title">&lt;no title&gt;</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="ff_attention.html" title="next page">
