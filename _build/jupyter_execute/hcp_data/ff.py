@@ -141,10 +141,10 @@ X_test = torch.from_numpy(X_t).float().to(device).permute(1, 0, 2)
 y_test = torch.from_numpy(y_t).float().to(device).permute(1, 0, 2)
 
 
-# In[42]:
+# In[ ]:
 
 
-EPOCHS = 500
+EPOCHS = 100
 n_input = 300
 n_hidden = 103
 n_output = 15
@@ -160,7 +160,7 @@ model = Model(ff, loss_fn, optimizer, n_input, n_hidden, n_output)
 ff_accuracy, rand_acc = model.train(X_train, y_train, X_test, y_test, rand_test=True)
 
 
-# In[44]:
+# In[ ]:
 
 
 xAx = [i for i in range(0,90)]

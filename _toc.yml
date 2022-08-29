@@ -15,7 +15,7 @@ parts:
     - file: encoder_decoder_entries
     - file: ff_entries
     - file: transformers_entries
-    - file: moving-circles-entries
+    - file: moving_circles_entries
 - caption: Prep Work
   chapters:
   - file: prep/deep_learning/deep_learning

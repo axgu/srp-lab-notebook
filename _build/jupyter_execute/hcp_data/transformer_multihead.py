@@ -196,11 +196,13 @@ X_train, y_train, X_t, y_t = numpy_prep(TS, pad = 0.)
 
 batch_size = 32
 
+train_data = TensorDataset(torch.from_numpy(X_train).float(), torch.from_numpy(y_train).float())
+train_loader = DataLoader(train_data, shuffle=True, batch_size=batch_size)
 test_data = TensorDataset(torch.from_numpy(X_t).float(), torch.from_numpy(y_t).float())
 test_loader = DataLoader(test_data, shuffle=True, batch_size=batch_size)
 
 
-# In[12]:
+# In[28]:
 
 
 n_input = 300
@@ -209,9 +211,9 @@ n_out = 15
 seq_len = 90
 drop = 0.1
 learning_rate = 1e-3
-EPOCHS = 10
+EPOCHS = 15
 num_head = 4
-num_layers = 6
+num_layers = 1
 position_encoding = False
 
 transformer_encoder_multi = Transformer(n_input, n_out, seq_len, num_head, dim_ff, num_layers, position_encoding).to(device)
@@ -219,27 +221,41 @@ loss_fn_multi = nn.CrossEntropyLoss()
 optimizer_multi = optim.Adam(transformer_encoder_multi.parameters(), lr=learning_rate)
 
 model_multi = TransformerModel(transformer_encoder_multi, loss_fn_multi, optimizer_multi , seq_len, "transformer_multi")
+train_loss = model_multi.train(train_loader, n_epochs=EPOCHS)
 
 
-# In[6]:
+# In[31]:
+
+
+xAx = [i for i in range(1, EPOCHS+1)]
+plt.plot(xAx, train_loss)
+plt.xlabel("Epoch")
+plt.ylabel("Cross Entropy Loss")
+plt.xlim(1, EPOCHS)
+plt.xticks([j for j in range(1, EPOCHS+1)])
+plt.title("Training Loss")
+plt.show()
+
+
+# In[32]:
 
 
 transformer_multi_accuracy, loss = model_multi.eval(test_loader)
 
 
-# In[15]:
+# In[33]:
 
 
 get_ipython().run_line_magic('store', 'transformer_multi_accuracy')
 
 
-# In[13]:
+# In[34]:
 
 
 transformer_multi_rand_acc = model_multi.rand_test(test_loader)
 
 
-# In[16]:
+# In[35]:
 
 
 xAx = [i for i in range(0,90)]

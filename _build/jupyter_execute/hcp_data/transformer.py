@@ -51,13 +51,27 @@ class Transformer(nn.Module):
         pe[:, 1::2] = torch.cos(pos * div_term)
         pe = pe.unsqueeze(0)
         return pe
+
+    def padding_mask(self, X):
+        mask = (X!=torch.zeros(self.n_input, device=device))[:, :, 0]
+        return mask
     
+    def src_mask(self, X):
+        X_lens = find_lens(X)
+        src_mask = torch.tensor([[[float('-inf')]*self.seq_len]*self.seq_len]*X.shape[0], device=device)
+        for batch, batch_len in enumerate(X_lens):
+            src_mask[batch,:batch_len,:batch_len] = torch.zeros((batch_len, batch_len), device=device)
+        return src_mask
+
     def forward(self, X):
         x = X.to(device)
         if self.position_encoding:
             pe = self.position_encode()
             pe = pe.expand(X.size(0), -1, -1)
             x = X + pe
+        #padding_mask = self.padding_mask(x).to(device)
+        #src_mask = self.src_mask(x)
+        #y = self.transformer_encoder(x, mask=src_mask, src_key_padding_mask=padding_mask)
         y = self.transformer_encoder(x)
         y = self.fc(y)
         return y
@@ -75,7 +89,7 @@ class TransformerModel:
         self.seq_len = seq_len
         self.model_name = model_name
 
-    def train(self, train_loader, n_epochs=10, learning=1e-2):
+    def train(self, train_loader, n_epochs=10, learning=1e-3):
         train_loss = []
         best_loss = 1e10
 
@@ -107,10 +121,10 @@ class TransformerModel:
                 best_loss = avg_loss
                 torch.save({self.model_name: self.model.state_dict(), self.model_name+"_optimizer": self.optimizer.state_dict()}, self.model_name+'-model.pt')
 
-            # print("Epoch " + str(i + 1) + "/" + str(n_epochs))
-            # print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
-            # print("Training loss: " + str(avg_loss))
-            # print()
+            print("Epoch " + str(i + 1) + "/" + str(n_epochs))
+            print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
+            print("Training loss: " + str(avg_loss))
+            print()
             train_loss.append(avg_loss)
         return train_loss
     
@@ -129,7 +143,6 @@ class TransformerModel:
             loss = 0.
             curr_batch_size = x.shape[0]
             X, Y = x.to(device), y.to(device)
-            
 
             out = self.model(X)
 
@@ -183,16 +196,17 @@ X_test = torch.from_numpy(X_t).float().to(device)
 y_test = torch.from_numpy(y_t).float().to(device)
 
 
-# In[5]:
+# In[30]:
 
 
 n_input = 300
-dim_ff = 64
+dim_ff = 32
 n_out = 15
 seq_len = 90
 drop = 0.1
 EPOCHS = 50
-learning_rate = 1e-3
+learning_rate = 5e-4
+
 
 num_head = 1
 num_layers = 1
@@ -203,7 +217,11 @@ loss_fn = nn.CrossEntropyLoss()
 optimizer = optim.Adam(transformer_encoder.parameters(), lr=learning_rate)
 
 model = TransformerModel(transformer_encoder, loss_fn, optimizer, seq_len, "transformer")
-"""
+
+
+# In[31]:
+
+
 train_loss = model.train(train_loader, n_epochs=EPOCHS, learning=learning_rate)
 xAx = [i for i in range(1, EPOCHS+1)]
 plt.plot(xAx, train_loss)
@@ -213,28 +231,27 @@ plt.xlim(0, EPOCHS)
 plt.xticks([50*j for j in range(EPOCHS // 50)])
 plt.title("Training Loss")
 plt.show()
-"""
 
 
-# In[6]:
+# In[32]:
 
 
 transformer_accuracy, loss = model.eval(X_test, y_test)
 
 
-# In[11]:
+# In[33]:
 
 
 get_ipython().run_line_magic('store', 'transformer_accuracy')
 
 
-# In[8]:
+# In[34]:
 
 
 transformer_rand_acc = model.rand_test(X_test, y_test)
 
 
-# In[14]:
+# In[36]:
 
 
 xAx = [i for i in range(0,90)]

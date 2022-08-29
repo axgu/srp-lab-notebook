@@ -34,8 +34,6 @@ class FF(nn.Module):
     self.fc_h = nn.Linear(n_hidden, n_hidden, bias=False)
     self.fc_out = nn.Linear(n_hidden, n_hidden, bias=False)
     self.weight = nn.Parameter(torch.FloatTensor(n_hidden))
-    # self.fc_h = nn.Parameter(torch.FloatTensor(n_hidden, n_hidden))
-    # self.fc_out = nn.Parameter(torch.FloatTensor(n_hidden, n_hidden))
 
   def forward(self, x, batch_size):
     y = self.in_layer(x)
@@ -44,13 +42,9 @@ class FF(nn.Module):
     # (batch_size, seq_len, seq_len)
     e = torch.zeros((batch_size, y.shape[1], y.shape[1]), device=device)
     V = self.weight.repeat(batch_size, 1).unsqueeze(1)
-    # W = self.fc_h.repeat(batch_size, 1, 1)
-    # U = self.fc_out.repeat(batch_size, 1, 1)
     for i in range(y.shape[1]):
       r = torch.zeros(y.shape, device=device)
       for j in range(y.shape[1]):
-        # (batch_size, seq_len, hidden_size)
-        # z = torch.tanh(torch.bmm(W, y[:, i, :].unsqueeze(1).permute(0, 2, 1)) + torch.bmm(U, y[:, j, :].unsqueeze(1).permute(0, 2, 1)))
         z = torch.tanh(self.fc_h(y[:, i, :]) + self.fc_out(y[:, j, :]))
         r[:, j, :] = z
       r = r.permute(0, 2, 1)
@@ -109,10 +103,10 @@ class FFModel:
         best_loss = avg_loss
         torch.save({"ff_attention": self.model.state_dict(), "ff_att_optimizer": self.optimizer.state_dict()}, 'ff-attention-model.pt')
 
-      # print("Epoch " + str(i + 1) + "/" + str(n_epochs))
-      # print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
-      # print("Training loss: " + str(loss.item()))
-      # print()
+      print("Epoch " + str(i + 1) + "/" + str(n_epochs))
+      print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
+      print("Training loss: " + str(loss.item()))
+      print()
 
       train_loss.append(avg_loss)
         
@@ -148,7 +142,7 @@ class FFModel:
     X_random = []
     X_lens = find_lens(X)
     for i in range(X.shape[0]):
-      X_batch = np.random.normal(size=(X_lens[i], X.shape[-1]))
+      X_batch = np.random.rand(size=(X_lens[i], X.shape[-1]))
       if X_lens[i] < self.seq_len:
         X_pad = np.array([[pad]*X.shape[-1]]*(self.seq_len - X_lens[i]))
         X_batch = np.append(X_batch, X_pad, axis=0)
@@ -182,47 +176,61 @@ X_test = torch.from_numpy(X_t).float().to(device)
 y_test = torch.from_numpy(y_t).float().to(device)
 
 
-# In[20]:
+# In[5]:
 
 
 EPOCHS = 15
 n_input = 300
 n_hidden = 32
 n_output = 15
-learning_rate = 5e-3
+learning_rate = 2e-3
 seq_len = 90
 
 ff_attention = FF(n_input, n_hidden, n_output).to(device)
 loss_fn = nn.CrossEntropyLoss()
+
 optimizer = optim.Adam(ff_attention.parameters(), lr=learning_rate)
 
 model = FFModel(ff_attention, loss_fn, optimizer, seq_len)
 
 
-# In[ ]:
+# In[6]:
 
 
 train_loss = model.train(train_loader, n_epochs=EPOCHS)
 
 
-# In[13]:
+# In[7]:
+
+
+xAx = [i for i in range(1, EPOCHS+1)]
+plt.plot(xAx, train_loss)
+plt.xlabel("Epoch")
+plt.ylabel("Cross Entropy Loss")
+plt.xlim(0, EPOCHS)
+plt.xticks([j for j in range(EPOCHS)])
+plt.title("Training Loss")
+plt.show()
+
+
+# In[8]:
 
 
 ff_accuracy, loss = model.eval(X_test, y_test)
 
 
-# In[14]:
+# In[9]:
 
 
 ff_rand_acc = model.rand_test(X_test, y_test)
 
 
-# In[15]:
+# In[10]:
 
 
 xAx = [i for i in range(0,90)]
 plt.plot(xAx, ff_accuracy, label="ff-attention")
-plt.plot(xAx, ff_rand_acc, label="ff-att-random")
+#plt.plot(xAx, ff_rand_acc, label="ff-att-random")
 plt.xlabel("Time (s)")
 plt.ylabel("Accuracy")
 plt.ylim(0,1)

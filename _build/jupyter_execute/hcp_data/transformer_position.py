@@ -200,7 +200,7 @@ test_data = TensorDataset(torch.from_numpy(X_t).float(), torch.from_numpy(y_t).f
 test_loader = DataLoader(test_data, shuffle=True, batch_size=batch_size)
 
 
-# In[ ]:
+# In[5]:
 
 
 n_input = 300
@@ -243,13 +243,13 @@ transformer_pos_accuracy, loss = model_pos.eval(test_loader)
 transformer_pos_rand_acc = model_pos.rand_test(test_loader)
 
 
-# In[ ]:
+# In[41]:
 
 
 learning_rate = 5e-4
 EPOCHS = 50
 num_head = 4
-num_layers=6
+num_layers=1
 
 transformer_multipos = Transformer(n_input, n_out, seq_len, num_head, dim_ff, num_layers, True).to(device)
 loss_fn_multipos = nn.CrossEntropyLoss()

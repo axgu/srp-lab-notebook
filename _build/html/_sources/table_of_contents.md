@@ -38,34 +38,34 @@
   - Prep Work
 * - 06/24/2022
   - HCP Dataset Set Up and Software Installation
-  - HCP Data
+  - Movie Watching Data
 * - 06/26/2022
   - HCP Dataset
-  - HCP Data
+  - Movie Watching Data
 * - 06/27/2022
   - HCP Dataset Visualization
-  - HCP Data
+  - Movie Watching Data
 * - 06/28/2022
   - HCP Dataset Summary
-  - HCP Data
+  - Movie Watching Data
 * - 06/29/2022
   - HCP Dataset Logistic Regression Program
-  - HCP Data
+  - Movie Watching Data
 * - 06/30/2022
   - HCP Dataset Logistic Regression
-  - HCP Data
+  - Movie Watching Data
 * - 07/01/2022
   - HCP Dataset Logistic Regression
-  - HCP Data
+  - Movie Watching Data
 * - 07/05/2022
   - HCP Dataset Logistic Regression Summary
-  - HCP Data
+  - Movie Watching Data
 * - 07/06/2022
   - Permutation Testing
-  - HCP Data
+  - Movie Watching Data
 * - 07/07/2022
   - Multiple Inference
-  - HCP Data
+  - Movie Watching Data
 * - 07/11/2022
   - Recurrent Neural Networks
   - RNN
@@ -83,47 +83,77 @@
   - RNN
 * - 07/18/2022
   - Attention Methods
-  - RNN
+  - Seq2Seq
 * - 07/19/2022
   - Attention Model
-  - RNN
+  - Seq2Seq
 * - 07/20/2022
   - Attention Model
-  - RNN
-* - 07/20/2022
-  - Attention Model
-  - RNN
-* - 07/20/2022
-  - Attention Model
-  - RNN
+  - Seq2Seq
 * - 07/21/2022
   - Attention Model
-  - RNN
+  - Seq2Seq
 * - 07/25/2022
   - Attention Model Masking
-  - RNN
+  - Seq2Seq
 * - 07/26/2022
   - Attention Model Training
-  - RNN
+  - Seq2Seq
 * - 07/27/2022
   - Attention Model Permutation Test
-  - RNN
+  - Seq2Seq
 * - 07/28/2022
   - Attention Model Analysis
-  - RNN
+  - Seq2Seq
 * - 07/29/2022
   - Attention Model Summary
-  - RNN
+  - Seq2Seq
 * - 08/01/2022
   - Neural Networks
-  - RNN
+  - FFNN
 * - 08/02/2022
   - Feedforward Network
-  - RNN
+  - FFNN
 * - 08/03/2022
   - Feedforward with Attention
-  - RNN
+  - FFNN
 * - 08/04/2022
   - Feedforward with Attention
-  - RNN
+  - FFNN
+* - 08/05/2022
+  - Feedforward with Attention Summary
+  - FFNN
+* - 08/08/2022
+  - Feedforward Wrap-Up
+  - FFNN
+* - 08/10/2022
+  - Transformers
+  - Transformer
+* - 08/11/2022
+  - Simple Transformer Implementation
+  - Transformer
+* - 08/12/2022
+  - Transformers with Multi-head Attention
+  - Transformer
+* - 08/15/2022
+  - Transformers Training and Evaluation
+  - Transformer
+* - 08/16/2022
+  - Transformers Summary
+  - Transformer
+* - 08/18/2022
+  - Moving Circles RNN
+  - Moving Circles Data
+* - 08/19/2022
+  - Moving Circles Transformer
+  - Moving Circles Data
+* - 08/22/2022
+  - Moving Circles Dataset
+  - Moving Circles Data
+* - 08/23/2022
+  - Padding Labels
+  - Moving Circles Data
+* - 08/26/2022
+  - Padding and Masking
+  - Moving Circles Data
 ```
