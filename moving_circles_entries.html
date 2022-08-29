@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Transformers &#8212; My Project</title>
+    <title>Moving Circles Dataset &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Deep Learning" href="prep/deep_learning/deep_learning.html" />
-    <link rel="prev" title="Feedforward Neural Network" href="ff_entries.html" />
+    <link rel="prev" title="Transformers" href="transformers_entries.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -159,9 +159,14 @@ const thebe_selector_output = ".output, .cell_output"
      Feedforward Neural Network
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformers_entries.html">
+     Transformers
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Transformers
+     Moving Circles Dataset
     </a>
    </li>
   </ul>
@@ -383,6 +388,23 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Moving Circles Dataset
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="appr_retr/appr_retr_rnn.html">
+   Moving Circles LSTM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="appr_retr/appr_retr_transformer.html">
+   Moving Circles Transformer
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -455,7 +477,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/transformers_entries.md"
+        <a href="_sources/moving_circles_entries.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -504,7 +526,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Transformers</h1>
+                <h1>Moving Circles Dataset</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -516,57 +538,61 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="transformers">
-<h1>Transformers<a class="headerlink" href="#transformers" title="Permalink to this headline">#</a></h1>
-<p><strong>Transformers</strong></p>
-<p><em>08/10/2022, 8:40 am</em></p>
-<p>Synopsis: I will learn about self attention and the transformer architecture.</p>
-<p>Data: I read material about the self attention mechanism and how it fits into transformers.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="moving-circles-dataset">
+<h1>Moving Circles Dataset<a class="headerlink" href="#moving-circles-dataset" title="Permalink to this headline">#</a></h1>
+<p><strong>Moving Circles RNN</strong></p>
+<p><em>08/18/2022, 8:40 am</em></p>
+<p>Synopsis: I will work with a moving circles dataset.</p>
+<p>Data: I trained an LSTM model, similar in structure to the one used on the movie watching dataset, on the movie circles data. I also evaluated binary classification accuracy with the test dataset, and tried “breaking” the model using random inputs.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
+<li><p><a class="reference internal" href="appr_retr/appr_retr_rnn.html"><span class="doc std std-doc">Moving Circles LSTM</span></a></p></li>
 </ul>
-<p><em>5:10 pm, 510 minutes</em></p>
+<p><em>3:25 pm, 405 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Simple Transformer Implementation</strong></p>
-<p><em>08/11/2022, 8:55 am</em></p>
-<p>Synopsis: I will implement a basic transformer architecture.</p>
-<p>Data: I built a transformer model for movie clip classification based on the TransformerEncoder layer in Pytorch. I tested the model using a single head for attention and a single layer of the transformer block.</p>
+<p><strong>Moving Circles Transformer</strong></p>
+<p><em>08/19/2022, 8:45 am</em></p>
+<p>Synopsis: I will work with a moving circles dataset.</p>
+<p>Data: I applied a transformer encoder architecture similar to the one used for multiclass classification for the movie clip dataset on the emoprox dataset. From training and evaluating performance of this neural network, I found that accuracy was periodic.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer.html"><span class="doc std std-doc">Single-head Transformer</span></a></p></li>
+<li><p><a class="reference internal" href="appr_retr/appr_retr_transformer.html"><span class="doc std std-doc">Moving Circles Transformer</span></a></p></li>
 </ul>
-<p><em>3:28 pm, 393 minutes</em></p>
+<p><em>3:00 pm, 315 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers with Multi-head Attention</strong></p>
-<p><em>08/12/2022, 8:35 am</em></p>
-<p>Synopsis: I will test hyperparamters of the transformer architecture.</p>
-<p>Data: I built a transformer model similar to the initial one created yesterday. I trained the model at a lower learning rate and smaller hidden dimensions. I also tried adding a multi-head attention mechanism and multiple layers of the transformer block, resulting in a higher validation accuracy.</p>
+<p><strong>Moving Circles Dataset</strong></p>
+<p><em>08/22/2022, 9:15 am</em></p>
+<p>Synopsis: I will learn about the moving circles dataset.</p>
+<p>Data: I got a better understanding of the moving circles dataset and what the label dataset represents. I also finished running a random inputs test on the transformer model.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer_multihead.html"><span class="doc std std-doc">Multi-head Transformer</span></a></p></li>
+<li><p><a class="reference external" href="https://pessoalab.slack.com/files/UC26JSETT/F037ZN8NQ9F/movie_subj013__2_.mp4">Emoprox Dataset Video</a></p></li>
+<li><p><a class="reference internal" href="appr_retr/appr_retr_transformer.html"><span class="doc std std-doc">Moving Circles Transformer</span></a></p></li>
 </ul>
-<p><em>3:25 pm, 410 minutes</em></p>
+<p><em>3:00 pm, 275 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers Training and Evaluation</strong></p>
-<p><em>08/15/2022, 8:45 am</em></p>
-<p>Synopsis: I will add position encoding to my transformer architecture.</p>
-<p>Data: I met with Ms. Bosse and Dr. Pessoa to discuss the progress of my project and next steps. I also tried adding a position encoding function to the transformer models previously implemented. The purpose of position encoding is to differentiate the time steps (i.e. keep sequential order).</p>
+<p><strong>Padding Labels</strong></p>
+<p><em>08/23/2022, 8:55 am</em></p>
+<p>Synopsis: I will work on padding the y set for the moving circles dataset.</p>
+<p>Data: I worked on introducing a new class for padded values in the y-train and y-test set, as well as vectorizing these label datasets. To ensure the model did not prioritize the padding class, I calculated and passed weights to the loss function. I then retrained and tested the LSTM and transformer models.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer_position.html"><span class="doc std std-doc">Position Encoding Transformers</span></a></p></li>
+<li><p><a class="reference internal" href="appr_retr/appr_retr_rnn.html"><span class="doc std std-doc">Moving Circles LSTM</span></a></p></li>
+<li><p><a class="reference internal" href="appr_retr/appr_retr_transformer.html"><span class="doc std std-doc">Moving Circles Transformer</span></a></p></li>
 </ul>
-<p><em>4:55 pm, 490 minutes</em></p>
+<p><em>4:30 pm, 375 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers Summary</strong></p>
-<p><em>08/16/2022, 8:40 am</em></p>
-<p>Synopsis: I will summarize the work done with transformers.</p>
-<p>Data: I retrained the multi-head transformer with position encoding using more epochs but a lower learning rate to the model would converge. I also wrote a summary of what I have done with transformers, including information about data processing, transformer encoder architecture, self-attention mechanism, training, and evaluation.</p>
+<p><strong>Padding and Masking</strong></p>
+<p><em>08/26/2022, 8:30 am</em></p>
+<p>Synopsis: I will work on a new padding method for the y set for the moving circles dataset.</p>
+<p>Data: The results from the previous padding method indicated that the models were still learning the padding class as a label and assigning it to some input sequences. So, I modified the one-hot encoding so that there were only 2 classes, but padded values were assigned a [0,0] vector and left out of accuracy calculations. However, I found from running both models that while classification accuracy improved, they varied periodically across time.</p>
+<p>I also attempted to add padding masks to the transformer architecture. However, I kept receiving nan loss values.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><span class="xref myst">Transformers Summary</span></p></li>
+<li><p><a class="reference internal" href="appr_retr/appr_retr_rnn.html"><span class="doc std std-doc">Moving Circles LSTM</span></a></p></li>
+<li><p><a class="reference internal" href="appr_retr/appr_retr_transformer.html"><span class="doc std std-doc">Moving Circles Transformer</span></a></p></li>
 </ul>
-<p><em>5:10 pm, 510 minutes</em></p>
+<p><em>4:50 pm, 420 minutes</em></p>
 <hr class="docutils" />
 </section>
 
@@ -597,11 +623,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="ff_entries.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="transformers_entries.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Feedforward Neural Network</p>
+            <p class="prev-next-title">Transformers</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="prep/deep_learning/deep_learning.html" title="next page">

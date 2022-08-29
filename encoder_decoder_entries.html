@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Transformers &#8212; My Project</title>
+    <title>Seq2Seq Attention Model &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Deep Learning" href="prep/deep_learning/deep_learning.html" />
-    <link rel="prev" title="Feedforward Neural Network" href="ff_entries.html" />
+    <link rel="next" title="Feedforward Neural Network" href="ff_entries.html" />
+    <link rel="prev" title="Recurrent Neural Network" href="recurrent_nn_entries.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -149,8 +149,8 @@ const thebe_selector_output = ".output, .cell_output"
      Recurrent Neural Network
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="encoder_decoder_entries.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Seq2Seq Attention Model
     </a>
    </li>
@@ -159,8 +159,8 @@ const thebe_selector_output = ".output, .cell_output"
      Feedforward Neural Network
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformers_entries.html">
      Transformers
     </a>
    </li>
@@ -455,7 +455,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/transformers_entries.md"
+        <a href="_sources/encoder_decoder_entries.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -504,7 +504,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Transformers</h1>
+                <h1>Seq2Seq Attention Model</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -516,57 +516,106 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="transformers">
-<h1>Transformers<a class="headerlink" href="#transformers" title="Permalink to this headline">#</a></h1>
-<p><strong>Transformers</strong></p>
-<p><em>08/10/2022, 8:40 am</em></p>
-<p>Synopsis: I will learn about self attention and the transformer architecture.</p>
-<p>Data: I read material about the self attention mechanism and how it fits into transformers.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="seq2seq-attention-model">
+<h1>Seq2Seq Attention Model<a class="headerlink" href="#seq2seq-attention-model" title="Permalink to this headline">#</a></h1>
+<p><strong>Attention Methods</strong></p>
+<p><em>07/18/2022, 8:50 am</em></p>
+<p>Synopsis: I will learn about attention methods.</p>
+<p>Data: I learned about sequence to sequence models, specifically about encoder decoder architectures. I also looked into LSTM models to understand how they worked. Then, I learned about the bottleneck problem in standard encoder decoder models and the solution provided by attention. I looked into several attention mechanisms within seq2seq problems, as well as a basic overview of self-attention.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/attention_methods.html"><span class="doc std std-doc">Attention Methods Notes</span></a></p></li>
 </ul>
-<p><em>5:10 pm, 510 minutes</em></p>
+<p><em>5:50 pm, 540 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Simple Transformer Implementation</strong></p>
-<p><em>08/11/2022, 8:55 am</em></p>
-<p>Synopsis: I will implement a basic transformer architecture.</p>
-<p>Data: I built a transformer model for movie clip classification based on the TransformerEncoder layer in Pytorch. I tested the model using a single head for attention and a single layer of the transformer block.</p>
+<p><strong>Attention Model</strong></p>
+<p><em>07/19/2022, 9:00 am</em></p>
+<p>Synopsis: I will implement an attention model.</p>
+<p>Data: I worked on adding figures to my attention methods notes. Then, I started working in Python with PyTorch to build an encoder class and a decoder class.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer.html"><span class="doc std std-doc">Single-head Transformer</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/attention_methods.html"><span class="doc std std-doc">Attention Methods Notes</span></a></p></li>
+<li><p><span class="xref myst">Attention Model (.py)</span></p></li>
 </ul>
-<p><em>3:28 pm, 393 minutes</em></p>
+<p><em>5:00 pm, 480 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers with Multi-head Attention</strong></p>
-<p><em>08/12/2022, 8:35 am</em></p>
-<p>Synopsis: I will test hyperparamters of the transformer architecture.</p>
-<p>Data: I built a transformer model similar to the initial one created yesterday. I trained the model at a lower learning rate and smaller hidden dimensions. I also tried adding a multi-head attention mechanism and multiple layers of the transformer block, resulting in a higher validation accuracy.</p>
+<p><strong>Attention Model</strong></p>
+<p><em>07/20/2022, 9:00 am</em></p>
+<p>Synopsis: I will implement an attention model.</p>
+<p>Data: I finished building the encoder, decoder, and attention classes in PyTorch. Then, I worked on preprocessing the dataset into training/testing and input/output data. I also created functions for padding the arrays and vectorizing the movie clip labels. I wrote code to train the model that incorporates the attention mechanism. Finally, I looked into creating masks with PyTorch, and will implement that, as well as model evaluation, tomorrow.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer_multihead.html"><span class="doc std std-doc">Multi-head Transformer</span></a></p></li>
+<li><p><span class="xref myst">Attention Model (.py)</span></p></li>
+<li><p><span class="xref myst">Data Prep (.py)</span></p></li>
 </ul>
-<p><em>3:25 pm, 410 minutes</em></p>
+<p><em>5:33 pm, 513 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers Training and Evaluation</strong></p>
-<p><em>08/15/2022, 8:45 am</em></p>
-<p>Synopsis: I will add position encoding to my transformer architecture.</p>
-<p>Data: I met with Ms. Bosse and Dr. Pessoa to discuss the progress of my project and next steps. I also tried adding a position encoding function to the transformer models previously implemented. The purpose of position encoding is to differentiate the time steps (i.e. keep sequential order).</p>
+<p><strong>Attention Model</strong></p>
+<p><em>07/21/2022, 8:00 am</em></p>
+<p>Synopsis: I will continue working on my attention model.</p>
+<p>Data: I fixed errors within my encoder and decoder classes. I also built an LSTM  model in PyTorch, as well as train and test methods. An issue with my LSTM model when I try to train it is that the loss stays constant over all epochs.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer_position.html"><span class="doc std std-doc">Position Encoding Transformers</span></a></p></li>
+<li><p><span class="xref myst">Attention Model (.py)</span></p></li>
+<li><p><span class="xref myst">Model Evaluation (.py)</span></p></li>
 </ul>
-<p><em>4:55 pm, 490 minutes</em></p>
+<p><em>7:30 pm, 690 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers Summary</strong></p>
-<p><em>08/16/2022, 8:40 am</em></p>
-<p>Synopsis: I will summarize the work done with transformers.</p>
-<p>Data: I retrained the multi-head transformer with position encoding using more epochs but a lower learning rate to the model would converge. I also wrote a summary of what I have done with transformers, including information about data processing, transformer encoder architecture, self-attention mechanism, training, and evaluation.</p>
+<p><strong>Attention Model Masking</strong></p>
+<p><em>07/25/2022, 9:00 am</em></p>
+<p>Synopsis: I will continue working on my attention model.</p>
+<p>Data: I worked on adding padding and masking to the data in my LSTM and encoder-decoder attention model. I was also able to fix the issue with my LSTM model where the training loss was not decreasing by transposing the output from the LSTM and the actual y arrays from (batch size x sequence length x class) to (batch size x class x sequence length). Then I continued training the models.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><span class="xref myst">Transformers Summary</span></p></li>
+<li><p><span class="xref myst">Attention Model (.py)</span></p></li>
 </ul>
-<p><em>5:10 pm, 510 minutes</em></p>
+<p><em>6:15 pm, 555 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Attention Model Training</strong></p>
+<p><em>07/26/2022, 8:30 am</em></p>
+<p>Synopsis: I will continue working on my attention model.</p>
+<p>Data: I continued training my LSTM and Seq2Seq models, experimenting with learning rate and epoch size. I also saved them to my local disk and plotted the resulting accuracies for comparison.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">Attention Model (.py)</span></p></li>
+<li><p><span class="xref myst">LSTM Model (.py)</span></p></li>
+</ul>
+<p><em>6:25 pm, 595 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Attention Model Permutation Test</strong></p>
+<p><em>07/27/2022, 9:25 am</em></p>
+<p>Synopsis: I will perform a permutation test on my LSTM and Seq2Seq attention model.</p>
+<p>Data: I wrote functions to shuffle each feature along the time steps in a batch. I then ran a permutation test with 100 resamples and plotted a comparison of accuracy between logistic regression, LSTM, and attention performance.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">RNN Permutation Test Code (.py)</span></p></li>
+<li><p><a class="reference internal" href="hcp_data/attention-book.html"><span class="doc std std-doc">Attention Model</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/lstm-book.html"><span class="doc std std-doc">LSTM Model</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/hcp_plot.html"><span class="doc std std-doc">Visual Model Comparison</span></a></p></li>
+</ul>
+<p><em>5:20 pm, 475 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Attention Model Analysis</strong></p>
+<p><em>07/28/2022, 8:30 am</em></p>
+<p>Synopsis: I will summarize what I have implemented.</p>
+<p>Data: The permutation test for the attention Seq2Seq model indicated around 80% accuracy, which is unreasonably high. So, I worked on trying to “break” my model. Each method I utilized was performed 3 times. I tested by randomizing labels for each (batch, time step), which yielded an 8% accuracy for all time steps, and randomizing labels for each batch but remaining the same for all time steps, which yielded a 22% accuracy. I then tried re-running the permutation test (i.e. shuffling the data across time steps for each feature). Afterward, I tried randomly generating input feature data from a normal distribution. Both of these evaluations also yielded approximately an 80% accuracy for all time steps.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">RNN Permutation Test Code (.py)</span></p></li>
+<li><p><a class="reference internal" href="hcp_data/attention-book.html"><span class="doc std std-doc">Attention Model</span></a></p></li>
+</ul>
+<p><em>7:02 pm, 632 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Attention Model Summary</strong></p>
+<p><em>07/29/2022, 8:39 am</em></p>
+<p>Synopsis: I will continue analyzing why my attention model has such a high performance with permuted samples.</p>
+<p>Data: I met with my mentors briefly to discuss possible issues with my attention model. I also tried to determine the issue with my attention encoder decoder architecture.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><span class="xref myst">RNN Permutation Test Code (.py)</span></p></li>
+<li><p><a class="reference internal" href="hcp_data/attention-book.html"><span class="doc std std-doc">Attention Model</span></a></p></li>
+</ul>
+<p><em>4:00 pm, 441 minutes</em></p>
 <hr class="docutils" />
 </section>
 
@@ -597,17 +646,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="ff_entries.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="recurrent_nn_entries.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Feedforward Neural Network</p>
+            <p class="prev-next-title">Recurrent Neural Network</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="prep/deep_learning/deep_learning.html" title="next page">
+    <a class='right-next' id="next-link" href="ff_entries.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Deep Learning</p>
+        <p class="prev-next-title">Feedforward Neural Network</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

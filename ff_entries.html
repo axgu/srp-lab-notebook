@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Transformers &#8212; My Project</title>
+    <title>Feedforward Neural Network &#8212; My Project</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Deep Learning" href="prep/deep_learning/deep_learning.html" />
-    <link rel="prev" title="Feedforward Neural Network" href="ff_entries.html" />
+    <link rel="next" title="Transformers" href="transformers_entries.html" />
+    <link rel="prev" title="Seq2Seq Attention Model" href="encoder_decoder_entries.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -154,13 +154,13 @@ const thebe_selector_output = ".output, .cell_output"
      Seq2Seq Attention Model
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="ff_entries.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Feedforward Neural Network
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="transformers_entries.html">
      Transformers
     </a>
    </li>
@@ -455,7 +455,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/transformers_entries.md"
+        <a href="_sources/ff_entries.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -504,7 +504,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Transformers</h1>
+                <h1>Feedforward Neural Network</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -516,57 +516,69 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="transformers">
-<h1>Transformers<a class="headerlink" href="#transformers" title="Permalink to this headline">#</a></h1>
-<p><strong>Transformers</strong></p>
-<p><em>08/10/2022, 8:40 am</em></p>
-<p>Synopsis: I will learn about self attention and the transformer architecture.</p>
-<p>Data: I read material about the self attention mechanism and how it fits into transformers.</p>
-<p>Files:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="recurrent_nn.html"><span class="doc std std-doc">Recurrent Neural Network Notes</span></a></p></li>
-</ul>
-<p><em>5:10 pm, 510 minutes</em></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="feedforward-neural-network">
+<h1>Feedforward Neural Network<a class="headerlink" href="#feedforward-neural-network" title="Permalink to this headline">#</a></h1>
+<p><strong>Neural Networks</strong></p>
+<p><em>08/01/2022, 8:27 am</em></p>
+<p>Synopsis: I will continue analyzing why my attention model has such a high performance with random inputs.</p>
+<p>Data: I learned more about attention mechanism through a meeting with mentors. I also watched videos and read about how neural networks work and backpropagation.</p>
+<p><em>6:00 pm, 573 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Simple Transformer Implementation</strong></p>
-<p><em>08/11/2022, 8:55 am</em></p>
-<p>Synopsis: I will implement a basic transformer architecture.</p>
-<p>Data: I built a transformer model for movie clip classification based on the TransformerEncoder layer in Pytorch. I tested the model using a single head for attention and a single layer of the transformer block.</p>
+<p><strong>Feedforward Network</strong></p>
+<p><em>08/02/2022, 8:53 am</em></p>
+<p>Synopsis: I will build a feedforward neural network.</p>
+<p>Data: I built, trained, and evaluated a feedforward neural network in PyTorch that considers time steps blindly. I also tried adding the attention mechanism discussed in the meeting yesterday to a recurrent neural network and trained the model.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer.html"><span class="doc std std-doc">Single-head Transformer</span></a></p></li>
+<li><p><span class="xref myst">RNN Permutation Test Code (.py)</span></p></li>
+<li><p><a class="reference internal" href="hcp_data/attention-book.html"><span class="doc std std-doc">Attention Model</span></a></p></li>
 </ul>
-<p><em>3:28 pm, 393 minutes</em></p>
+<p><em>6:20 pm, 567 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers with Multi-head Attention</strong></p>
-<p><em>08/12/2022, 8:35 am</em></p>
-<p>Synopsis: I will test hyperparamters of the transformer architecture.</p>
-<p>Data: I built a transformer model similar to the initial one created yesterday. I trained the model at a lower learning rate and smaller hidden dimensions. I also tried adding a multi-head attention mechanism and multiple layers of the transformer block, resulting in a higher validation accuracy.</p>
+<p><strong>Feedforward with Attention</strong></p>
+<p><em>08/03/2022, 8:38 am</em></p>
+<p>Synopsis: I will summarize what I did with the feedforward neural network.</p>
+<p>Data: I wrote a summary of my work with the feedforward neural network. I provided details about handling the dataset, architecture specification, training, and evaluating model performance. I had another meeting with my mentors to discuss adding an attention layer to a feedforward network. Then I tried implementing what was discussed. However, when I tried training the model, every epoch took over an hour and a half and the loss for several iterations was outputted as infinity.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer_multihead.html"><span class="doc std std-doc">Multi-head Transformer</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff_summary.html"><span class="doc std std-doc">Feedforward Network Summary</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff_attention.html"><span class="doc std std-doc">Feedforward Attention</span></a></p></li>
 </ul>
-<p><em>3:25 pm, 410 minutes</em></p>
+<p><em>5:30 pm, 532 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers Training and Evaluation</strong></p>
-<p><em>08/15/2022, 8:45 am</em></p>
-<p>Synopsis: I will add position encoding to my transformer architecture.</p>
-<p>Data: I met with Ms. Bosse and Dr. Pessoa to discuss the progress of my project and next steps. I also tried adding a position encoding function to the transformer models previously implemented. The purpose of position encoding is to differentiate the time steps (i.e. keep sequential order).</p>
+<p><strong>Feedforward with Attention</strong></p>
+<p><em>08/04/2022, 8:48 am</em></p>
+<p>Synopsis: I will continue training the feedforward/attention architecture and evaluate its performance.</p>
+<p>Data: I retrained the feedforward with attention model since my computer restarted and training was incomplete. I also modified the feedforward network so that it trains data from each time point separately as its own classification problem. While my model was training, I also worked on organizing my code and Jupyter notebook.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hcp_data/transformer_position.html"><span class="doc std std-doc">Position Encoding Transformers</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff.html"><span class="doc std std-doc">Feedforward Network</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff_attention.html"><span class="doc std std-doc">Feedforward Attention</span></a></p></li>
 </ul>
-<p><em>4:55 pm, 490 minutes</em></p>
+<p><em>5:30 pm, 532 minutes</em></p>
 <hr class="docutils" />
-<p><strong>Transformers Summary</strong></p>
-<p><em>08/16/2022, 8:40 am</em></p>
-<p>Synopsis: I will summarize the work done with transformers.</p>
-<p>Data: I retrained the multi-head transformer with position encoding using more epochs but a lower learning rate to the model would converge. I also wrote a summary of what I have done with transformers, including information about data processing, transformer encoder architecture, self-attention mechanism, training, and evaluation.</p>
+<p><strong>Feedforward with Attention Summary</strong></p>
+<p><em>08/05/2022, 9:00 am</em></p>
+<p>Synopsis: I will continue training the feedforward/attention architecture and evaluate its performance.</p>
+<p>Data: I summarized work with the feedforward attention architecture, including documenting the math for the attention mechanism and summarizing parts of the code written.</p>
 <p>Files:</p>
 <ul class="simple">
-<li><p><span class="xref myst">Transformers Summary</span></p></li>
+<li><p><span class="xref myst">Feedforward Attention Summary</span></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff_attention.html"><span class="doc std std-doc">Feedforward Attention</span></a></p></li>
 </ul>
-<p><em>5:10 pm, 510 minutes</em></p>
+<p><em>3:30 pm, 390 minutes</em></p>
+<hr class="docutils" />
+<p><strong>Feedforward Wrap-Up</strong></p>
+<p><em>08/08/2022, 8:40 am</em></p>
+<p>Synopsis: I will wrap up work with the feedforward network and feedforward attention model.</p>
+<p>Data: I ran permutation tests on the model fitted at each time point in the feedforward neural network. I also wrote another program to perform logistic regression in a similar manner, by considering data from each time step as a separate classification problem. This model was trained and tested on HCP data and fed random feature values. Then, I retrained the feedforward attention model at a smaller learning rate with more epochs. I also sent Ms. Bosse and email updating my progress.</p>
+<p>Files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hcp_data/ff.html"><span class="doc std std-doc">Feedforward Neural Network</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/logistic_regression.html"><span class="doc std std-doc">Logistic Regression</span></a></p></li>
+<li><p><a class="reference internal" href="hcp_data/ff_attention.html"><span class="doc std std-doc">Feedforward Attention</span></a></p></li>
+</ul>
+<p><em>3:40 pm, 420 minutes</em></p>
 <hr class="docutils" />
 </section>
 
@@ -597,17 +609,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="ff_entries.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="encoder_decoder_entries.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Feedforward Neural Network</p>
+            <p class="prev-next-title">Seq2Seq Attention Model</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="prep/deep_learning/deep_learning.html" title="next page">
+    <a class='right-next' id="next-link" href="transformers_entries.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Deep Learning</p>
+        <p class="prev-next-title">Transformers</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
