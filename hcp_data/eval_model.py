@@ -14,7 +14,7 @@ def accuracy(target, prob, correct, tot):
         totalCount = tot[i]
         for j in range(prob.shape[0]):
             if np.count_nonzero(target[j][i]) != 0:
-                if findIndex(1., target[j][i]) == findIndex(np.amax(prob[j][i]), prob[j][i]):
+                if findIndex(1., target[j][i]) == findIndex(1., prob[j][i]):
                     correctCount += 1
                 totalCount += 1
         correct[i] = correctCount
@@ -32,7 +32,7 @@ def find_lens(X):
     for batch in X:
         count = 0
         for time in batch:
-            if time[0] == -100.:
+            if time[0] == 0.:
                 break
             else:
                 count += 1

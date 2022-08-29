@@ -18,7 +18,6 @@ def determineTest():
     testIndex = index[:76]
     return testIndex
 
-
 def splitDict(dictionary, indexList):
     trainDict = {}
     testDict = {}
@@ -61,7 +60,6 @@ def shaping(dictionary, pad = -100.):
 
     return X_padded, y_vector
 
-
 def paddingArr(arr, max_len=90, num_features=300, pad = -100.):
     padded_arr = np.empty((arr.shape[0], max_len, num_features), dtype=float)
     for i, seq in enumerate(arr):
@@ -74,8 +72,8 @@ def paddingArr(arr, max_len=90, num_features=300, pad = -100.):
             padded_arr[i] = seq[:max_len, :]
     return padded_arr
 
-def vectorize_labels(labels, keys, classNums):
-    results = np.zeros((int(labels.shape[0]), int(labels.shape[1]), classNums))
+def vectorize_labels(labels, keys, n_class):
+    results = np.zeros((int(labels.shape[0]), int(labels.shape[1]), n_class))
     for i in range(labels.shape[0]):
         for j in range(labels.shape[1]):
             if labels[i][j] != '':
@@ -83,7 +81,7 @@ def vectorize_labels(labels, keys, classNums):
                 results[i][j][indexNum] = 1.
     return results
 
-def numpy_prep(dictionary, pad = -100.):
+def numpy_prep(dictionary, pad = 0.):
     testIndex = determineTest()
 
     train, test = splitDict(dictionary, testIndex)
@@ -91,7 +89,7 @@ def numpy_prep(dictionary, pad = -100.):
     X_test, y_test = shaping(test, pad = pad)
     return X_train, y_train, X_test, y_test
 
-def prep(dictionary, pad=-100., batch_size=32):
+def prep(dictionary, pad=-1., batch_size=32):
     X_train, y_train, X_test, y_test = numpy_prep(dictionary, pad)
     train_data = TensorDataset(torch.from_numpy(X_train).float(), torch.from_numpy(y_train).float())
     test_data = TensorDataset(torch.from_numpy(X_test).float(), torch.from_numpy(y_test).float())
