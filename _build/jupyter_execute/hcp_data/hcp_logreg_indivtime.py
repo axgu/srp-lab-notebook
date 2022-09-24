@@ -85,7 +85,7 @@ def reshapeData(dict):
     return arr
 
 
-# In[7]:
+# In[5]:
 
 
 X_train, X_test, y_train, y_test = splitData(reshapeData(TS))

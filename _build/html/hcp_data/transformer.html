@@ -164,6 +164,11 @@ const thebe_selector_output = ".output, .cell_output"
      Transformers
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../moving_circles_entries.html">
+     Moving Circles Dataset
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -381,6 +386,23 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Moving Circles Dataset
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appr_retr/appr_retr_rnn.html">
+   Moving Circles LSTM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appr_retr/appr_retr_transformer.html">
+   Moving Circles Transformer
+  </a>
  </li>
 </ul>
 
@@ -617,7 +639,7 @@ title="Print to PDF"
         <span class="c1">#src_mask = self.src_mask(x)</span>
         <span class="c1">#y = self.transformer_encoder(x, mask=src_mask, src_key_padding_mask=padding_mask)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer_encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">y</span>
     
 </pre></div>
@@ -666,10 +688,6 @@ title="Print to PDF"
                 <span class="n">best_loss</span> <span class="o">=</span> <span class="n">avg_loss</span>
                 <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="o">+</span><span class="s2">&quot;_optimizer&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()},</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="o">+</span><span class="s1">&#39;-model.pt&#39;</span><span class="p">)</span>
 
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoch &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">epoch_mins</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; minutes &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">epoch_secs</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; seconds&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training loss: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">avg_loss</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">()</span>
             <span class="n">train_loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avg_loss</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">train_loss</span>
     
@@ -748,38 +766,6 @@ title="Print to PDF"
   X_padded = paddingArr(np.array(X_arr), pad=pad)
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [4],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;HCP_movie_watching.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">TS</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_t</span><span class="p">,</span> <span class="n">y_t</span> <span class="o">=</span> <span class="n">numpy_prep</span><span class="p">(</span><span class="n">TS</span><span class="p">,</span> <span class="n">pad</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">train_data</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
-
-<span class="nn">File ~\Documents\GitHub\srp-lab-notebook\hcp_data\lstm_data_prep.py:88,</span> in <span class="ni">numpy_prep</span><span class="nt">(dictionary, pad)</span>
-<span class="g g-Whitespace">     </span><span class="mi">85</span> <span class="n">testIndex</span> <span class="o">=</span> <span class="n">determineTest</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">splitDict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">testIndex</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">88</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">shaping</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">pad</span> <span class="o">=</span> <span class="n">pad</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">shaping</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">pad</span> <span class="o">=</span> <span class="n">pad</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span> <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
-
-<span class="nn">File ~\Documents\GitHub\srp-lab-notebook\hcp_data\lstm_data_prep.py:59,</span> in <span class="ni">shaping</span><span class="nt">(dictionary, pad)</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span>         <span class="n">y_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">y_arr</span><span class="p">,</span> <span class="n">clip</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="n">X_padded</span> <span class="o">=</span> <span class="n">paddingArr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_arr</span><span class="p">),</span> <span class="n">pad</span><span class="o">=</span><span class="n">pad</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">59</span> <span class="n">y_vector</span> <span class="o">=</span> <span class="n">vectorize_labels</span><span class="p">(</span><span class="n">y_arr</span><span class="p">,</span> <span class="n">keylist</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">keylist</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="k">return</span> <span class="n">X_padded</span><span class="p">,</span> <span class="n">y_vector</span>
-
-<span class="nn">File ~\Documents\GitHub\srp-lab-notebook\hcp_data\lstm_data_prep.py:80,</span> in <span class="ni">vectorize_labels</span><span class="nt">(labels, keys, n_class)</span>
-<span class="g g-Whitespace">     </span><span class="mi">78</span>     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span>         <span class="k">if</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">80</span>             <span class="n">indexNum</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span>             <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">indexNum</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="g g-Whitespace">     </span><span class="mi">82</span> <span class="k">return</span> <span class="n">results</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -821,213 +807,21 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/50
-Time: 0 minutes 3 seconds
-Training loss: 127.17249619960785
-
-Epoch 2/50
-Time: 0 minutes 3 seconds
-Training loss: 82.45135116577148
-
-Epoch 3/50
-Time: 0 minutes 2 seconds
-Training loss: 57.05367159843445
-
-Epoch 4/50
-Time: 0 minutes 4 seconds
-Training loss: 43.15415647625923
-
-Epoch 5/50
-Time: 0 minutes 2 seconds
-Training loss: 35.23848715424538
-
-Epoch 6/50
-Time: 0 minutes 3 seconds
-Training loss: 29.09774251282215
-
-Epoch 7/50
-Time: 0 minutes 3 seconds
-Training loss: 24.894645169377327
-
-Epoch 8/50
-Time: 0 minutes 3 seconds
-Training loss: 21.386983081698418
-
-Epoch 9/50
-Time: 0 minutes 2 seconds
-Training loss: 18.246660456061363
-
-Epoch 10/50
-Time: 0 minutes 3 seconds
-Training loss: 16.862296387553215
-
-Epoch 11/50
-Time: 0 minutes 2 seconds
-Training loss: 14.487989533692598
-
-Epoch 12/50
-Time: 0 minutes 3 seconds
-Training loss: 12.268657937645912
-
-Epoch 13/50
-Time: 0 minutes 3 seconds
-Training loss: 10.836652874946594
-
-Epoch 14/50
-Time: 0 minutes 2 seconds
-Training loss: 10.14228731021285
-
-Epoch 15/50
-Time: 0 minutes 2 seconds
-Training loss: 8.729588471353054
-
-Epoch 16/50
-Time: 0 minutes 3 seconds
-Training loss: 7.514501132071018
-
-Epoch 17/50
-Time: 0 minutes 2 seconds
-Training loss: 6.324863061308861
-
-Epoch 18/50
-Time: 0 minutes 3 seconds
-Training loss: 5.40025419741869
-
-Epoch 19/50
-Time: 0 minutes 2 seconds
-Training loss: 4.726946879178286
-
-Epoch 20/50
-Time: 0 minutes 2 seconds
-Training loss: 4.172818476334214
-
-Epoch 21/50
-Time: 0 minutes 3 seconds
-Training loss: 3.777977354824543
-
-Epoch 22/50
-Time: 0 minutes 2 seconds
-Training loss: 3.6513732727617025
-
-Epoch 23/50
-Time: 0 minutes 3 seconds
-Training loss: 3.587597355246544
-
-Epoch 24/50
-Time: 0 minutes 3 seconds
-Training loss: 2.584441075101495
-
-Epoch 25/50
-Time: 0 minutes 2 seconds
-Training loss: 2.4961394602432847
-
-Epoch 26/50
-Time: 0 minutes 2 seconds
-Training loss: 2.1441698409616947
-
-Epoch 27/50
-Time: 0 minutes 3 seconds
-Training loss: 1.8801056100055575
-
-Epoch 28/50
-Time: 0 minutes 3 seconds
-Training loss: 1.6534190950915217
-
-Epoch 29/50
-Time: 0 minutes 2 seconds
-Training loss: 1.4746629716828465
-
-Epoch 30/50
-Time: 0 minutes 3 seconds
-Training loss: 1.4880137797445059
-
-Epoch 31/50
-Time: 0 minutes 2 seconds
-Training loss: 1.3345126127824187
-
-Epoch 32/50
-Time: 0 minutes 2 seconds
-Training loss: 1.1528221061453223
-
-Epoch 33/50
-Time: 0 minutes 3 seconds
-Training loss: 1.0738377119414508
-
-Epoch 34/50
-Time: 0 minutes 2 seconds
-Training loss: 1.0214803060516715
-
-Epoch 35/50
-Time: 0 minutes 2 seconds
-Training loss: 0.8959753438830376
-
-Epoch 36/50
-Time: 0 minutes 2 seconds
-Training loss: 0.7994294865056872
-
-Epoch 37/50
-Time: 0 minutes 3 seconds
-Training loss: 0.7595479884184897
-
-Epoch 38/50
-Time: 0 minutes 2 seconds
-Training loss: 0.7150295600295067
-
-Epoch 39/50
-Time: 0 minutes 2 seconds
-Training loss: 0.687617183662951
-
-Epoch 40/50
-Time: 0 minutes 3 seconds
-Training loss: 0.6219760281965137
-
-Epoch 41/50
-Time: 0 minutes 3 seconds
-Training loss: 0.6707107746042311
-
-Epoch 42/50
-Time: 0 minutes 2 seconds
-Training loss: 0.7004848741926253
-
-Epoch 43/50
-Time: 0 minutes 3 seconds
-Training loss: 0.7091776684392244
-
-Epoch 44/50
-Time: 0 minutes 2 seconds
-Training loss: 0.5722085286397487
-
-Epoch 45/50
-Time: 0 minutes 3 seconds
-Training loss: 1.1179641583003104
-
-Epoch 46/50
-Time: 0 minutes 3 seconds
-Training loss: 2.498580889776349
-
-Epoch 47/50
-Time: 0 minutes 3 seconds
-Training loss: 5.281439254060388
-
-Epoch 48/50
-Time: 0 minutes 2 seconds
-Training loss: 7.6384542640298605
-
-Epoch 49/50
-Time: 0 minutes 3 seconds
-Training loss: 2.2480853889137506
-
-Epoch 50/50
-Time: 0 minutes 3 seconds
-Training loss: 1.1083943992853165
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Anna\AppData\Local\Temp\ipykernel_8320\1567880741.py:48: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  y = F.log_softmax(self.fc(y))
 </pre></div>
 </div>
-<img alt="../_images/transformer_6_1.png" src="../_images/transformer_6_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformer_accuracy</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Anna\AppData\Local\Temp\ipykernel_27044\1567880741.py:48: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  y = F.log_softmax(self.fc(y))
 </pre></div>
 </div>
 </div>
@@ -1055,7 +849,7 @@ Training loss: 1.1083943992853165
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xAx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">)]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">transformer_accuracy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;transformer&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAx</span><span class="p">,</span> <span class="n">transformer_rand_acc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;random&quot;</span><span class="p">)</span>
+<span class="c1">#plt.plot(xAx, transformer_rand_acc, label=&quot;random&quot;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>

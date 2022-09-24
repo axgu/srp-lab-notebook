@@ -73,7 +73,7 @@ class Transformer(nn.Module):
         #src_mask = self.src_mask(x)
         #y = self.transformer_encoder(x, mask=src_mask, src_key_padding_mask=padding_mask)
         y = self.transformer_encoder(x)
-        y = self.fc(y)
+        y = F.log_softmax(self.fc(y))
         return y
     
 
@@ -121,10 +121,6 @@ class TransformerModel:
                 best_loss = avg_loss
                 torch.save({self.model_name: self.model.state_dict(), self.model_name+"_optimizer": self.optimizer.state_dict()}, self.model_name+'-model.pt')
 
-            print("Epoch " + str(i + 1) + "/" + str(n_epochs))
-            print("Time: " + str(epoch_mins) + " minutes " + str(epoch_secs) + " seconds")
-            print("Training loss: " + str(avg_loss))
-            print()
             train_loss.append(avg_loss)
         return train_loss
     
@@ -196,7 +192,7 @@ X_test = torch.from_numpy(X_t).float().to(device)
 y_test = torch.from_numpy(y_t).float().to(device)
 
 
-# In[30]:
+# In[5]:
 
 
 n_input = 300
@@ -219,7 +215,7 @@ optimizer = optim.Adam(transformer_encoder.parameters(), lr=learning_rate)
 model = TransformerModel(transformer_encoder, loss_fn, optimizer, seq_len, "transformer")
 
 
-# In[31]:
+# In[6]:
 
 
 train_loss = model.train(train_loader, n_epochs=EPOCHS, learning=learning_rate)
@@ -233,7 +229,7 @@ plt.title("Training Loss")
 plt.show()
 
 
-# In[32]:
+# In[28]:
 
 
 transformer_accuracy, loss = model.eval(X_test, y_test)
@@ -251,12 +247,12 @@ get_ipython().run_line_magic('store', 'transformer_accuracy')
 transformer_rand_acc = model.rand_test(X_test, y_test)
 
 
-# In[36]:
+# In[30]:
 
 
 xAx = [i for i in range(0,90)]
 plt.plot(xAx, transformer_accuracy, label="transformer")
-plt.plot(xAx, transformer_rand_acc, label="random")
+#plt.plot(xAx, transformer_rand_acc, label="random")
 plt.xlabel("Time (s)")
 plt.ylabel("Accuracy")
 plt.ylim(0,1)

@@ -32,8 +32,15 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-["with open('HCP_movie_watching.pkl','rb') as f:", '    TS = pickle.load(f)', '', 'X_train, y_train, X_t, y_t = numpy_prep(TS, pad = 0.)', 'batch_size = 32']
-...
-['train_data = TensorDataset(torch.from_numpy(X_train).float(), torch.from_numpy(y_train).float())', 'train_loader = DataLoader(train_data, shuffle=True, batch_size=batch_size)', '', 'X_test = torch.from_numpy(X_t).float().to(device)', 'y_test = torch.from_numpy(y_t).float().to(device)']
+
+train_loss = model.train(train_loader, n_epochs=EPOCHS, learning=learning_rate)
+xAx = [i for i in range(1, EPOCHS+1)]
+plt.plot(xAx, train_loss)
+plt.xlabel("Epoch")
+plt.ylabel("Cross Entropy Loss")
+plt.xlim(0, EPOCHS)
+plt.xticks([50*j for j in range(EPOCHS // 50)])
+plt.title("Training Loss")
+plt.show()
 -------------------
 
